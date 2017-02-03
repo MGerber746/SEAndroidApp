@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class HttpURLConnectionHandler {
     public enum Method {GET, POST, HEAD, OPTIONS, PUT, DELETE, TRACE}
-    public static final String ROOT_URL = "https://calm-beach-65683.herokuapp.com/";
+    public static final String ROOT_URL = "vast-hollows-88441.herokuapp.com";
     private String apiEndpoint;
     private Method method;
     private HashMap<String, String> params;
