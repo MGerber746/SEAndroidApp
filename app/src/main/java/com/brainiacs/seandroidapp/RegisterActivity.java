@@ -90,6 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
             String response = handler.execute();
             System.out.println(response);
             // Pass user on to the next activity
+            startActivity(intent);
         }
     }
 
