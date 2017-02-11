@@ -20,7 +20,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     /** Called when user clicks submit button **/
     public void register(View view) {
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, TeacherLoginActivity.class);
         // Get all of the views of our fields
         EditText mFirstNameView = (EditText) findViewById(R.id.first_name);
         EditText mLastNameView = (EditText) findViewById(R.id.last_name);
