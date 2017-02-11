@@ -11,9 +11,6 @@ import java.util.HashMap;
 
 import utils.HttpURLConnectionHandler;
 
-//import com.example.alex.planningmadeeasy.utils.DBTools;
-//import com.example.alex.planningmadeeasy.utils.User;
-
 public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,43 +37,38 @@ public class RegisterActivity extends AppCompatActivity {
         String reenterPassword = mReenterPasswordView.getText().toString();
         // Check to make sure everything is valid
         boolean cancel = false;
-        View focusView = null;
 
         if (TextUtils.isEmpty(firstName)) {
             mFirstNameView.setError(getString(R.string.empty_first_name));
-            focusView = mFirstNameView;
             cancel = true;
-        } else if (TextUtils.isEmpty(lastName)) {
+        }
+        if (TextUtils.isEmpty(lastName)) {
             mLastNameView.setError(getString(R.string.empty_last_name));
-            focusView = mLastNameView;
             cancel = true;
-        } else if (!this.isEmailValid(email)) {
+        }
+        if (!this.isEmailValid(email)) {
             mEmailView.setError(getString(R.string.invalid_email));
-            focusView = mEmailView;
             cancel = true;
-        } else if (TextUtils.isEmpty(username)) {
+        }
+        if (TextUtils.isEmpty(username)) {
             mUsernameView.setError(getString(R.string.empty_username));
-            focusView = mUsernameView;
             cancel = true;
-        } else if (TextUtils.isEmpty(password)) {
+        }
+        if (TextUtils.isEmpty(password)) {
             mPasswordView.setError(getString(R.string.empty_password));
-            focusView = mPasswordView;
             cancel = true;
-        } else if (TextUtils.isEmpty(reenterPassword)) {
+        }
+        if (TextUtils.isEmpty(reenterPassword)) {
             mReenterPasswordView.setError(getString(R.string.empty_reenter_password));
-            focusView = mReenterPasswordView;
             cancel = true;
-        } else if(!password.equals(reenterPassword)) {
+        }
+        if(!password.equals(reenterPassword)) {
             mPasswordView.setError(getString(R.string.invalid_password));
             mReenterPasswordView.setError(getString(R.string.invalid_password));
-            focusView = mPasswordView;
-            focusView = mReenterPasswordView;
             cancel = true;
         }
 
-        if (cancel) {
-            focusView.requestFocus();
-        } else {
+        if(!cancel) {
             // Set up our handler
             HashMap<String, String> params = new HashMap<>();
             params.put("first_name", firstName);
@@ -86,9 +78,9 @@ public class RegisterActivity extends AppCompatActivity {
             params.put("password", password);
             params.put("confirm_password", reenterPassword);
             HttpURLConnectionHandler handler = new HttpURLConnectionHandler(
-                    "register/", HttpURLConnectionHandler.Method.POST, params);
-            String response = handler.execute();
-            System.out.println(response);
+                    "register/", HttpURLConnectionHandler.Method.POST, params, this);
+            // Execute the task
+            handler.execute((Void) null);
             // Pass user on to the next activity
             startActivity(intent);
         }
