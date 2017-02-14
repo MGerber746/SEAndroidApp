@@ -43,4 +43,6 @@
     <string name="password">password</string>
     <string name="confirm_password">confirm_password</string>
 
+    <!-- Strings related to Student Login -->
+    <string name="title_activity_student_login">StudentLoginActivity</string>
 </resources>
