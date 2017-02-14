@@ -86,8 +86,15 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    public void returnToLogin(){
+        Intent intent = new Intent(this, TeacherLoginActivity.class);
+        startActivity(intent);
+
+    }
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
+        if (email.contains("@") && email.contains("."))
+            return true;
+        else
+            return false;
     }
 }
