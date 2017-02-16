@@ -1,7 +1,5 @@
 package com.brainiacs.seandroidapp;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,7 +12,6 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -180,7 +177,7 @@ public class TeacherLoginActivity extends AppCompatActivity implements LoaderCal
             focusView.requestFocus();
         } else {
             // Setup our params for login
-            HashMap<String, String> params = new HashMap<String, String>();
+            HashMap<String, String> params = new HashMap<>();
             params.put(getString(R.string.username), username);
             params.put(getString(R.string.password), password);
             Intent intent = new Intent(this, this.getClass());
@@ -243,7 +240,6 @@ public class TeacherLoginActivity extends AppCompatActivity implements LoaderCal
     @Override
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
     }
-
 
     private interface ProfileQuery {
         String[] PROJECTION = {
