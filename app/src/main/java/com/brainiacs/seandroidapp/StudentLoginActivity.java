@@ -268,7 +268,6 @@ public class StudentLoginActivity extends AppCompatActivity implements LoaderCal
             } catch (InterruptedException e) {
                 return false;
             }
-
             return true;
         }
 

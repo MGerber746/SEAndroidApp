@@ -2,7 +2,12 @@
     <string name="app_name">Brainiacs</string>
 
     <!-- Strings related to login -->
+<<<<<<< e114b340fe68fea85d0be7a3250b3abb2bfca63c
     <string name="prompt_username">Username</string>
+=======
+
+    <string name="prompt_email">Username</string>
+>>>>>>> Removed back to login button(not needed on android), changed some variable names in login activities
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in</string>
     <string name="action_register">Register</string>
