@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import java.util.HashMap;
@@ -86,11 +87,6 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    public void returnToLogin(){
-        Intent intent = new Intent(this, TeacherLoginActivity.class);
-        startActivity(intent);
-
-    }
     private boolean isEmailValid(String email) {
         if (email.contains("@") && email.contains("."))
             return true;

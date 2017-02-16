@@ -8,6 +8,7 @@ import android.widget.Button;
 
 public class LoginSelectionActivity extends AppCompatActivity {
 
+    //Finds button IDs on create and readys for button input.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,11 +31,13 @@ public class LoginSelectionActivity extends AppCompatActivity {
         });
     }
 
+    //Redirects to teacher login activity
     private void teacherLogin() {
         Intent intent = new Intent(this, TeacherLoginActivity.class);
         startActivity(intent);
     }
 
+    //Redirects to student login activity
     private void studentLogin(){
         Intent intent = new Intent(this, TeacherLoginActivity.class);
         startActivity(intent);

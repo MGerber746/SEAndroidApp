@@ -102,12 +102,6 @@
             android:text="@string/submit_registraion_button"
             android:onClick="register"/>
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Back to login"
-                android:onClick="returnToLogin"/>
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

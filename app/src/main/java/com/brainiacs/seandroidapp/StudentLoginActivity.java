@@ -36,7 +36,7 @@ import java.util.List;
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
- * A login screen that offers login via email/password.
+ * A login screen that offers login via Username/password.
  */
 public class StudentLoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
@@ -296,7 +296,7 @@ public class StudentLoginActivity extends AppCompatActivity implements LoaderCal
     }
 
     /**
-     * Represents an asynchronous login/registration task used to authenticate
+     * Represents an asynchronous login task used to authenticate
      * the user.
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
@@ -328,7 +328,7 @@ public class StudentLoginActivity extends AppCompatActivity implements LoaderCal
                 }
             }
 
-            // TODO: register the new account here.
+
             return true;
         }
 
