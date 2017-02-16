@@ -39,7 +39,7 @@ public class LoginSelectionActivity extends AppCompatActivity {
 
     //Redirects to student login activity
     private void studentLogin(){
-        Intent intent = new Intent(this, TeacherLoginActivity.class);
+        Intent intent = new Intent(this, StudentLoginActivity.class);
         startActivity(intent);
     }
 }

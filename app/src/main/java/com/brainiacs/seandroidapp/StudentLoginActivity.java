@@ -179,6 +179,13 @@ public class StudentLoginActivity extends AppCompatActivity implements LoaderCal
             cancel = true;
         }
 
+        //Check for a password
+        if (TextUtils.isEmpty(password)) {
+            mPasswordView.setError(getString(R.string.error_field_required));
+            focusView = mPasswordView;
+            cancel = true;
+        }
+
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
