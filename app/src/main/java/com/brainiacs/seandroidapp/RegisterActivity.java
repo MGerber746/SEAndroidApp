@@ -11,6 +11,7 @@ import android.widget.EditText;
 import java.util.HashMap;
 
 import utils.HttpURLConnectionHandler;
+import utils.RegisterURLConnectionHandler;
 
 public class RegisterActivity extends AppCompatActivity {
     @Override
@@ -21,7 +22,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     /** Called when user clicks submit button **/
     public void register(View view) {
-        Intent intent = new Intent(this, TeacherLoginActivity.class);
         // Get all of the views of our fields
         EditText mFirstNameView = (EditText) findViewById(R.id.first_name);
         EditText mLastNameView = (EditText) findViewById(R.id.last_name);
@@ -72,18 +72,19 @@ public class RegisterActivity extends AppCompatActivity {
         if(!cancel) {
             // Set up our handler
             HashMap<String, String> params = new HashMap<>();
-            params.put("first_name", firstName);
-            params.put("last_name", lastName);
-            params.put("email", email);
-            params.put("username", username);
-            params.put("password", password);
-            params.put("confirm_password", reenterPassword);
-            HttpURLConnectionHandler handler = new HttpURLConnectionHandler(
-                    "register/", HttpURLConnectionHandler.Method.POST, params, this);
-            // Execute the task
+            params.put(getString(R.string.first_name), firstName);
+            params.put(getString(R.string.last_name), lastName);
+            params.put(getString(R.string.email), email);
+            params.put(getString(R.string.username), username);
+            params.put(getString(R.string.password), password);
+            params.put(getString(R.string.confirm_password), reenterPassword);
+            Intent intent = new Intent(this, TeacherLoginActivity.class);
+            RegisterURLConnectionHandler handler = new RegisterURLConnectionHandler(
+                    getString(R.string.register_url), getString(R.string.registration_successful),
+                    getString(R.string.failed_to_register), HttpURLConnectionHandler.Method.POST,
+                    params, this, intent);
+            // Execute the task, and forward to next activity if successful
             handler.execute((Void) null);
-            // Pass user on to the next activity
-            startActivity(intent);
         }
     }
 
