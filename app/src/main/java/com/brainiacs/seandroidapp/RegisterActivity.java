@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import java.util.HashMap;
@@ -20,7 +21,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     /** Called when user clicks submit button **/
     public void register(View view) {
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, TeacherLoginActivity.class);
         // Get all of the views of our fields
         EditText mFirstNameView = (EditText) findViewById(R.id.first_name);
         EditText mLastNameView = (EditText) findViewById(R.id.last_name);
@@ -87,7 +88,9 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
+        if (email.contains("@") && email.contains("."))
+            return true;
+        else
+            return false;
     }
 }

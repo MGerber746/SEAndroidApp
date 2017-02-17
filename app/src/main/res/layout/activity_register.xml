@@ -97,10 +97,10 @@
             </android.support.design.widget.TextInputLayout>
 
             <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/submit_registraion_button"
-                android:onClick="register"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/submit_registraion_button"
+            android:onClick="register"/>
 
         </LinearLayout>
     </ScrollView>
