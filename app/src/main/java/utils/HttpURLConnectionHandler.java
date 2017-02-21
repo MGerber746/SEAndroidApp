@@ -7,6 +7,8 @@ import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -23,7 +25,7 @@ import java.util.Map;
  */
 public abstract class HttpURLConnectionHandler extends AsyncTask<Void, Void, String> {
     public enum Method {GET, POST, HEAD, OPTIONS, PUT, DELETE, TRACE}
-    protected static final String ROOT_URL = "http://146.86.206.183:8000/";
+    protected String rootUrl;
     protected String apiEndpoint;
     protected Method method;
     protected HashMap<String, String> params;
@@ -51,12 +53,21 @@ public abstract class HttpURLConnectionHandler extends AsyncTask<Void, Void, Str
         this.intent = intent;
         this.success = success;
         this.failure = failure;
+        try {
+            // Get local url when developing
+            BufferedReader br = new BufferedReader(
+                    new InputStreamReader(context.getResources().getAssets().open("url.txt")));
+            this.rootUrl = br.readLine();
+        } catch (Exception e) {
+            // Get production url on server
+            this.rootUrl = "https://vast-hollows-88441.herokuapp.com/";
+        }
     }
 
     // Starts the communication process with the server
     protected String doInBackground(Void... params) {
         try {
-            URL url = new URL(ROOT_URL + apiEndpoint);
+            URL url = new URL(rootUrl + apiEndpoint);
 
             // Set the basics of the connection up
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
