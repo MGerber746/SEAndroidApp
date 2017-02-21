@@ -251,4 +251,3 @@ public class TeacherLoginActivity extends AppCompatActivity implements LoaderCal
         int IS_PRIMARY = 1;
     }
 }
-
