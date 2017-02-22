@@ -23,21 +23,25 @@ public class ButtonAdapter extends BaseAdapter {
         mContext = c;
     }
 
+    //Returns length of the adapter
     @Override
     public int getCount() {
         return buttons.length;
     }
 
+    //Returns null, is not needed for this class
     @Override
     public Object getItem(int position) {
         return null;
     }
 
+    //Returns position in the
     @Override
     public long getItemId(int position) {
         return position;
     }
 
+    //Sets up buttons on grid.
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Button btn;

@@ -4,6 +4,7 @@ import android.view.View;
 
 /**
  * Created by Matthew on 2/21/17.
+ * Sets up button with something it needs to do
  */
 
 public class ButtonOnClickListener implements View.OnClickListener {
