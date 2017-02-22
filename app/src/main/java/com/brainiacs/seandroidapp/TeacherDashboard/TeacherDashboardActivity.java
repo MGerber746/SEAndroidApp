@@ -6,6 +6,10 @@ import android.widget.GridView;
 
 import com.brainiacs.seandroidapp.R;
 
+/**
+ * Created by Matthew on 2/21/17.
+ * Sets up grid view with our buttons
+ */
 public class TeacherDashboardActivity extends AppCompatActivity {
 
     @Override
