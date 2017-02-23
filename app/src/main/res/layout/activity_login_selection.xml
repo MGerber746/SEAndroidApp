@@ -17,22 +17,27 @@
         android:orientation="horizontal"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:background="@drawable/Background"
+        android:weightSum="1">
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:text="Student Login"
-            android:layout_weight="1"
-            android:id="@+id/student_login" />
+            android:id="@+id/student_login"
+            android:layout_weight="0.13"
+            android:background="@color/Blue"
+            android:textColor="@android:color/background_light" />
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="106dp"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:text="Teacher Login"
-            android:layout_weight="1"
-            android:id="@+id/teacher_login" />
+            android:id="@+id/teacher_login"
+            android:background="@color/Blue"
+            android:textColor="@android:color/background_light" />
     </LinearLayout>
 </RelativeLayout>
