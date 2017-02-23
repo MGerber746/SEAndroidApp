@@ -8,7 +8,7 @@ import android.widget.Button;
 
 public class LoginSelectionActivity extends AppCompatActivity {
 
-    //Finds button IDs on create and readys for button input.
+    //Finds button IDs on create and ready for button input.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

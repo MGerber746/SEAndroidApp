@@ -27,3 +27,5 @@ local.properties
 ehthumbs.db
 Thumbs.db
 
+# ignore local url settings
+app/src/main/assets/url.txt

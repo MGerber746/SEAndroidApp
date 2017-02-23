@@ -1,11 +1,15 @@
 package utils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -19,14 +23,17 @@ import java.util.Map;
 /**
  * Task will run communications to server through async task
  */
-public class HttpURLConnectionHandler extends AsyncTask<Void, Void, String> {
+public abstract class HttpURLConnectionHandler extends AsyncTask<Void, Void, String> {
     public enum Method {GET, POST, HEAD, OPTIONS, PUT, DELETE, TRACE}
-    public static final String ROOT_URL = "https://vast-hollows-88441.herokuapp.com//";
-    private String apiEndpoint;
-    private Method method;
-    private HashMap<String, String> params;
-    private int responseCode;
-    private Context context;
+    protected String rootUrl;
+    protected String apiEndpoint;
+    protected Method method;
+    protected HashMap<String, String> params;
+    protected int responseCode;
+    protected Context context;
+    protected Intent intent;
+    protected String success;
+    protected String failure;
 
     /**
      * Sets up the needed information to use the handler
@@ -36,19 +43,31 @@ public class HttpURLConnectionHandler extends AsyncTask<Void, Void, String> {
      *               'PUT', 'DELETE', or 'TRACE'
      * @param params required parameters to be put in the url for the given method
      */
-    public HttpURLConnectionHandler(String apiEndpoint, Method method,
-                                    HashMap<String, String> params, Context context) {
+    public HttpURLConnectionHandler(String apiEndpoint, String success, String failure, Method method,
+                                    HashMap<String, String> params, Context context, Intent intent) {
         this.apiEndpoint = apiEndpoint;
         this.method = method;
         this.params = params;
         this.responseCode = 0;
         this.context = context;
+        this.intent = intent;
+        this.success = success;
+        this.failure = failure;
+        try {
+            // Get local url when developing
+            BufferedReader br = new BufferedReader(
+                    new InputStreamReader(context.getResources().getAssets().open("url.txt")));
+            this.rootUrl = br.readLine();
+        } catch (Exception e) {
+            // Get production url on server
+            this.rootUrl = "https://vast-hollows-88441.herokuapp.com/";
+        }
     }
 
     // Starts the communication process with the server
     protected String doInBackground(Void... params) {
         try {
-            URL url = new URL(ROOT_URL + apiEndpoint);
+            URL url = new URL(rootUrl + apiEndpoint);
 
             // Set the basics of the connection up
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -71,19 +90,8 @@ public class HttpURLConnectionHandler extends AsyncTask<Void, Void, String> {
             // Get the response code
             responseCode = conn.getResponseCode();
 
-            if(responseCode == HttpURLConnection.HTTP_OK) {
-                StringBuffer sb = new StringBuffer("Success");
-                String line = "";
-                BufferedReader br = new BufferedReader(
-                        new InputStreamReader(conn.getInputStream()));
-                while((line=br.readLine()) != null) {
-                    sb.append(line);
-                }
-                br.close();
-                return sb.toString();
-            } else {
-                return "Response Code: " + responseCode;
-            }
+            // Handle the response
+            return this.handleResponse(conn);
         } catch (Exception e) {
             return e.getMessage();
         }
@@ -92,6 +100,9 @@ public class HttpURLConnectionHandler extends AsyncTask<Void, Void, String> {
     @Override
     protected void onPostExecute(String result) {
         Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        if(!result.equals(failure)) {
+            context.startActivity(intent);
+        }
     }
 
     /**
@@ -113,5 +124,29 @@ public class HttpURLConnectionHandler extends AsyncTask<Void, Void, String> {
             result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
         }
         return result.toString();
+    }
+
+    /**
+     * Default method of handling a response.
+     * @param conn is the http connection
+     * @return a string that is used in the post execute.
+     * @throws IOException
+     */
+    protected String handleResponse(HttpURLConnection conn) throws IOException {
+        if(responseCode == HttpURLConnection.HTTP_OK) {
+            StringBuffer sb = new StringBuffer("Success");
+            String line;
+            BufferedReader br = new BufferedReader(
+                    new InputStreamReader(conn.getInputStream()));
+            while((line=br.readLine()) != null) {
+                sb.append(line);
+            }
+            br.close();
+            return sb.toString();
+        } else if(responseCode >= 200 && responseCode < 300) {
+            return success;
+        } else {
+            return failure;
+        }
     }
 }

@@ -1,7 +1,5 @@
 package com.brainiacs.seandroidapp;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -268,8 +266,7 @@ public class StudentLoginActivity extends AppCompatActivity implements LoaderCal
             } catch (InterruptedException e) {
                 return false;
             }
-
-            return true;
+           return true;
         }
 
         @Override
@@ -290,4 +287,3 @@ public class StudentLoginActivity extends AppCompatActivity implements LoaderCal
         }
     }
 }
-

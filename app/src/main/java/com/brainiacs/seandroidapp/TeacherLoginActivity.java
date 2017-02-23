@@ -1,7 +1,5 @@
 package com.brainiacs.seandroidapp;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,7 +12,6 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -31,7 +28,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import utils.DBTools;
+import utils.HttpURLConnectionHandler;
+import utils.LoginURLConnectionHandler;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -45,15 +47,9 @@ public class TeacherLoginActivity extends AppCompatActivity implements LoaderCal
      */
     private static final int REQUEST_READ_CONTACTS = 0;
 
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
-    private UserLoginTask mAuthTask = null;
-
     // UI references.
     private AutoCompleteTextView mUsernameView;
     private EditText mPasswordView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +86,6 @@ public class TeacherLoginActivity extends AppCompatActivity implements LoaderCal
                 register();
             }
         });
-
     }
 
     private void populateAutoComplete() {
@@ -143,9 +138,13 @@ public class TeacherLoginActivity extends AppCompatActivity implements LoaderCal
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-        if (mAuthTask != null) {
+        // If we have a token we don't need to login
+        DBTools dbTools = new DBTools(this);
+        if (!dbTools.getToken().isEmpty()) {
+            dbTools.close();
             return;
         }
+        dbTools.close();
 
         // Reset errors.
         mUsernameView.setError(null);
@@ -170,24 +169,23 @@ public class TeacherLoginActivity extends AppCompatActivity implements LoaderCal
             mUsernameView.setError(getString(R.string.error_field_required));
             focusView = mUsernameView;
             cancel = true;
+        }
 
-            //Check for a password
-            if (TextUtils.isEmpty(password)) {
-                mPasswordView.setError(getString(R.string.error_field_required));
-                focusView = mPasswordView;
-                cancel = true;
-            }
-
-            if (cancel) {
-                // There was an error; don't attempt login and focus the first
-                // form field with an error.
-                focusView.requestFocus();
-            } else {
-                // Show a progress spinner, and kick off a background task to
-                // perform the user login attempt.
-                mAuthTask = new UserLoginTask(username, password);
-                mAuthTask.execute((Void) null);
-            }
+        if (cancel) {
+            // There was an error; don't attempt login and focus the first
+            // form field with an error.
+            focusView.requestFocus();
+        } else {
+            // Setup our params for login
+            HashMap<String, String> params = new HashMap<>();
+            params.put(getString(R.string.username), username);
+            params.put(getString(R.string.password), password);
+            Intent intent = new Intent(this, this.getClass());
+            LoginURLConnectionHandler handler = new LoginURLConnectionHandler(
+                    getString(R.string.login_url), getString(R.string.login_successful),
+                    getString(R.string.failed_to_login), HttpURLConnectionHandler.Method.POST,
+                    params, this, intent);
+            handler.execute((Void) null);
         }
     }
 
@@ -241,9 +239,7 @@ public class TeacherLoginActivity extends AppCompatActivity implements LoaderCal
 
     @Override
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
-
     }
-
 
     private interface ProfileQuery {
         String[] PROJECTION = {
@@ -254,52 +250,4 @@ public class TeacherLoginActivity extends AppCompatActivity implements LoaderCal
         int ADDRESS = 0;
         int IS_PRIMARY = 1;
     }
-
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-
-        private final String mUsername;
-        private final String mPassword;
-
-        UserLoginTask(String username, String password) {
-            mUsername = username;
-            mPassword = password;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-            // TODO: register the new account here.
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-
-            if (success) {
-                finish();
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-        }
-    }
 }
-
