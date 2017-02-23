@@ -26,7 +26,7 @@ public class ButtonAdapter extends BaseAdapter {
     //Returns length of the adapter
     @Override
     public int getCount() {
-        return buttons.length;
+        return 0;
     }
 
     //Returns null, is not needed for this class
@@ -54,6 +54,11 @@ public class ButtonAdapter extends BaseAdapter {
                 btn = (Button) convertView;
             }
 
+        if (!getButtons().equals(null)){
+            btn.setText(getButtons()[position]);
+            btn.setOnClickListener(new ButtonOnClickListener(position));
+        }
+        btn.setText("Create a new class");
         btn.setOnClickListener(new ButtonOnClickListener(position));
         return btn;
         }
