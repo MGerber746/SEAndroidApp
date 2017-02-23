@@ -68,4 +68,6 @@
 
     <!-- Strings related to Student Home Page -->
     <string name="students_get_classes_url">students/get-classes/</string>
+
+    <string name="title_activity_ducks">Ducks</string>
 </resources>
