@@ -82,12 +82,13 @@
                     style="?android:textAppearanceSmall"
                     android:layout_margin="10dp"
                     android:layout_width="317dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="70dp"
                     android:text="@string/action_sign_in"
                     android:textStyle="bold"
                     android:background="@android:color/black"
                     android:textColor="@android:color/background_light"
-                    android:layout_weight="0.41" />
+                    android:layout_weight="0.21"
+                    android:textSize="24sp" />
             </LinearLayout>
 
         </LinearLayout>
