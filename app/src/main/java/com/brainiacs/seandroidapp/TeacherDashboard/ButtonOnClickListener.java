@@ -1,6 +1,8 @@
 package com.brainiacs.seandroidapp.TeacherDashboard;
 
+import android.content.Intent;
 import android.view.View;
+
 
 /**
  * Created by Matthew on 2/21/17.
@@ -10,14 +12,13 @@ import android.view.View;
 public class ButtonOnClickListener implements View.OnClickListener {
     private final int position;
 
-    public ButtonOnClickListener(int position)
-    {
+    public ButtonOnClickListener(int position) {
+
         this.position = position;
     }
 
     @Override
     public void onClick(View v) {
-        //TODO
-        //When clicked do something(this.position)
+        //Intent intent = new Intent(this, ClassHomeActivity.class);
     }
 }

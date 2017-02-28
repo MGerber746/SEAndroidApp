@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginSelectionActivity"
+            android:name=".TeacherDashboard.TeacherDashboardActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,8 +26,9 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".TeacherLoginActivity" />
         <activity android:name=".StudentLoginActivity" />
-        <activity android:name=".TeacherDashboard.TeacherDashboardActivity" />
-        <activity android:name=".TeacherDashboard.ClassHomeActivity"></activity>
+        <activity android:name=".LoginSelectionActivity" />
+        <activity android:name=".TeacherDashboard.ClassHomeActivity" />
+        <activity android:name=".TeacherDashboard.CreateStudentAccountActivity"></activity>
     </application>
 
 </manifest>
