@@ -1,5 +1,6 @@
 package com.brainiacs.seandroidapp;
 
+import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
@@ -13,8 +14,8 @@ import android.content.Context;
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 {
-    public static final int WIDTH = 856;
-    public static final int HEIGHT = 480;
+    public static final int WIDTH = 512;
+    public static final int HEIGHT = 512;
     private Background background;
     public GamePanel(Context context)
     {
@@ -32,7 +33,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        background = new Background(BitmapFactory.decodeResource(getResources(), R.mipmap.carnival_background));
+        background = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.carnival_background));
 
     }
 
