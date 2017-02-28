@@ -17,27 +17,30 @@ import android.widget.GridView;
 
 public class ButtonAdapter extends BaseAdapter {
     private Context mContext;
-    private String[] buttons;
+    private String[] buttons = {"Class 1", "Class 2", "Class 3", "Create new Class"};
 
     public ButtonAdapter(Context c){
+
         mContext = c;
     }
 
     //Returns length of the adapter
     @Override
     public int getCount() {
-        return 0;
+        return buttons.length;
     }
 
     //Returns null, is not needed for this class
     @Override
     public Object getItem(int position) {
+
         return null;
     }
 
     //Returns position in the
     @Override
     public long getItemId(int position) {
+
         return position;
     }
 
@@ -47,19 +50,17 @@ public class ButtonAdapter extends BaseAdapter {
         Button btn;
         if (convertView == null) {
             btn = new Button(mContext);
-            btn.setLayoutParams(new GridView.LayoutParams(100, 55));
+            btn.setLayoutParams(new GridView.LayoutParams(200, 200));
             btn.setPadding(8, 8, 8, 8);
         }
             else{
                 btn = (Button) convertView;
             }
 
-        if (!getButtons().equals(null)){
-            btn.setText(getButtons()[position]);
+            //Sets up button text and makes them buttons
+            btn.setText(buttons[position]);
             btn.setOnClickListener(new ButtonOnClickListener(position));
-        }
-        btn.setText("Create a new class");
-        btn.setOnClickListener(new ButtonOnClickListener(position));
+
         return btn;
         }
 
