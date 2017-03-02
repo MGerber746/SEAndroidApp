@@ -18,7 +18,12 @@ public class ButtonOnClickListener implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
+        //classOverview(this);
+    }
+
+    private void classOverview() {
         //Intent intent = new Intent(this, ClassHomeActivity.class);
+        //startActivity(intent);
     }
 }

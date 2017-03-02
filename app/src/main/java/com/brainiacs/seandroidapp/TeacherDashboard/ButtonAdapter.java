@@ -33,14 +33,12 @@ public class ButtonAdapter extends BaseAdapter {
     //Returns null, is not needed for this class
     @Override
     public Object getItem(int position) {
-
         return null;
     }
 
     //Returns position in the
     @Override
     public long getItemId(int position) {
-
         return position;
     }
 

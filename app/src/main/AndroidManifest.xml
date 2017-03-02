@@ -28,7 +28,8 @@
         <activity android:name=".StudentLoginActivity" />
         <activity android:name=".LoginSelectionActivity" />
         <activity android:name=".TeacherDashboard.ClassHomeActivity" />
-        <activity android:name=".TeacherDashboard.CreateStudentAccountActivity"></activity>
+        <activity android:name=".TeacherDashboard.CreateStudentAccountActivity" />
+        <activity android:name=".TeacherDashboard.activityOverviewActivity"></activity>
     </application>
 
 </manifest>
