@@ -22,7 +22,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="151dp"
-                app:srcCompat="@drawable/Logo1"
+                app:srcCompat="@drawable/logo"
                 android:id="@+id/imageView2"
                 android:scaleType="centerCrop"
                 android:background="@color/Blue" />
@@ -34,7 +34,7 @@
                 <EditText
                     android:id="@+id/username"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:hint="@string/prompt_username"
                     android:inputType="text"
                     android:maxLines="1"
@@ -81,13 +81,12 @@
                     android:id="@+id/sign_in_button"
                     style="?android:textAppearanceSmall"
                     android:layout_margin="10dp"
-                    android:layout_width="317dp"
-                    android:layout_height="70dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
                     android:text="@string/action_sign_in"
                     android:textStyle="bold"
                     android:background="@android:color/black"
                     android:textColor="@android:color/background_light"
-                    android:layout_weight="0.21"
                     android:textSize="24sp" />
             </LinearLayout>
 
