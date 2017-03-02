@@ -32,7 +32,7 @@
     <string name="empty_reenter_password">Please retype your password</string>
     <string name="invalid_password">Password do not match</string>
     <string name="submit_registraion_button">Submit</string>
-    <string name="register_url">register/</string>
+    <string name="register_url">accounts/</string>
     <string name="failed_to_register">Registration failed.</string>
     <string name="registration_successful">Registration successful.</string>
     <string name="first_name">first_name</string>
