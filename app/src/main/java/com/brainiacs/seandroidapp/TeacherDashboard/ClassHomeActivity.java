@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.TableLayout;
 
 import com.brainiacs.seandroidapp.R;
 import com.brainiacs.seandroidapp.TeacherLoginActivity;
@@ -34,6 +36,14 @@ public class ClassHomeActivity extends AppCompatActivity {
                 overviewActivities();
             }
         });
+
+        //Retrieves class names from selection Screen
+        Intent oldIntent = getIntent();
+        String className = oldIntent.getStringExtra("className");
+        ((TextView)findViewById(R.id.textView)).setText(className);
+
+        //Sets up student names and grades in a table
+
     }
 
     //Redirects to teacher login activity

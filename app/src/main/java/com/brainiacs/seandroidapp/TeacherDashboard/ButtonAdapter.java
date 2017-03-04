@@ -1,11 +1,16 @@
 package com.brainiacs.seandroidapp.TeacherDashboard;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+
+
+
+import com.brainiacs.seandroidapp.TeacherLoginActivity;
 
 
 /**
@@ -57,7 +62,14 @@ public class ButtonAdapter extends BaseAdapter {
 
             //Sets up button text and makes them buttons
             btn.setText(buttons[position]);
-            btn.setOnClickListener(new ButtonOnClickListener(position));
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, ClassHomeActivity.class);
+                    intent.putExtra("className", ((Button) v).getText().toString());
+                    mContext.startActivity(intent);
+                }
+            });
 
         return btn;
         }
