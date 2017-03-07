@@ -57,12 +57,6 @@ public class StudentLoginActivity extends AppCompatActivity {
         String password = mPasswordView.getText().toString();
 
         boolean isValid = true;
-        View focusView = null;
-
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            isValid = false;
-        }
 
         // Check for a valid username.
         if (TextUtils.isEmpty(username)) {
@@ -88,10 +82,5 @@ public class StudentLoginActivity extends AppCompatActivity {
                     params, this, intent);
             handler.execute((Void) null);
         }
-    }
-
-    private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
     }
 }
