@@ -45,4 +45,6 @@
     <!-- Strings related to Student Login -->
     <string name="title_activity_student_login">StudentLoginActivity</string>
     <string name="title_activity_test">TestActivity</string>
+    <string name="student_login">Student Login</string>
+    <string name="teacher_login">Teacher Login</string>
 </resources>
