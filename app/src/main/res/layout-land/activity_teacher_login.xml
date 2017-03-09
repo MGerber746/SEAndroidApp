@@ -26,7 +26,8 @@
                 android:layout_height="160dp"
                 app:srcCompat="@drawable/logo"
                 android:id="@+id/imageView6"
-                tools:ignore="ContentDescription" />
+                tools:ignore="ContentDescription"
+                android:background="@color/Blue" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
