@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TableLayout;
 
@@ -16,6 +17,8 @@ import com.brainiacs.seandroidapp.TeacherLoginActivity;
  * Overview for a class
  */
 public class ClassHomeActivity extends AppCompatActivity {
+    private String[] assignments = {"Homework", "Classwork", "Pleaswork"};
+    private String[] students = {"Gary", "Barry", "Larry", "Harry"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,29 @@ public class ClassHomeActivity extends AppCompatActivity {
 
         //Sets up student names and grades in a table
 
+        TableLayout table = (TableLayout) findViewById(R.id.table);
+        TableRow assignRow = new TableRow(this);
+        for(int i = 0; i < assignments.length; i++){
+            TextView column = new TextView(this);
+            column.setText(assignments[i].toString());
+            assignRow.addView(column);
+        }
+        table.addView(assignRow);
+        TableRow row = new TableRow(this);
+        for(int i = 0; i < students.length; i++){
+            TextView column = new TextView(this);
+            column.setText(students[i]);
+            row.addView(column);
+
+            for(int j = 0; j < assignments.length; j++){
+                TextView column1 = new TextView(this);
+                column1.setText("1");
+                row.addView(column1);
+
+            }
+            table.addView(row);
+
+        }
     }
 
     //Redirects to teacher login activity

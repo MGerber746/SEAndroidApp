@@ -26,10 +26,11 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".TeacherLoginActivity" />
         <activity android:name=".StudentLoginActivity" />
-        <activity android:name=".LoginSelectionActivity" />
         <activity android:name=".TeacherDashboard.ClassHomeActivity" />
+        <activity android:name=".LoginSelectionActivity" />
         <activity android:name=".TeacherDashboard.CreateStudentAccountActivity" />
-        <activity android:name=".TeacherDashboard.activityOverviewActivity"></activity>
+        <activity android:name=".TeacherDashboard.activityOverviewActivity" />
+        <activity android:name=".StudentDashboardActivity"></activity>
     </application>
 
 </manifest>

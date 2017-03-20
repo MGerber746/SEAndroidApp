@@ -12,6 +12,8 @@ import android.widget.GridView;
 
 import com.brainiacs.seandroidapp.TeacherLoginActivity;
 
+import static com.brainiacs.seandroidapp.R.id.gridview;
+
 
 /**
  * Created by Matthew on 2/21/17.
@@ -65,9 +67,14 @@ public class ButtonAdapter extends BaseAdapter {
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContext, ClassHomeActivity.class);
-                    intent.putExtra("className", ((Button) v).getText().toString());
-                    mContext.startActivity(intent);
+                    if(((Button) v).getText().toString().equals("Create New Class")){
+
+                    }
+                    else {
+                        Intent intent = new Intent(mContext, ClassHomeActivity.class);
+                        intent.putExtra("className", ((Button) v).getText().toString());
+                        mContext.startActivity(intent);
+                    }
                 }
             });
 
@@ -78,9 +85,8 @@ public class ButtonAdapter extends BaseAdapter {
     //Retrieves reference to number of classes and
     //required amount of buttons
     //TODO
-    public String[] getButtons(){
+    public void setButtons(){
 
-        return null;
     }
 
 }
