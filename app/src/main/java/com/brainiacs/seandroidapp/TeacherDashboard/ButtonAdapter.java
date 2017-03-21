@@ -9,8 +9,12 @@ import android.widget.Button;
 import android.widget.GridView;
 
 
-
+import com.brainiacs.seandroidapp.R;
 import com.brainiacs.seandroidapp.TeacherLoginActivity;
+
+import utils.GetClassesURLConnectionHandler;
+import utils.HttpURLConnectionHandler;
+import utils.LoginURLConnectionHandler;
 
 import static com.brainiacs.seandroidapp.R.id.gridview;
 
@@ -86,7 +90,11 @@ public class ButtonAdapter extends BaseAdapter {
     //required amount of buttons
     //TODO
     public void setButtons(){
-
+        GetClassesURLConnectionHandler handler = new GetClassesURLConnectionHandler(
+                , ,
+                getString(R.string.failed_to_login), HttpURLConnectionHandler.Method.POST,
+                params, this, intent);
+        handler.execute((Void) null);
     }
 
 }

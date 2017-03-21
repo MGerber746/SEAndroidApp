@@ -27,4 +27,5 @@ public class GetClassesURLConnectionHandler extends HttpURLConnectionHandler {
                                           HashMap<String, String> params, Context context, Intent intent) {
         super(apiEndpoint, success, failure, method, params, context, intent);
     }
+
 }
