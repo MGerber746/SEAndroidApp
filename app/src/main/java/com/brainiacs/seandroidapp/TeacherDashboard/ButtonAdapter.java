@@ -1,16 +1,24 @@
 package com.brainiacs.seandroidapp.TeacherDashboard;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.InputType;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 
 
 import com.brainiacs.seandroidapp.R;
 import com.brainiacs.seandroidapp.TeacherLoginActivity;
+
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import utils.GetClassesURLConnectionHandler;
 import utils.HttpURLConnectionHandler;
@@ -71,8 +79,32 @@ public class ButtonAdapter extends BaseAdapter {
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(((Button) v).getText().toString().equals("Create New Class")){
+                    if(((Button) v).getText().toString().equals(R.string.Create_New_Class)){
+                        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                        builder.setTitle("New Class Name");
+                        final EditText input = new EditText(mContext);
+                        input.setInputType(InputType.TYPE_CLASS_TEXT);
+                        builder.setView(input);
 
+                        // Set up the buttons
+                        builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                input.getText().toString();
+                                //TODO POST new class to db
+                                Intent intent = new Intent(mContext, ClassHomeActivity.class);
+                                intent.putExtra("className", input.getText().toString());
+                                mContext.startActivity(intent);
+                            }
+                        });
+                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+
+                        builder.show();
                     }
                     else {
                         Intent intent = new Intent(mContext, ClassHomeActivity.class);
@@ -90,11 +122,12 @@ public class ButtonAdapter extends BaseAdapter {
     //required amount of buttons
     //TODO
     public void setButtons(){
-        GetClassesURLConnectionHandler handler = new GetClassesURLConnectionHandler(
-                , ,
-                getString(R.string.failed_to_login), HttpURLConnectionHandler.Method.POST,
-                params, this, intent);
-        handler.execute((Void) null);
+        GetClassesURLConnectionHandler classJSON = new GetClassesURLConnectionHandler("teacher/get-classes", "Data Retrieval Successful",
+                "Data Retrieval Failed", HttpURLConnectionHandler.Method.GET, null, mContext, null);
+        classJSON.execute((Void) null);
+        JSONObject JSONclasses = new JSONObject();
+        ArrayList<String> arrayClasses = new ArrayList<String>();
+
     }
 
 }

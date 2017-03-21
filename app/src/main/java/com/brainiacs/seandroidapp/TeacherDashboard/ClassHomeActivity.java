@@ -46,7 +46,8 @@ public class ClassHomeActivity extends AppCompatActivity {
 
         //Sets up student names and grades in a table
 
-        TableLayout table = (TableLayout) findViewById(R.id.table);
+        
+/*        TableLayout table = (TableLayout) findViewById(R.id.table);
         TableRow assignRow = new TableRow(this);
         for(int i = 0; i < assignments.length; i++){
             TextView column = new TextView(this);
@@ -68,7 +69,7 @@ public class ClassHomeActivity extends AppCompatActivity {
             }
             table.addView(row);
 
-        }
+        }*/
     }
 
     //Redirects to teacher login activity

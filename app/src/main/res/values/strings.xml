@@ -44,4 +44,7 @@
 
     <!-- Strings related to Student Login -->
     <string name="title_activity_student_login">StudentLoginActivity</string>
+
+    <!-- Strings related to Create new Class Buttons -->
+    <string name="Create_New_Class">Create New Class</string>
 </resources>
