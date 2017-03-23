@@ -19,7 +19,13 @@ import com.brainiacs.seandroidapp.TeacherLoginActivity;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
 
+=======
+import java.util.HashMap;
+
+import utils.DBTools;
+>>>>>>> dev
 import utils.GetClassesURLConnectionHandler;
 import utils.HttpURLConnectionHandler;
 import utils.LoginURLConnectionHandler;
@@ -38,6 +44,10 @@ public class ButtonAdapter extends BaseAdapter {
     private Context mContext;
     private String[] buttons = {"Class 1", "Class 2", "Class 3", "Create new Class"};
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> dev
     public ButtonAdapter(Context c){
 
         mContext = c;
@@ -125,8 +135,7 @@ public class ButtonAdapter extends BaseAdapter {
         GetClassesURLConnectionHandler classJSON = new GetClassesURLConnectionHandler("teacher/get-classes", "Data Retrieval Successful",
                 "Data Retrieval Failed", HttpURLConnectionHandler.Method.GET, null, mContext, null);
         classJSON.execute((Void) null);
-        JSONObject JSONclasses = new JSONObject();
-        ArrayList<String> arrayClasses = new ArrayList<String>();
+        classJSON.getClasses()
 
     }
 

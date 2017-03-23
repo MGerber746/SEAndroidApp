@@ -3,6 +3,17 @@ package utils;
 import android.content.Context;
 import android.content.Intent;
 
+import com.brainiacs.seandroidapp.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -28,4 +39,23 @@ public class GetClassesURLConnectionHandler extends HttpURLConnectionHandler {
         super(apiEndpoint, success, failure, method, params, context, intent);
     }
 
+    public JSONArray getClasses(HttpURLConnection conn) throws IOException{
+
+        String line = null;
+        StringBuilder sb = new StringBuilder();
+        BufferedReader br = new BufferedReader(
+                new InputStreamReader(conn.getInputStream()));
+        while((line=br.readLine()) != null) {
+            sb.append(line);
+        }
+        br.close();
+        // Create a JSONObject to get our data
+        try {
+            JSONObject json = new JSONObject(sb.toString());
+            return json.getJSONArray("classes");
+        } catch (JSONException e) {
+            System.err.print(e.getMessage());
+            return null;
+        }
+    }
 }
