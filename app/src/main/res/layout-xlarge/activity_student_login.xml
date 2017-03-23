@@ -21,7 +21,7 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="420dp"
                 app:srcCompat="@drawable/logo"
                 android:id="@+id/imageView2"
                 android:scaleType="centerCrop"
@@ -30,12 +30,12 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="95dp">
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/username"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="80dp"
                     android:hint="@string/prompt_username"
                     android:inputType="text"
                     android:maxLines="1"
@@ -45,30 +45,34 @@
                     android:background="@android:color/background_light"
                     android:paddingBottom="@dimen/activity_vertical_margin"
                     android:padding="@dimen/activity_vertical_margin"
-                    android:layout_margin="@dimen/activity_vertical_margin" />
+                    android:layout_margin="@dimen/activity_vertical_margin"
+                    android:textSize="30sp" />
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="95dp">
 
                 <EditText
                     android:id="@+id/password"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="80dp"
                     android:hint="@string/prompt_password"
+                    android:imeActionId="@+id/login"
+                    android:imeActionLabel="@string/action_sign_in"
+                    android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:layout_margin="@dimen/activity_vertical_margin"
                     android:background="@android:color/background_light"
-                    android:padding="@dimen/activity_vertical_margin" />
+                    android:padding="@dimen/activity_vertical_margin"
+                    android:textSize="30sp" />
 
             </android.support.design.widget.TextInputLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="1">
@@ -78,12 +82,12 @@
                     style="?android:textAppearanceSmall"
                     android:layout_margin="@dimen/activity_vertical_margin"
                     android:layout_width="match_parent"
-                    android:layout_height="72dp"
+                    android:layout_height="match_parent"
                     android:text="@string/action_sign_in"
                     android:textStyle="bold"
                     android:background="@android:color/black"
                     android:textColor="@android:color/background_light"
-                    android:textSize="24sp"
+                    android:textSize="36sp"
                     android:padding="@dimen/activity_vertical_margin" />
             </LinearLayout>
 

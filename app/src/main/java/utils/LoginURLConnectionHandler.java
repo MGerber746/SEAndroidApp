@@ -30,7 +30,7 @@ public class LoginURLConnectionHandler extends HttpURLConnectionHandler {
     protected String handleResponse(HttpURLConnection conn) throws IOException {
         if(responseCode == HttpURLConnection.HTTP_OK) {
             // Convert the stream to a string
-            String line = null;
+            String line;
             StringBuilder sb = new StringBuilder();
             BufferedReader br = new BufferedReader(
                     new InputStreamReader(conn.getInputStream()));

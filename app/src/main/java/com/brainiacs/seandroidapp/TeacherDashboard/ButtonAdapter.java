@@ -14,23 +14,8 @@ import android.widget.GridView;
 
 
 import com.brainiacs.seandroidapp.R;
-import com.brainiacs.seandroidapp.TeacherLoginActivity;
-
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-<<<<<<< HEAD
-
-=======
-import java.util.HashMap;
-
-import utils.DBTools;
->>>>>>> dev
 import utils.GetClassesURLConnectionHandler;
 import utils.HttpURLConnectionHandler;
-import utils.LoginURLConnectionHandler;
-
-import static com.brainiacs.seandroidapp.R.id.gridview;
 
 
 /**
@@ -44,10 +29,6 @@ public class ButtonAdapter extends BaseAdapter {
     private Context mContext;
     private String[] buttons = {"Class 1", "Class 2", "Class 3", "Create new Class"};
 
-<<<<<<< HEAD
-=======
-
->>>>>>> dev
     public ButtonAdapter(Context c){
 
         mContext = c;
