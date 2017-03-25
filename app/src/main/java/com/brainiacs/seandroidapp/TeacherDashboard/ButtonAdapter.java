@@ -116,7 +116,7 @@ public class ButtonAdapter extends BaseAdapter {
         GetClassesURLConnectionHandler classJSON = new GetClassesURLConnectionHandler("teacher/get-classes", "Data Retrieval Successful",
                 "Data Retrieval Failed", HttpURLConnectionHandler.Method.GET, null, mContext, null);
         classJSON.execute((Void) null);
-        classJSON.getClasses()
+
 
     }
 

@@ -39,23 +39,30 @@ public class GetClassesURLConnectionHandler extends HttpURLConnectionHandler {
         super(apiEndpoint, success, failure, method, params, context, intent);
     }
 
-    public JSONArray getClasses(HttpURLConnection conn) throws IOException{
-
-        String line = null;
-        StringBuilder sb = new StringBuilder();
-        BufferedReader br = new BufferedReader(
-                new InputStreamReader(conn.getInputStream()));
-        while((line=br.readLine()) != null) {
-            sb.append(line);
-        }
-        br.close();
-        // Create a JSONObject to get our data
-        try {
-            JSONObject json = new JSONObject(sb.toString());
-            return json.getJSONArray("classes");
-        } catch (JSONException e) {
-            System.err.print(e.getMessage());
-            return null;
+    protected String handleResponse(HttpURLConnection conn) throws IOException {
+        if(responseCode == HttpURLConnection.HTTP_OK) {
+            // Convert the stream to a string
+            String line;
+            StringBuilder sb = new StringBuilder();
+            BufferedReader br = new BufferedReader(
+                    new InputStreamReader(conn.getInputStream()));
+            while((line=br.readLine()) != null) {
+                sb.append(line);
+            }
+            br.close();
+            // Create a JSONObject to get our data
+            try {
+                JSONObject json = new JSONObject(sb.toString());
+                String classes = json.getString(context.getString(R.string.class_List));
+                return classes;
+            } catch (JSONException e) {
+                System.err.print(e.getMessage());
+                return failure;
+            }
+        } else if(responseCode >= 200 && responseCode < 300) {
+            return success;
+        } else {
+            return failure;
         }
     }
 }

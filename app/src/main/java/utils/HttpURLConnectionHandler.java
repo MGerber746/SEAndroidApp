@@ -116,7 +116,7 @@ public abstract class HttpURLConnectionHandler extends AsyncTask<Void, Void, Str
      * Changes the hash map of params into a string representation
      * @return string representation of the params
      */
-    private String getParamsString() throws UnsupportedEncodingException {
+    protected String getParamsString() throws UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();
         boolean first = true;
         for(Map.Entry<String, String> entry : params.entrySet()) {

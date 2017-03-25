@@ -44,13 +44,12 @@
 
     <!-- Strings related to Student Login -->
     <string name="title_activity_student_login">StudentLoginActivity</string>
-<<<<<<< HEAD
 
     <!-- Strings related to Create new Class Buttons -->
     <string name="Create_New_Class">Create New Class</string>
-=======
+    <string name="class_List">classes</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="student_login">Student Login</string>
     <string name="teacher_login">Teacher Login</string>
->>>>>>> dev
+
 </resources>

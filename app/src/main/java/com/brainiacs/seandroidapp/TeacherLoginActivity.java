@@ -59,6 +59,8 @@ public class TeacherLoginActivity extends AppCompatActivity {
     private void attemptLogin() {
         // If we have a token we don't need to login
         DBTools dbTools = new DBTools(this);
+        // TODO: Remove once logout is implemented
+        dbTools.deleteTokens();
         if (!dbTools.getToken().isEmpty()) {
             dbTools.close();
             return;
@@ -76,7 +78,7 @@ public class TeacherLoginActivity extends AppCompatActivity {
         boolean isValid = true;
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password)) {
+        if (TextUtils.isEmpty(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             isValid = false;
         }
