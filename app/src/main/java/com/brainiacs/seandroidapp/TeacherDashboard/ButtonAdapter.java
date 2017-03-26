@@ -14,8 +14,13 @@ import android.widget.GridView;
 
 
 import com.brainiacs.seandroidapp.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import utils.GetClassesURLConnectionHandler;
 import utils.HttpURLConnectionHandler;
+import utils.JSONTools;
 
 
 /**
@@ -65,6 +70,7 @@ public class ButtonAdapter extends BaseAdapter {
                 btn = (Button) convertView;
             }
 
+            setButtons();
             //Sets up button text and makes them buttons
             btn.setText(buttons[position]);
             btn.setOnClickListener(new View.OnClickListener() {
@@ -113,10 +119,16 @@ public class ButtonAdapter extends BaseAdapter {
     //required amount of buttons
     //TODO
     public void setButtons(){
+        JSONTools jsonData = new JSONTools();
         GetClassesURLConnectionHandler classJSON = new GetClassesURLConnectionHandler("teacher/get-classes", "Data Retrieval Successful",
-                "Data Retrieval Failed", HttpURLConnectionHandler.Method.GET, null, mContext, null);
+                "Data Retrieval Failed", HttpURLConnectionHandler.Method.GET, null, mContext, null, jsonData);
         classJSON.execute((Void) null);
-
+        JSONObject json = jsonData.getJSON();
+        //try {
+            //buttons = json.getString(mContext.getString(R.string.class_List));
+        //} catch (JSONException e) {
+          //  e.printStackTrace();
+        //}
 
     }
 
