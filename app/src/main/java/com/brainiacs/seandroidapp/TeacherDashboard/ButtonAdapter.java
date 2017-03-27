@@ -32,7 +32,7 @@ import utils.JSONTools;
 
 public class ButtonAdapter extends BaseAdapter {
     private Context mContext;
-    private String[] buttons = {"Class 1", "Class 2", "Class 3", "Create new Class"};
+    private String[] buttons = {"1st Grade Period 1", "Period 2", "Second Grade Period 1", "Create New Class"};
 
     public ButtonAdapter(Context c){
 
@@ -70,13 +70,13 @@ public class ButtonAdapter extends BaseAdapter {
                 btn = (Button) convertView;
             }
 
-            setButtons();
+            //TODO setButtons();
             //Sets up button text and makes them buttons
             btn.setText(buttons[position]);
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(((Button) v).getText().toString().equals(R.string.Create_New_Class)){
+                    if(((Button) v).getText().toString().equals("Create New Class")){
                         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                         builder.setTitle("New Class Name");
                         final EditText input = new EditText(mContext);
