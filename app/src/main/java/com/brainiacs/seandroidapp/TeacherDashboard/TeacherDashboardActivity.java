@@ -1,10 +1,16 @@
 package com.brainiacs.seandroidapp.TeacherDashboard;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.GridView;
 
 import com.brainiacs.seandroidapp.R;
+import com.brainiacs.seandroidapp.LoginSelectionActivity;
+
+import utils.DBTools;
 
 /**
  * Created by Matthew on 2/21/17.
@@ -19,5 +25,22 @@ public class TeacherDashboardActivity extends AppCompatActivity {
 
         GridView gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new ButtonAdapter(this));
+
+        Button mSignInButton = (Button) findViewById(R.id.Logout);
+        mSignInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logout();
+            }
+        });
+    }
+
+    private void logout(){
+        DBTools dbTools = new DBTools(this);
+        dbTools.deleteTokens();
+        dbTools.close();
+        Intent intent = new Intent(this, LoginSelectionActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

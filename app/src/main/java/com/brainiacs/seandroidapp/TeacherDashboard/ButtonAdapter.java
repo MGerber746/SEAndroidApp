@@ -74,7 +74,6 @@ public class ButtonAdapter extends BaseAdapter {
             //TODO setButtons();
             //Sets up button text and makes them buttons
             btn.setText(buttons[position]);
-            btn.setBackgroundColor(Color.rgb(0,255,255));
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
