@@ -107,7 +107,7 @@ public abstract class HttpURLConnectionHandler extends AsyncTask<Void, Void, Str
     @Override
     protected void onPostExecute(String result) {
         Toast.makeText(context, result, Toast.LENGTH_LONG).show();
-        if(!result.equals(failure)) {
+        if(!result.equals(failure) && intent != null) {
             context.startActivity(intent);
         }
     }
