@@ -71,14 +71,21 @@ public abstract class HttpURLConnectionHandler extends AsyncTask<Void, Void, Str
 
             // Set the basics of the connection up
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setReadTimeout(15000);
-            conn.setConnectTimeout(15000);
+            conn.setReadTimeout(1000);
+            conn.setConnectTimeout(1000);
             conn.setDoInput(true);
-            conn.setDoOutput(true);
             conn.setRequestMethod(method.name());
+            DBTools dbTools = new DBTools(context);
+            String token = dbTools.getToken();
+            dbTools.close();
+            // Check to see if we have a token
+            if (!token.isEmpty()) {
+                conn.setRequestProperty("Authorization", "Token " + token);
+            }
 
             // If we have params send them to the server
-            if(params != null) {
+            if(method.name().equals("POST")) {
+                conn.setDoOutput(true);
                 OutputStream os = conn.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
                 writer.write(getParamsString());
@@ -100,7 +107,7 @@ public abstract class HttpURLConnectionHandler extends AsyncTask<Void, Void, Str
     @Override
     protected void onPostExecute(String result) {
         Toast.makeText(context, result, Toast.LENGTH_LONG).show();
-        if(!result.equals(failure)) {
+        if(!result.equals(failure) && intent != null) {
             context.startActivity(intent);
         }
     }

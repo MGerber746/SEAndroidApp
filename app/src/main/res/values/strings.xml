@@ -47,4 +47,7 @@
     <string name="title_activity_test">TestActivity</string>
     <string name="student_login">Student Login</string>
     <string name="teacher_login">Teacher Login</string>
+
+    <!-- Strings related to Student Home Page -->
+    <string name="students_get_classes_url">students/get-classes/</string>
 </resources>
