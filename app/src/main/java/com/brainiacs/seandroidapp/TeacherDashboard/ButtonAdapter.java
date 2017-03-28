@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.text.InputType;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +64,7 @@ public class ButtonAdapter extends BaseAdapter {
         Button btn;
         if (convertView == null) {
             btn = new Button(mContext);
-            btn.setLayoutParams(new GridView.LayoutParams(200, 200));
+            btn.setLayoutParams(new GridView.LayoutParams(500, 300));
             btn.setPadding(8, 8, 8, 8);
         }
             else{
@@ -73,6 +74,7 @@ public class ButtonAdapter extends BaseAdapter {
             //TODO setButtons();
             //Sets up button text and makes them buttons
             btn.setText(buttons[position]);
+            btn.setBackgroundColor(Color.rgb(0,255,255));
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
