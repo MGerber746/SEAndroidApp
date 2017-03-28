@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".LoginSelectionActivity"
+            android:name=".BalloonPoppingActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,6 +29,7 @@
         <activity android:name=".activityOverviewActivity" />
         <activity android:name=".StudentDashboardActivity"/>
         <activity android:name=".StudentHomeActivity" />
+        <activity android:name=".LoginSelectionActivity" />
     </application>
 
 </manifest>
