@@ -32,8 +32,12 @@ import utils.JSONTools;
  */
 
 public class ButtonAdapter extends BaseAdapter {
+    int i = 0;
+    //RGB Values need to be individual ints
+    int[] colorArray = {66,149,244,244,66,191,13,219,61,237,22,7,214,7,237};
     private Context mContext;
     private String[] buttons = {"1st Grade Period 1", "Period 2", "Second Grade Period 1", "Create New Class"};
+
 
     public ButtonAdapter(Context c){
 
@@ -74,7 +78,14 @@ public class ButtonAdapter extends BaseAdapter {
             //TODO setButtons();
             //Sets up button text and makes them buttons
             btn.setText(buttons[position]);
-            btn.setBackgroundColor(Color.rgb(0,255,255));
+            //---------------- Apply RGB Values here -------------------
+            btn.setBackgroundColor(Color.rgb(colorArray[i], colorArray[i+1], colorArray[i+2]));
+            if (i + 2 == colorArray.length - 1) {
+                i = 0;
+            }
+            else {
+                i = i + 3;
+            }
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
