@@ -14,12 +14,6 @@ import android.widget.EditText;
 import android.widget.GridView;
 
 
-import org.json.JSONObject;
-
-import utils.HttpURLConnectionHandler;
-import utils.JSONTools;
-
-
 /**
  * Created by Matthew on 2/21/17.
  * This class sets up a grid view of buttons
