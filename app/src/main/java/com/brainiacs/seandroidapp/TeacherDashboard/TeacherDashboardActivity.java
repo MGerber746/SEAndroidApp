@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import com.brainiacs.seandroidapp.R;
 import com.brainiacs.seandroidapp.LoginSelectionActivity;
@@ -22,6 +23,12 @@ public class TeacherDashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_dashboard);
+        TextView view = (TextView) findViewById(R.id.username);
+        view.setText("Teacher_Test");
+
+        TextView view2 = (TextView) findViewById(R.id.schoolname);
+        view2.setText("East High School");
+
 
         GridView gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new ButtonAdapter(this));
@@ -43,4 +50,7 @@ public class TeacherDashboardActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+
+
 }
