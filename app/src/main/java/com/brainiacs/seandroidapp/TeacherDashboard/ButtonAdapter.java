@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 
+import com.brainiacs.seandroidapp.R;
+
 
 /**
  * Created by Matthew on 2/21/17.
@@ -22,6 +24,7 @@ import android.widget.GridView;
  */
 
 public class ButtonAdapter extends BaseAdapter {
+    public static final String className = "className";
     int i = 0;
     //RGB Values need to be individual ints
     int[] colorArray = {66,149,244,244,66,191,13,219,61,237,22,7,214,7,237};
@@ -80,25 +83,26 @@ public class ButtonAdapter extends BaseAdapter {
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    //TODO change hardcoded string to asset
                     if(((Button) v).getText().toString().equals("Create New Class")){
                         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                        builder.setTitle("New Class Name");
+                        builder.setTitle(R.string.New_class_name);
                         final EditText input = new EditText(mContext);
                         input.setInputType(InputType.TYPE_CLASS_TEXT);
                         builder.setView(input);
 
                         // Set up the buttons
-                        builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+                        builder.setPositiveButton(R.string.Create, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 input.getText().toString();
                                 //TODO POST new class to db
                                 Intent intent = new Intent(mContext, ClassHomeActivity.class);
-                                intent.putExtra("className", input.getText().toString());
+                                intent.putExtra(className, input.getText().toString());
                                 mContext.startActivity(intent);
                             }
                         });
-                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.cancel();
@@ -109,7 +113,7 @@ public class ButtonAdapter extends BaseAdapter {
                     }
                     else {
                         Intent intent = new Intent(mContext, ClassHomeActivity.class);
-                        intent.putExtra("className", ((Button) v).getText().toString());
+                        intent.putExtra(className, ((Button) v).getText().toString());
                         mContext.startActivity(intent);
                     }
                 }

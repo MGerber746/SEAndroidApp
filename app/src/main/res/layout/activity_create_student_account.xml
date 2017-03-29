@@ -28,7 +28,7 @@
                 <EditText android:id="@+id/first_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Student's first name"
+                    android:hint="@string/Student_FName"
                     android:maxLines="1" />
 
             </android.support.design.widget.TextInputLayout>
@@ -40,7 +40,7 @@
                 <EditText android:id="@+id/last_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Student's last name"
+                    android:hint="@string/Student_LName"
                     android:maxLines="1" />
 
             </android.support.design.widget.TextInputLayout>
@@ -58,7 +58,7 @@
                 <EditText android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Student's username"
+                    android:hint="@string/Student_UN"
                     android:maxLines="1" />
 
             </android.support.design.widget.TextInputLayout>
@@ -70,7 +70,7 @@
                 <EditText android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Student's password"
+                    android:hint="@string/Student_Pass"
                     android:inputType="textPassword"
                     android:maxLines="1" />
 
@@ -83,7 +83,7 @@
                 <EditText android:id="@+id/reenter_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Reenter student's password"
+                    android:hint="@string/Student_RePass"
                     android:inputType="textPassword"
                     android:maxLines="1"    />
 

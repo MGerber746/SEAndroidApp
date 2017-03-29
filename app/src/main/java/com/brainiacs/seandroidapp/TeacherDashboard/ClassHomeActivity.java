@@ -42,7 +42,7 @@ public class ClassHomeActivity extends AppCompatActivity {
 
         //Retrieves class names from selection Screen
         Intent oldIntent = getIntent();
-        ((TextView)findViewById(R.id.textView)).setText(oldIntent.getStringExtra("className"));
+        ((TextView)findViewById(R.id.textView)).setText(oldIntent.getStringExtra(ButtonAdapter.className));
 
         //Sets up student names and grades in a table
 
