@@ -1,16 +1,13 @@
-package com.brainiacs.seandroidapp.TeacherDashboard;
+package com.brainiacs.seandroidapp;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.TableLayout;
 
-import com.brainiacs.seandroidapp.R;
-import com.brainiacs.seandroidapp.TeacherLoginActivity;
+import com.brainiacs.seandroidapp.TeacherDashboard.ButtonAdapter;
 
 /**
  * Created by Matthew on 2/21/17.

@@ -1,4 +1,4 @@
-package com.brainiacs.seandroidapp.TeacherDashboard;
+package com.brainiacs.seandroidapp;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
+import com.brainiacs.seandroidapp.ClassHomeActivity;
 import com.brainiacs.seandroidapp.R;
 
 import java.util.HashMap;

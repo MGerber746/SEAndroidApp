@@ -1,4 +1,4 @@
-package com.brainiacs.seandroidapp.TeacherDashboard;
+package com.brainiacs.seandroidapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
