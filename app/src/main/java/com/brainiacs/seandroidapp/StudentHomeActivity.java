@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,6 +13,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import utils.DBTools;
 import utils.HttpURLConnectionHandler;
 import utils.JSONTool;
 import utils.StudentClassesURLConnectionHandler;
@@ -75,5 +75,24 @@ public class StudentHomeActivity extends AppCompatActivity implements View.OnCli
             classButton.setOnClickListener(this);
             linearLayout.addView(classButton);
         }
+
+        Button logoutButton = new Button(this);
+        logoutButton.setText("Logout");
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logout();
+            }
+        });
+        linearLayout.addView(logoutButton);
+    }
+
+    private void logout(){
+        DBTools dbTools = new DBTools(this);
+        dbTools.deleteTokens();
+        dbTools.close();
+        Intent intent = new Intent(this, LoginSelectionActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

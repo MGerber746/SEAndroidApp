@@ -56,7 +56,6 @@
     <string name="title_activity_test">TestActivity</string>
     <string name="student_login">Student Login</string>
     <string name="teacher_login">Teacher Login</string>
-<<<<<<< 17e9a32306b36ca531186657fff15bb1b58e47bf
     <string name="Assignments">Assignments</string>
 
     <!-- Strings relating to popup builder -->
@@ -67,10 +66,6 @@
 
     <string name="Create_Activity">Create Activity</string>
 
-
-=======
-
     <!-- Strings related to Student Home Page -->
     <string name="students_get_classes_url">students/get-classes/</string>
->>>>>>> Started student home page
 </resources>

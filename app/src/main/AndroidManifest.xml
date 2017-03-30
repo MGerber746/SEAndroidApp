@@ -27,7 +27,6 @@
         <activity android:name=".TeacherDashboard.TeacherDashboardActivity" />
         <activity android:name=".CreateStudentAccountActivity" />
         <activity android:name=".activityOverviewActivity" />
-        <activity android:name=".StudentDashboardActivity"/>
         <activity android:name=".StudentHomeActivity" />
         <activity android:name=".BalloonPoppingActivity" />
         <activity android:name=".StudentAssignmentsActivity"></activity>

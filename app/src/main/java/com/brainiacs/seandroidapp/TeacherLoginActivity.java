@@ -58,14 +58,12 @@ public class TeacherLoginActivity extends AppCompatActivity {
      */
     private void attemptLogin() {
         // If we have a token we don't need to login
-        DBTools dbTools = new DBTools(this);
-        // TODO: Remove once logout is implemented
-        dbTools.deleteTokens();
-        if (!dbTools.getToken().isEmpty()) {
-            dbTools.close();
-            return;
-        }
-        dbTools.close();
+//        DBTools dbTools = new DBTools(this);
+//        if (!dbTools.getToken().isEmpty()) {
+//            dbTools.close();
+//            return;
+//        }
+//        dbTools.close();
 
         // Reset errors.
         mUsernameView.setError(null);
