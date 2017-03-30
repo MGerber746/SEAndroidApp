@@ -47,7 +47,6 @@
                         android:weightSum="1">
 
                         <TextView
-                            android:text=" "
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/Gray"
@@ -57,7 +56,6 @@
                             android:layout_weight="0.20" />
 
                         <TextView
-                            android:text=""
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="18sp"
