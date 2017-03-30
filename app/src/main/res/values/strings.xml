@@ -66,5 +66,6 @@
 
     <string name="Create_Activity">Create Activity</string>
 
-
+    <!-- Strings related to Student Home Page -->
+    <string name="students_get_classes_url">students/get-classes/</string>
 </resources>
