@@ -10,6 +10,10 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -57,7 +61,7 @@ public class BalloonPoppingActivity extends AppCompatActivity implements View.On
             equationTextView.setText(currentEquation.getEquation());
         } else {
             // Create alert with score
-            final Intent intent = new Intent(this, this.getClass());
+            final Intent intent = new Intent(this, StudentHomeActivity.class);
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle("Score");
             alertDialogBuilder.setMessage("Answers Correct: " + correctAnswers + "\nAnswers Incorrect: " + incorrectAnswers);
@@ -82,16 +86,14 @@ public class BalloonPoppingActivity extends AppCompatActivity implements View.On
 
         // Get equations setup
         equations = new ArrayList<>();
-        equations.add(new Equation("4 + 3 = ?", "7"));
-        equations.add(new Equation("5 + 7 = ?", "12"));
-        equations.add(new Equation("9 + 8 = ?", "17"));
-        equations.add(new Equation("3 + 1 = ?", "4"));
-        equations.add(new Equation("7 + 2 = ?", "9"));
-        equations.add(new Equation("5 + 5 = ?", "10"));
-        equations.add(new Equation("6 + 2 = ?", "8"));
-        equations.add(new Equation("4 + 10 = ?", "14"));
-        equations.add(new Equation("9 + 4 = ?", "13"));
-        equations.add(new Equation("2 + 4 = ?", "6"));
+        try {
+            JSONArray temp_data = new JSONArray(this.getIntent().getExtras().getString("questions_data"));
+            for (int i = 0; i < temp_data.length(); ++i) {
+                JSONObject equation_data = temp_data.getJSONObject(i);
+                equations.add(new Equation(
+                        equation_data.getString("question"), equation_data.getString("answer")));
+            }
+        } catch(JSONException e) {}
 
         // Start correct and incorrect answers at zero
         correctAnswers = 0;

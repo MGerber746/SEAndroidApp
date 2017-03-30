@@ -1,19 +1,47 @@
 package com.brainiacs.seandroidapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import utils.HttpURLConnectionHandler;
 import utils.JSONTool;
 import utils.StudentClassesURLConnectionHandler;
 
-public class StudentHomeActivity extends AppCompatActivity {
+public class StudentHomeActivity extends AppCompatActivity implements View.OnClickListener {
+    private ArrayList<JSONObject> classes_data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_home);
 
+        initializeData();
+        initializeWidgets();
+    }
+
+    @Override
+    public void onClick(View v) {
+        Button button = (Button) v;
+        try {
+            JSONArray assignments_data = (JSONArray) classes_data.get(button.getId()).get("assignments");
+            Intent intent = new Intent(this, StudentAssignmentsActivity.class);
+            intent.putExtra("assignments_data", assignments_data.toString());
+            startActivity(intent);
+        } catch (JSONException e) {}
+    }
+
+    private void initializeData() {
         JSONTool jsonTool = new JSONTool();
         StudentClassesURLConnectionHandler handler = new StudentClassesURLConnectionHandler(
                 getString(R.string.students_get_classes_url), "Fetched classes", "Failed to fetch classes",
@@ -26,6 +54,26 @@ public class StudentHomeActivity extends AppCompatActivity {
             }
         } catch(InterruptedException e) {}
 
-        jsonTool.getJsonArray();
+        classes_data = new ArrayList<>();
+        try {
+            for (int i = 0; i < jsonTool.getJsonArray().length(); ++i) {
+                classes_data.add(jsonTool.getJsonArray().getJSONObject(i));
+            }
+        } catch(JSONException e) {}
+    }
+
+    private void initializeWidgets() {
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.activity_student_home);
+
+        // Create buttons for all of the classes
+        for (int i = 0; i < classes_data.size(); ++i) {
+            Button classButton = new Button(this);
+            try {
+                classButton.setText(classes_data.get(i).getString("name"));
+                classButton.setId(i);
+            } catch(JSONException e) {}
+            classButton.setOnClickListener(this);
+            linearLayout.addView(classButton);
+        }
     }
 }

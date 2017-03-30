@@ -47,4 +47,11 @@ public class StudentClassesURLConnectionHandler extends HttpURLConnectionHandler
             return failure;
         }
     }
+
+    @Override
+    protected void onPostExecute(String result) {
+        if(!result.equals(failure) && intent != null) {
+            context.startActivity(intent);
+        }
+    }
 }
