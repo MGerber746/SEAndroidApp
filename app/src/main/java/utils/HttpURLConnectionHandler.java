@@ -53,7 +53,8 @@ public abstract class HttpURLConnectionHandler extends AsyncTask<Void, Void, Str
         this.intent = intent;
         this.success = success;
         this.failure = failure;
-        try {
+        this.rootUrl = "https://vast-hollows-88441.herokuapp.com/";
+        /* try {
             // Get local url when developing
             BufferedReader br = new BufferedReader(
                     new InputStreamReader(context.getResources().getAssets().open("url.txt")));
@@ -61,7 +62,7 @@ public abstract class HttpURLConnectionHandler extends AsyncTask<Void, Void, Str
         } catch (Exception e) {
             // Get production url on server
             this.rootUrl = "https://vast-hollows-88441.herokuapp.com/";
-        }
+        }*/
     }
 
     // Starts the communication process with the server
