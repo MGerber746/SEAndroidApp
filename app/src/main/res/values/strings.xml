@@ -36,15 +36,35 @@
     <string name="failed_to_register">Registration failed.</string>
     <string name="registration_successful">Registration successful.</string>
     <string name="first_name">first_name</string>
-    <string name="last_name">last_name</string>
+    <string name="last_name">last name</string>
     <string name="email">email</string>
     <string name="username">username</string>
     <string name="password">password</string>
-    <string name="confirm_password">confirm_password</string>
+    <string name="confirm_password">confirm password</string>
 
     <!-- Strings related to Student Login -->
     <string name="title_activity_student_login">StudentLoginActivity</string>
+    <string name="Student_FName">Student\'s first name</string>
+    <string name="Student_LName">Student\'s last name</string>
+    <string name="Student_UN">Student\'s username</string>
+    <string name="Student_Pass">Student\'s password</string>
+    <string name="Student_RePass">Reenter student\'s password</string>
+
+    <!-- Strings related to Create new Class Buttons -->
+    <string name="Create_New_Class">Create New Class</string>
+    <string name="class_List">classes</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="student_login">Student Login</string>
     <string name="teacher_login">Teacher Login</string>
+    <string name="Assignments">Assignments</string>
+
+    <!-- Strings relating to popup builder -->
+    <string name="logout_button">Logout</string>
+    <string name="New_class_name">New Class Name</string>
+    <string name="Create">Create</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="Create_Activity">Create Activity</string>
+
+
 </resources>

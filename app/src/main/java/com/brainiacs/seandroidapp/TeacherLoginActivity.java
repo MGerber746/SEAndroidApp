@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.brainiacs.seandroidapp.TeacherDashboard.TeacherDashboardActivity;
 import java.util.HashMap;
 
 import utils.DBTools;
@@ -58,6 +59,8 @@ public class TeacherLoginActivity extends AppCompatActivity {
     private void attemptLogin() {
         // If we have a token we don't need to login
         DBTools dbTools = new DBTools(this);
+        // TODO: Remove once logout is implemented
+        dbTools.deleteTokens();
         if (!dbTools.getToken().isEmpty()) {
             dbTools.close();
             return;
@@ -75,7 +78,7 @@ public class TeacherLoginActivity extends AppCompatActivity {
         boolean isValid = true;
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password)) {
+        if (TextUtils.isEmpty(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             isValid = false;
         }
@@ -91,7 +94,7 @@ public class TeacherLoginActivity extends AppCompatActivity {
             HashMap<String, String> params = new HashMap<>();
             params.put(getString(R.string.username), username);
             params.put(getString(R.string.password), password);
-            Intent intent = new Intent(this, this.getClass());
+            Intent intent = new Intent(this, TeacherDashboardActivity.class);
             LoginURLConnectionHandler handler = new LoginURLConnectionHandler(
                     getString(R.string.login_url), getString(R.string.login_successful),
                     getString(R.string.failed_to_login), HttpURLConnectionHandler.Method.POST,

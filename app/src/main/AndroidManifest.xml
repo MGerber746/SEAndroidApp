@@ -23,7 +23,11 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".TeacherLoginActivity" />
         <activity android:name=".StudentLoginActivity" />
-
+        <activity android:name=".ClassHomeActivity" />
+        <activity android:name="TeacherDashboard.TeacherDashboardActivity" />
+        <activity android:name=".CreateStudentAccountActivity" />
+        <activity android:name=".activityOverviewActivity" />
+        <activity android:name=".StudentDashboardActivity"/>
     </application>
 
 </manifest>
