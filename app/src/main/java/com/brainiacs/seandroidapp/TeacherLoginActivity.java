@@ -10,10 +10,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.brainiacs.seandroidapp.TeacherDashboard.TeacherDashboardActivity;
 import java.util.HashMap;
 
-import utils.DBTools;
 import utils.HttpURLConnectionHandler;
 import utils.LoginURLConnectionHandler;
 

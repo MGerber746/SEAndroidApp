@@ -68,4 +68,5 @@
 
     <!-- Strings related to Student Home Page -->
     <string name="students_get_classes_url">students/get-classes/</string>
+    <string name="teachers_get_classes_url">teachers/get-classes</string>
 </resources>
