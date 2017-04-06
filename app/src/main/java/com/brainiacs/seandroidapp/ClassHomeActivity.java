@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.brainiacs.seandroidapp.TeacherDashboard.ButtonAdapter;
+import utils.ButtonAdapter;
 
 /**
  * Created by Matthew on 2/21/17.
