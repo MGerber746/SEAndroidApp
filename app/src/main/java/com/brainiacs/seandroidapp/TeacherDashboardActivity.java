@@ -8,9 +8,6 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 
-import com.brainiacs.seandroidapp.R;
-import com.brainiacs.seandroidapp.LoginSelectionActivity;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,9 +15,9 @@ import java.util.ArrayList;
 
 import utils.ButtonAdapter;
 import utils.DBTools;
-import utils.HttpURLConnectionHandler;
+import utils.handlers.HttpHandler;
 import utils.JSONTool;
-import utils.StudentClassesURLConnectionHandler;
+import utils.handlers.ClassesHandler;
 
 /**
  * Created by Matthew on 2/21/17.
@@ -56,7 +53,7 @@ public class TeacherDashboardActivity extends AppCompatActivity {
 
     private void logout(){
         DBTools dbTools = new DBTools(this);
-        dbTools.deleteTokens();
+        dbTools.deleteUsers();
         dbTools.close();
         Intent intent = new Intent(this, LoginSelectionActivity.class);
         startActivity(intent);
@@ -65,9 +62,9 @@ public class TeacherDashboardActivity extends AppCompatActivity {
 
     private void initializeData() {
         JSONTool jsonTool = new JSONTool();
-        StudentClassesURLConnectionHandler handler = new StudentClassesURLConnectionHandler(
-                "teachers/get-classes", "Fetched classes", "Failed to fetch classes",
-                HttpURLConnectionHandler.Method.GET, null, this, null, jsonTool);
+        ClassesHandler handler = new ClassesHandler(
+                getString(R.string.teachers_get_classes_url), "Fetched classes", "Failed to fetch classes",
+                HttpHandler.Method.GET, null, this, null, jsonTool);
         handler.execute((Void) null);
         try {
             // Sleep while we wait for the data

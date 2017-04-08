@@ -12,8 +12,8 @@ import android.widget.EditText;
 
 import java.util.HashMap;
 
-import utils.HttpURLConnectionHandler;
-import utils.LoginURLConnectionHandler;
+import utils.handlers.HttpHandler;
+import utils.handlers.TeacherLoginHandler;
 
 /**
  * A login screen that offers login via username/password.
@@ -55,14 +55,6 @@ public class TeacherLoginActivity extends AppCompatActivity {
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-        // If we have a token we don't need to login
-//        DBTools dbTools = new DBTools(this);
-//        if (!dbTools.getToken().isEmpty()) {
-//            dbTools.close();
-//            return;
-//        }
-//        dbTools.close();
-
         // Reset errors.
         mUsernameView.setError(null);
         mPasswordView.setError(null);
@@ -91,16 +83,16 @@ public class TeacherLoginActivity extends AppCompatActivity {
             params.put(getString(R.string.username), username);
             params.put(getString(R.string.password), password);
             Intent intent = new Intent(this, TeacherDashboardActivity.class);
-            LoginURLConnectionHandler handler = new LoginURLConnectionHandler(
+            TeacherLoginHandler handler = new TeacherLoginHandler(
                     getString(R.string.login_url), getString(R.string.login_successful),
-                    getString(R.string.failed_to_login), HttpURLConnectionHandler.Method.POST,
+                    getString(R.string.failed_to_login), HttpHandler.Method.POST,
                     params, this, intent);
             handler.execute((Void) null);
         }
     }
 
     private void register() {
-        Intent intent = new Intent(this, RegisterActivity.class);
+        Intent intent = new Intent(this, TeacherRegisterActivity.class);
         startActivity(intent);
     }
 }

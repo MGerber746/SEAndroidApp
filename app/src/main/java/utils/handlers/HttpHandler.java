@@ -1,4 +1,4 @@
-package utils;
+package utils.handlers;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,10 +20,12 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import utils.DBTools;
+
 /**
  * Task will run communications to server through async task
  */
-public abstract class HttpURLConnectionHandler extends AsyncTask<Void, Void, String> {
+public abstract class HttpHandler extends AsyncTask<Void, Void, String> {
     public enum Method {GET, POST, HEAD, OPTIONS, PUT, DELETE, TRACE}
     protected String rootUrl;
     protected String apiEndpoint;
@@ -43,8 +45,8 @@ public abstract class HttpURLConnectionHandler extends AsyncTask<Void, Void, Str
      *               'PUT', 'DELETE', or 'TRACE'
      * @param params required parameters to be put in the url for the given method
      */
-    public HttpURLConnectionHandler(String apiEndpoint, String success, String failure, Method method,
-                                    HashMap<String, String> params, Context context, Intent intent) {
+    public HttpHandler(String apiEndpoint, String success, String failure, Method method,
+                       HashMap<String, String> params, Context context, Intent intent) {
         this.apiEndpoint = apiEndpoint;
         this.method = method;
         this.params = params;
@@ -106,7 +108,7 @@ public abstract class HttpURLConnectionHandler extends AsyncTask<Void, Void, Str
 
     @Override
     protected void onPostExecute(String result) {
-        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
         if(!result.equals(failure) && intent != null) {
             context.startActivity(intent);
         }
