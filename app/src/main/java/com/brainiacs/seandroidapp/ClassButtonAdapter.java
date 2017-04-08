@@ -1,4 +1,4 @@
-package utils;
+package com.brainiacs.seandroidapp;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -29,7 +29,7 @@ import java.util.ArrayList;
  * Its necessary for the class buttons
  */
 
-public class ButtonAdapter extends BaseAdapter {
+public class ClassButtonAdapter extends BaseAdapter {
     public static final String className = "className";
 
     //RGB Values need to be individual ints
@@ -38,7 +38,7 @@ public class ButtonAdapter extends BaseAdapter {
     private ArrayList<String> buttons = new ArrayList<String>();
     private int i = 0;
 
-    public ButtonAdapter(Context c){
+    public ClassButtonAdapter(Context c){
         mContext = c;
         initializeClasses();
         buttons.add(c.getString(R.string.Create_New_Class));

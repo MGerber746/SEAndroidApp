@@ -62,6 +62,7 @@
     <string name="student_login">Student Login</string>
     <string name="teacher_login">Teacher Login</string>
     <string name="Assignments">Assignments</string>
+    <string name="Create_Student_Account">Create Student Account</string>
 
     <!-- Strings relating to popup builder -->
     <string name="logout_button">Logout</string>
@@ -74,4 +75,14 @@
     <!-- Strings related to Student Home Page -->
     <string name="students_get_classes_url">students/classes/</string>
     <string name="teachers_get_classes_url">teachers/classes/</string>
+
+    <string-array name="SpinnerSelections">
+        <item>Addition</item>
+        <item>Subtraction</item>
+        <item>Places</item>
+        <item>Odd/Even</item>
+    </string-array>
+
+    <string name="SelectAssignmentType">Select the Type of Assignment to Create</string>
+    <string name="NewQuestion">Add a Question</string>
 </resources>
