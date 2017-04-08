@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import utils.ButtonAdapter;
 import utils.DBTools;
 import utils.handlers.HttpHandler;
 import utils.JSONTool;
@@ -39,21 +40,13 @@ public class TeacherDashboardActivity extends AppCompatActivity {
 
 
         GridView gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setAdapter(new ClassButtonAdapter(this));
+        gridview.setAdapter(new ButtonAdapter(this));
 
         Button mSignInButton = (Button) findViewById(R.id.Logout);
         mSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 logout();
-            }
-        });
-
-        Button mStudentLoginButton = (Button) findViewById(R.id.CreateStudent);
-        mStudentLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createStudent();
             }
         });
     }
@@ -91,11 +84,5 @@ public class TeacherDashboardActivity extends AppCompatActivity {
     //Returns JSONClassData
     public static ArrayList<JSONObject> getClassData(){
         return classes_data;
-    }
-
-    //Redirects to Student Creation activity
-    private void createStudent() {
-        Intent intent = new Intent(this, CreateStudentAccountActivity.class);
-        startActivity(intent);
     }
 }

@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-
 /**
  * Created by Matthew on 2/21/17.
  * Overview for a class
