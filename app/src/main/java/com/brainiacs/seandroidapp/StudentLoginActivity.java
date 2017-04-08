@@ -12,8 +12,9 @@ import android.widget.EditText;
 
 import java.util.HashMap;
 
-import utils.HttpURLConnectionHandler;
-import utils.LoginURLConnectionHandler;
+import utils.handlers.HttpHandler;
+import utils.handlers.StudentLoginHandler;
+import utils.handlers.TeacherLoginHandler;
 
 /**
  * A login screen that offers login via Username/password.
@@ -75,10 +76,10 @@ public class StudentLoginActivity extends AppCompatActivity {
             HashMap<String, String> params = new HashMap<>();
             params.put(getString(R.string.username), username);
             params.put(getString(R.string.password), password);
-            Intent intent = new Intent(this, StudentHomeActivity.class);
-            LoginURLConnectionHandler handler = new LoginURLConnectionHandler(
+            Intent intent = new Intent(this, TeacherDashboardActivity.class);
+            StudentLoginHandler handler = new StudentLoginHandler(
                     getString(R.string.login_url), getString(R.string.login_successful),
-                    getString(R.string.failed_to_login), HttpURLConnectionHandler.Method.POST,
+                    getString(R.string.failed_to_login), HttpHandler.Method.POST,
                     params, this, intent);
             handler.execute((Void) null);
         }

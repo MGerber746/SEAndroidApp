@@ -7,19 +7,16 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
-import com.brainiacs.seandroidapp.ClassHomeActivity;
-import com.brainiacs.seandroidapp.R;
-
 import java.util.HashMap;
 
-import utils.HttpURLConnectionHandler;
-import utils.RegisterURLConnectionHandler;
+import utils.handlers.HttpHandler;
+import utils.handlers.TeacherRegisterHandler;
 
 public class CreateStudentAccountActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_teacher_register);
     }
 
     /** Called when user clicks submit button **/
@@ -77,9 +74,9 @@ public class CreateStudentAccountActivity extends AppCompatActivity {
             params.put(getString(R.string.password), password);
             params.put(getString(R.string.confirm_password), reenterPassword);
             Intent intent = new Intent(this, ClassHomeActivity.class);
-            RegisterURLConnectionHandler handler = new RegisterURLConnectionHandler(
-                    getString(R.string.register_url), getString(R.string.registration_successful),
-                    getString(R.string.failed_to_register), HttpURLConnectionHandler.Method.POST,
+            TeacherRegisterHandler handler = new TeacherRegisterHandler(
+                    getString(R.string.accounts_url), getString(R.string.registration_successful),
+                    getString(R.string.failed_to_register), HttpHandler.Method.POST,
                     params, this, intent);
             // Execute the task, and forward to next activity if successful
             handler.execute((Void) null);

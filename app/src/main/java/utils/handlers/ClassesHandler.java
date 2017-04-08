@@ -1,4 +1,4 @@
-package utils;
+package utils.handlers;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,12 +12,14 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.util.HashMap;
 
-public class StudentClassesURLConnectionHandler extends HttpURLConnectionHandler {
+import utils.JSONTool;
+
+public class ClassesHandler extends HttpHandler {
     private JSONTool jsonTool;
 
-    public StudentClassesURLConnectionHandler(String apiEndpoint, String success, String failure,
-                                              Method method, HashMap<String, String> params,
-                                              Context context, Intent intent, JSONTool jsonTool) {
+    public ClassesHandler(String apiEndpoint, String success, String failure,
+                          Method method, HashMap<String, String> params,
+                          Context context, Intent intent, JSONTool jsonTool) {
         super(apiEndpoint, success, failure, method, params, context, intent);
         this.jsonTool = jsonTool;
     }
