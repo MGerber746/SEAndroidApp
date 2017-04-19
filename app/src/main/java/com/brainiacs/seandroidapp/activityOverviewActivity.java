@@ -91,13 +91,14 @@ public class activityOverviewActivity extends AppCompatActivity {
                     setViews();
                 }
                 else{
-                    Toast.makeText(getApplicationContext(), "Must be at least 1, but not more than 10 questions", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.questionNumCheckToast, Toast.LENGTH_SHORT).show();
                 }
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                resetQuestions();
                 dialog.cancel();
             }
         });
@@ -118,7 +119,7 @@ public class activityOverviewActivity extends AppCompatActivity {
                 Matcher mQ = pQuestion.matcher(questions.get(i));
                 Matcher m = pAnswer.matcher(answers.get(i));
                 if(!m.matches() || !mQ.matches()) {
-                    Toast.makeText(getApplicationContext(), "Question or answer does not fit addition format, check question: " + (i+1), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.additionFailure + (i+1), Toast.LENGTH_SHORT).show();
                     return false;
                 }
             }
@@ -128,7 +129,7 @@ public class activityOverviewActivity extends AppCompatActivity {
                 Matcher m = pQuestion.matcher(questions.get(i));
                 Matcher mQ = pAnswer.matcher(answers.get(i));
                 if(!m.matches() || !mQ.matches()) {
-                    Toast.makeText(getApplicationContext(), "Question or answer does not fit subtraction format, check question: " + (i+1), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.subtractionFailure + (i+1), Toast.LENGTH_SHORT).show();
                     return false;
                 }
             }
@@ -147,7 +148,7 @@ public class activityOverviewActivity extends AppCompatActivity {
                 Matcher m = pQuestion.matcher(questions.get(i));
                 Matcher mQ = pAnswer.matcher(answers.get(i).toLowerCase());
                 if(!m.matches() || !mQ.matches()) {
-                    Toast.makeText(getApplicationContext(), "Question or answer does not fit even/odd format, check question: " + (i+1), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.oddEvenFailure + (i+1), Toast.LENGTH_SHORT).show();
                     return false;
                 }
             }

@@ -84,7 +84,7 @@
     </string-array>
 
     <string name="SelectAssignmentType">Select the Type of Assignment to Create</string>
-    <string name="Reset">reset</string>
+    <string name="Reset">Cancel</string>
     <string name="AddAssignment">Add Assignment to Class</string>
     <string name="questions">Questions </string>
     <string name="question">Question</string>
@@ -133,4 +133,9 @@
         <item>A9</item>
         <item>A10</item>
     </string-array>
+
+    <string name="questionNumCheckToast">Must be at least 1, but not more than 10 questions</string>
+    <string name="additionFailure">Question or answer does not fit addition format, check question: </string>
+    <string name="subtractionFailure">Question or answer does not fit subtraction format, check question: </string>
+    <string name="oddEvenFailure">Question or answer does not fit even/odd format, check question: </string>
 </resources>
