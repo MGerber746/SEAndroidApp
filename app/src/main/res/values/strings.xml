@@ -84,5 +84,53 @@
     </string-array>
 
     <string name="SelectAssignmentType">Select the Type of Assignment to Create</string>
-    <string name="NewQuestion">Add a Question</string>
+    <string name="Reset">reset</string>
+    <string name="AddAssignment">Add Assignment to Class</string>
+    <string name="questions">Questions </string>
+    <string name="question">Question</string>
+    <string name="NumOfQuestions">How many questions do you want? (Max 10)</string>
+    <string name="answer">Answer</string>
+    <string name="addition">Addition</string>
+    <string name="subtraction">Subtraction</string>
+    <string name="places">Places</string>
+    <string name="evenOdd">Odd/Even</string>
+
+    <string-array name="questionViews">
+        <item>l1</item>
+        <item>l2</item>
+        <item>l3</item>
+        <item>l4</item>
+        <item>l5</item>
+        <item>l6</item>
+        <item>l7</item>
+        <item>l8</item>
+        <item>l9</item>
+        <item>l10</item>
+    </string-array>
+
+    <string-array name="questionEntry">
+        <item>Q1</item>
+        <item>Q2</item>
+        <item>Q3</item>
+        <item>Q4</item>
+        <item>Q5</item>
+        <item>Q6</item>
+        <item>Q7</item>
+        <item>Q8</item>
+        <item>Q9</item>
+        <item>Q10</item>
+    </string-array>
+
+    <string-array name="answerEntry">
+        <item>A1</item>
+        <item>A2</item>
+        <item>A3</item>
+        <item>A4</item>
+        <item>A5</item>
+        <item>A6</item>
+        <item>A7</item>
+        <item>A8</item>
+        <item>A9</item>
+        <item>A10</item>
+    </string-array>
 </resources>

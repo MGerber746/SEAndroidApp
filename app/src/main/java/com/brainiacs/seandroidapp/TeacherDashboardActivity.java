@@ -31,22 +31,23 @@ public class TeacherDashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         initializeData();
         setContentView(R.layout.activity_teacher_dashboard);
-        //TODO
-        TextView view = (TextView) findViewById(R.id.username);
-        view.setText("Teacher_Test");
-
-        TextView view2 = (TextView) findViewById(R.id.schoolname);
-        view2.setText("East High School");
-
 
         GridView gridview = (GridView) findViewById(R.id.gridview);
         gridview.setAdapter(new ButtonAdapter(this));
 
-        Button mSignInButton = (Button) findViewById(R.id.Logout);
-        mSignInButton.setOnClickListener(new View.OnClickListener() {
+        Button mLogoutButton = (Button) findViewById(R.id.Logout);
+        mLogoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 logout();
+            }
+        });
+
+        Button mCreateStudentButton = (Button) findViewById(R.id.CreateStudent);
+        mCreateStudentButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                createStudent();
             }
         });
     }
@@ -84,5 +85,11 @@ public class TeacherDashboardActivity extends AppCompatActivity {
     //Returns JSONClassData
     public static ArrayList<JSONObject> getClassData(){
         return classes_data;
+    }
+
+    //Redirects to teacher login activity
+    private void createStudent() {
+        Intent intent = new Intent(this, CreateStudentAccountActivity.class);
+        startActivity(intent);
     }
 }

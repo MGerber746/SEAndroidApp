@@ -125,7 +125,6 @@ public class ClassButtonAdapter extends BaseAdapter {
                     }
                 }
             });
-
         return btn;
         }
 
