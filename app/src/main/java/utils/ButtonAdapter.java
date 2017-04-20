@@ -68,6 +68,7 @@ public class ButtonAdapter extends BaseAdapter {
 
         Button btn;
         if (convertView == null) {
+            //Sets params of buttons
             btn = new Button(mContext);
             btn.setLayoutParams(new GridView.LayoutParams(500, 300));
             btn.setPadding(16, 16, 16, 16);
@@ -76,7 +77,7 @@ public class ButtonAdapter extends BaseAdapter {
                 btn = (Button) convertView;
             }
 
-            btn.setText(buttons.get(position));
+            btn.setText(buttons.get(position)); //sets text to the string in (position) of buttons arraylist
 
             //---------------- Apply RGB Values here -------------------
             btn.setBackgroundColor(Color.rgb(colorArray[i], colorArray[i+1], colorArray[i+2]));
@@ -89,7 +90,8 @@ public class ButtonAdapter extends BaseAdapter {
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(((Button) v).getText().toString().equals("Create New Class")){   //Hardcoded string necessary to assertEquals
+                    if(((Button) v).getText().toString().equals("Create New Class")){
+                        //Sets up alertDialog builder to accept input
                         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                         builder.setTitle(R.string.New_class_name);
                         final EditText input = new EditText(mContext);
@@ -100,13 +102,13 @@ public class ButtonAdapter extends BaseAdapter {
                         builder.setPositiveButton(R.string.Create, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                buttons.remove("Create New Class");  //Hardcoded string necessary to point to correct object
+                                buttons.remove("Create New Class");
                                 buttons.add(input.getText().toString());
                                 buttons.add(mContext.getString(R.string.Create_New_Class));
                                 //TODO POST new class to db
-                                Intent intent = new Intent(mContext, ClassHomeActivity.class);
-                                intent.putExtra(className, input.getText().toString());
-                                mContext.startActivity(intent);
+                                Intent intent = new Intent(mContext, ClassHomeActivity.class);  //Sets intent to next class
+                                intent.putExtra(className, input.getText().toString()); //Adds the class name to intent
+                                mContext.startActivity(intent); //Starts intent
                             }
                         });
                         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
