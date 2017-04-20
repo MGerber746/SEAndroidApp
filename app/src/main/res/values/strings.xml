@@ -70,7 +70,7 @@
     <string name="Create">Create</string>
     <string name="cancel">Cancel</string>
 
-    <string name="Create_Activity">Create Activity</string>
+    <string name="Create_Activity">Create Assignment</string>
 
     <!-- Strings related to Student Home Page -->
     <string name="students_get_classes_url">students/classes/</string>
@@ -85,6 +85,7 @@
     <string name="SelectAssignmentType">Select the Type of Assignment to Create</string>
     <string name="Reset">Cancel</string>
     <string name="AddAssignment">Add Assignment to Class</string>
+    <string name="assignName">Name the assignment</string>
     <string name="questions">Questions </string>
     <string name="question">Question</string>
     <string name="NumOfQuestions">How many questions do you want? (Max 10)</string>
