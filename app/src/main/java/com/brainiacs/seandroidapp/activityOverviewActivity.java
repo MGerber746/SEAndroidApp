@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -132,15 +133,6 @@ public class activityOverviewActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), R.string.subtractionFailure + (i+1), Toast.LENGTH_SHORT).show();
                     return false;
                 }
-            }
-            else if(questionType.equals(getString(R.string.places))){
-                //TODO
-                pAnswer = Pattern.compile("\\d+");
-                pQuestion = Pattern.compile("\\d+\\p{Space}*[-]\\p{Space}*\\d+");
-                Matcher m = pAnswer.matcher("\\d+");
-                Matcher mQ = pQuestion.matcher("");
-                if(!m.matches() || !mQ.matches())
-                    return false;
             }
             else{
                 pAnswer = Pattern.compile("even|odd");

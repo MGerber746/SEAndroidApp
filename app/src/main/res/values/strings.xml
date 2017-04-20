@@ -79,7 +79,6 @@
     <string-array name="SpinnerSelections">
         <item>Addition</item>
         <item>Subtraction</item>
-        <item>Places</item>
         <item>Odd/Even</item>
     </string-array>
 
@@ -92,7 +91,6 @@
     <string name="answer">Answer</string>
     <string name="addition">Addition</string>
     <string name="subtraction">Subtraction</string>
-    <string name="places">Places</string>
     <string name="evenOdd">Odd/Even</string>
 
     <string-array name="questionViews">
