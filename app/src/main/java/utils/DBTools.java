@@ -22,11 +22,13 @@ public class DBTools extends SQLiteOpenHelper {
     // Create table to store token
     private static final String TABLE_USER = "user";
     private static final String COLUMN_USER_ID = "id";
-    private static final String COLUMN_USER_TOKEN = "token";
     private static final String COLUMN_USER_IS_TEACHER = "is_teacher";
+    private static final String COLUMN_USER_TOKEN = "token";
+    private static final String COLUMN_USERNAME = "username";
     private static final String TABLE_TOKEN_CREATE =
             "CREATE TABLE " + TABLE_USER + " (" + COLUMN_USER_ID + " INTEGER PRIMARY KEY, "
-            + COLUMN_USER_IS_TEACHER + " BOOLEAN, " + COLUMN_USER_TOKEN + " TEXT NOT NULL)";
+            + COLUMN_USER_IS_TEACHER + " BOOLEAN, " + COLUMN_USER_TOKEN + " TEXT NOT NULL, "
+            + COLUMN_USERNAME + " TEXT)";
 
     public DBTools(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -49,14 +51,31 @@ public class DBTools extends SQLiteOpenHelper {
      * @return returns the token back after the call
      * @throws SQLiteConstraintException
      */
-    public void createUser(int id, String token, Boolean isTeacher) throws SQLiteConstraintException {
+    public void createUser(int id, String token, Boolean isTeacher, String username) throws SQLiteConstraintException {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_USER_ID, id);
-        values.put(COLUMN_USER_TOKEN, token);
         values.put(COLUMN_USER_IS_TEACHER, isTeacher);
+        values.put(COLUMN_USER_TOKEN, token);
+        values.put(COLUMN_USERNAME, username);
         database.insertOrThrow(TABLE_USER, null, values);
         database.close();
+    }
+
+    public String getUsername() {
+        try {
+            SQLiteDatabase database = this.getReadableDatabase();
+            // Get everything out of the table
+            Cursor cursor = database.query(TABLE_USER, null, null, null, null, null, null, null);
+            // Move to the last row and get the value of the token
+            cursor.moveToLast();
+            String username = cursor.getString(3);
+            cursor.close();
+            database.close();
+            return username;
+        } catch (CursorIndexOutOfBoundsException e) {
+            return "";
+        }
     }
 
     public Boolean isTeacher() {
@@ -66,8 +85,9 @@ public class DBTools extends SQLiteOpenHelper {
             Cursor cursor = database.query(TABLE_USER, null, null, null, null, null, null, null);
             // Move to the last row and get the value of the token
             cursor.moveToLast();
-            Boolean isTeacher = cursor.getInt(3) > 0;
+            Boolean isTeacher = cursor.getInt(1) == 1;
             cursor.close();
+            database.close();
             return isTeacher;
         } catch (CursorIndexOutOfBoundsException e) {
             return false;
@@ -83,6 +103,7 @@ public class DBTools extends SQLiteOpenHelper {
             cursor.moveToLast();
             String token = cursor.getString(2);
             cursor.close();
+            database.close();
             return token;
         } catch (CursorIndexOutOfBoundsException e) {
             return "";

@@ -55,14 +55,6 @@
                             android:id="@+id/username"
                             android:layout_weight="0.20" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="18sp"
-                            android:textColor="@color/Gray"
-                            android:id="@+id/schoolname"
-                            android:layout_weight="0.26" />
-
                 </LinearLayout>
 
                 <Button

@@ -35,6 +35,7 @@
     <string name="accounts_url">accounts/</string>
     <string name="teachers_url">teachers/</string>
     <string name="students_url">students/</string>
+    <string name="classes_url">classes/</string>
     <string name="user_info">user-info/</string>
     <string name="failed_to_register">Registration failed.</string>
     <string name="registration_successful">Registration successful.</string>
@@ -46,6 +47,13 @@
     <string name="confirm_password">confirm_password</string>
     <string name="school_name">school_name</string>
     <string name="user_id">id</string>
+
+    <!-- Strings related to classes -->
+    <string name="class_teacher">teacher</string>
+    <string name="class_students">students</string>
+    <string name="class_assignments">assignments</string>
+    <string name="class_name">name</string>
+    <string name="failed_class_creation">Failed to create class.</string>
 
     <!-- Strings related to Student Login -->
     <string name="title_activity_student_login">StudentLoginActivity</string>

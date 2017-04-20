@@ -77,6 +77,7 @@ public class StudentLoginActivity extends AppCompatActivity {
             params.put(getString(R.string.username), username);
             params.put(getString(R.string.password), password);
             Intent intent = new Intent(this, TeacherDashboardActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             StudentLoginHandler handler = new StudentLoginHandler(
                     getString(R.string.login_url), getString(R.string.login_successful),
                     getString(R.string.failed_to_login), HttpHandler.Method.POST,

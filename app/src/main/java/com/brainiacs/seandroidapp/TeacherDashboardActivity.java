@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -13,7 +14,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import utils.ButtonAdapter;
 import utils.DBTools;
 import utils.handlers.HttpHandler;
 import utils.JSONTool;
@@ -25,46 +25,67 @@ import utils.handlers.ClassesHandler;
  */
 public class TeacherDashboardActivity extends AppCompatActivity {
     private static ArrayList<JSONObject> classes_data;
+    private TextView usernameTextView;
+    private GridView gridView;
+    private Button createStudentButton, logoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initializeData();
         setContentView(R.layout.activity_teacher_dashboard);
-        //TODO
-        TextView view = (TextView) findViewById(R.id.username);
-        view.setText("Teacher_Test");
 
-        TextView view2 = (TextView) findViewById(R.id.schoolname);
-        view2.setText("East High School");
+        initializeData();
+        initializeWidgets();
+        initializeListeners();
+    }
 
+    private void initializeWidgets() {
+        DBTools dbTools = new DBTools(this);
+        usernameTextView = (TextView) findViewById(R.id.username);
+        usernameTextView.setText(dbTools.getUsername());
 
-        GridView gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setAdapter(new ButtonAdapter(this));
+        gridView = (GridView) findViewById(R.id.gridview);
+        gridView.setAdapter(new ClassButtonAdapter(this));
 
-        Button mSignInButton = (Button) findViewById(R.id.Logout);
-        mSignInButton.setOnClickListener(new View.OnClickListener() {
+        logoutButton = (Button) findViewById(R.id.Logout);
+
+        createStudentButton = (Button) findViewById(R.id.CreateStudent);
+        if (!dbTools.isTeacher()) {
+            createStudentButton.setVisibility(View.GONE);
+        }
+        dbTools.close();
+    }
+
+    private void initializeListeners() {
+        logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 logout();
             }
         });
-    }
 
-    private void logout(){
-        DBTools dbTools = new DBTools(this);
-        dbTools.deleteUsers();
-        dbTools.close();
-        Intent intent = new Intent(this, LoginSelectionActivity.class);
-        startActivity(intent);
-        finish();
+        createStudentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createStudent();
+            }
+        });
     }
 
     private void initializeData() {
         JSONTool jsonTool = new JSONTool();
-        ClassesHandler handler = new ClassesHandler(
-                getString(R.string.teachers_get_classes_url), "Fetched classes", "Failed to fetch classes",
-                HttpHandler.Method.GET, null, this, null, jsonTool);
+        DBTools dbTools = new DBTools(this);
+        ClassesHandler handler;
+        if (dbTools.isTeacher()) {
+            handler = new ClassesHandler(
+                    getString(R.string.teachers_get_classes_url), "Fetched classes", "Failed to fetch classes",
+                    HttpHandler.Method.GET, null, this, null, jsonTool);
+        } else {
+            handler = new ClassesHandler(
+                    getString(R.string.students_get_classes_url), "Fetched classes", "Failed to fetch classes",
+                    HttpHandler.Method.GET, null, this, null, jsonTool);
+        }
+        dbTools.close();
         handler.execute((Void) null);
         try {
             // Sleep while we wait for the data
@@ -79,6 +100,20 @@ public class TeacherDashboardActivity extends AppCompatActivity {
                 classes_data.add(jsonTool.getJsonArray().getJSONObject(i));
             }
         } catch(JSONException e) {}
+    }
+
+    private void createStudent() {
+        Intent intent = new Intent(this, CreateStudentAccountActivity.class);
+        startActivity(intent);
+    }
+
+    private void logout() {
+        DBTools dbTools = new DBTools(this);
+        dbTools.deleteUsers();
+        dbTools.close();
+        Intent intent = new Intent(this, LoginSelectionActivity.class);
+        finish();
+        startActivity(intent);
     }
 
     //Returns JSONClassData

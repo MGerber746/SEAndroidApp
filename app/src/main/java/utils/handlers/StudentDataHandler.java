@@ -83,9 +83,10 @@ public class StudentDataHandler extends HttpHandler {
                 JSONObject json = new JSONObject(sb.toString());
                 int id = json.getInt(context.getString(R.string.user_id));
                 String token = intent.getExtras().getString(context.getString(R.string.token));
+                String username = json.getString(context.getString(R.string.username));
                 // Store the user in the database
                 DBTools dbTools = new DBTools(context);
-                dbTools.createUser(id, token, false);
+                dbTools.createUser(id, token, false, username);
                 dbTools.close();
                 return success;
             } catch (JSONException e) {
