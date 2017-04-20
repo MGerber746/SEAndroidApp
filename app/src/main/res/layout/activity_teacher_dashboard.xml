@@ -28,7 +28,8 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
-                android:background="@color/Blue">
+                android:background="@color/Blue"
+                android:weightSum="1">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profile_image"
@@ -67,16 +68,16 @@
 
                 <Button
                 android:text="@string/logout_button"
-                    android:layout_height="wrap_content"
+                    android:layout_height="55dp"
                 android:layout_alignParentTop="false"
                     android:id="@+id/Logout"
                     style="@style/Widget.AppCompat.Button"
                     android:layout_centerHorizontal="false"
                     android:layout_alignParentRight="false"
                     android:layout_marginTop="25dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_width="wrap_content" />
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="70dp" />
 
             </LinearLayout>
 
