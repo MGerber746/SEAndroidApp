@@ -70,7 +70,7 @@
     <string name="Create">Create</string>
     <string name="cancel">Cancel</string>
 
-    <string name="Create_Activity">Create Activity</string>
+    <string name="Create_Activity">Create Assignment</string>
 
     <!-- Strings related to Student Home Page -->
     <string name="students_get_classes_url">students/classes/</string>
