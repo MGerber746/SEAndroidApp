@@ -14,9 +14,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import utils.DBTools;
-import utils.HttpURLConnectionHandler;
+import utils.handlers.HttpHandler;
 import utils.JSONTool;
-import utils.StudentClassesURLConnectionHandler;
+import utils.handlers.ClassesHandler;
 
 public class StudentHomeActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayList<JSONObject> classes_data;
@@ -43,9 +43,9 @@ public class StudentHomeActivity extends AppCompatActivity implements View.OnCli
 
     private void initializeData() {
         JSONTool jsonTool = new JSONTool();
-        StudentClassesURLConnectionHandler handler = new StudentClassesURLConnectionHandler(
+        ClassesHandler handler = new ClassesHandler(
                 getString(R.string.students_get_classes_url), "Fetched classes", "Failed to fetch classes",
-                HttpURLConnectionHandler.Method.GET, null, this, null, jsonTool);
+                HttpHandler.Method.GET, null, this, null, jsonTool);
         handler.execute((Void) null);
         try {
             // Sleep while we wait for the data
@@ -94,7 +94,7 @@ public class StudentHomeActivity extends AppCompatActivity implements View.OnCli
 
     private void logout(){
         DBTools dbTools = new DBTools(this);
-        dbTools.deleteTokens();
+        dbTools.deleteUsers();
         dbTools.close();
         Intent intent = new Intent(this, LoginSelectionActivity.class);
         startActivity(intent);

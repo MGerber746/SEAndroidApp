@@ -13,10 +13,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import utils.HttpURLConnectionHandler;
-import utils.JSONTool;
-import utils.StudentClassesURLConnectionHandler;
-
 public class StudentAssignmentsActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayList<JSONObject> assignments_data;
 

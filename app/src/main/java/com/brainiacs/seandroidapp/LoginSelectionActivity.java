@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import utils.DBTools;
+
 public class LoginSelectionActivity extends AppCompatActivity {
 
     //Finds button IDs on create and ready for button input.
@@ -14,21 +16,26 @@ public class LoginSelectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_selection);
 
-        Button mStudentLoginButton = (Button) findViewById(R.id.student_login);
-        mStudentLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                studentLogin();
-            }
-        });
+        DBTools dbTools = new DBTools(this);
+        if (!dbTools.getToken().isEmpty()) {
+            startActivity(new Intent(this, DashboardActivity.class));
+        } else {
+            Button mStudentLoginButton = (Button) findViewById(R.id.student_login);
+            mStudentLoginButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    studentLogin();
+                }
+            });
 
-        Button mTeacherLoginButton = (Button) findViewById(R.id.teacher_login);
-        mTeacherLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                teacherLogin();
-            }
-        });
+            Button mTeacherLoginButton = (Button) findViewById(R.id.teacher_login);
+            mTeacherLoginButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    teacherLogin();
+                }
+            });
+        }
     }
 
     //Redirects to teacher login activity
