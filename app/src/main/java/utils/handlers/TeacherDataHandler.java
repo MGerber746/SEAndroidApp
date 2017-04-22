@@ -20,7 +20,7 @@ import java.util.HashMap;
 
 import utils.DBTools;
 
-public class    TeacherDataHandler extends HttpHandler {
+public class TeacherDataHandler extends HttpHandler {
     public TeacherDataHandler(String apiEndpoint, String success, String failure, Method method,
                                HashMap<String, String> params, Context context, Intent intent) {
         super(apiEndpoint, success, failure, method, params, context, intent);
@@ -83,9 +83,10 @@ public class    TeacherDataHandler extends HttpHandler {
                 JSONObject json = new JSONObject(sb.toString());
                 int id = json.getInt(context.getString(R.string.user_id));
                 String token = intent.getExtras().getString(context.getString(R.string.token));
+                String username = json.getString(context.getString(R.string.username));
                 // Store the user in the database
                 DBTools dbTools = new DBTools(context);
-                dbTools.createUser(id, token, true);
+                dbTools.createUser(id, token, true, username);
                 dbTools.close();
                 return success;
             } catch (JSONException e) {

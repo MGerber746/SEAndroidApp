@@ -10,7 +10,6 @@ import android.widget.EditText;
 import java.util.HashMap;
 
 import utils.handlers.HttpHandler;
-import utils.handlers.TeacherRegisterHandler;
 
 public class TeacherRegisterActivity extends AppCompatActivity {
     @Override
@@ -78,7 +77,8 @@ public class TeacherRegisterActivity extends AppCompatActivity {
             params.put(getString(R.string.password), password);
             params.put(getString(R.string.confirm_password), reenterPassword);
             Intent intent = new Intent(this, TeacherLoginActivity.class);
-            TeacherRegisterHandler handler = new TeacherRegisterHandler(
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            HttpHandler handler = new HttpHandler(
                     getString(R.string.accounts_url) + getString(R.string.teachers_url), getString(R.string.registration_successful),
                     getString(R.string.failed_to_register), HttpHandler.Method.POST,
                     params, this, intent);

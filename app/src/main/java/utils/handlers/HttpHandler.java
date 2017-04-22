@@ -25,7 +25,7 @@ import utils.DBTools;
 /**
  * Task will run communications to server through async task
  */
-public abstract class HttpHandler extends AsyncTask<Void, Void, String> {
+public class HttpHandler extends AsyncTask<Void, Void, String> {
     public enum Method {GET, POST, HEAD, OPTIONS, PUT, DELETE, TRACE}
     protected String rootUrl;
     protected String apiEndpoint;
@@ -108,7 +108,9 @@ public abstract class HttpHandler extends AsyncTask<Void, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
+        if (!result.isEmpty()) {
+            Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
+        }
         if(!result.equals(failure) && intent != null) {
             context.startActivity(intent);
         }
