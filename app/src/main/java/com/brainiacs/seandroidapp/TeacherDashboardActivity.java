@@ -102,11 +102,6 @@ public class TeacherDashboardActivity extends AppCompatActivity {
         } catch(JSONException e) {}
     }
 
-    private void createStudent() {
-        Intent intent = new Intent(this, CreateStudentAccountActivity.class);
-        startActivity(intent);
-    }
-
     private void logout() {
         DBTools dbTools = new DBTools(this);
         dbTools.deleteUsers();
@@ -119,5 +114,11 @@ public class TeacherDashboardActivity extends AppCompatActivity {
     //Returns JSONClassData
     public static ArrayList<JSONObject> getClassData(){
         return classes_data;
+    }
+
+    //Redirects to teacher login activity
+    private void createStudent() {
+        Intent intent = new Intent(this, CreateStudentAccountActivity.class);
+        startActivity(intent);
     }
 }

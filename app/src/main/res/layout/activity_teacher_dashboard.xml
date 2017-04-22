@@ -39,7 +39,7 @@
                     app:civ_border_color="@android:color/background_light"
                     app:civ_fill_color="@android:color/background_light"
                     android:layout_margin="@dimen/activity_vertical_margin" />
-
+                
                 <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="wrap_content"
@@ -59,23 +59,24 @@
 
                 <Button
                     android:text="@string/Create_Student_Account"
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_centerHorizontal="false"
+                    android:layout_alignParentRight="false"
+                    android:layout_alignParentTop="false"
+                    android:layout_marginTop="25dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/CreateStudent"
-                    android:layout_weight="1"
-                    style="@style/Widget.AppCompat.Button" />
+                    android:id="@+id/CreateStudent" />
 
                 <Button
-                android:text="@string/logout_button"
+                    android:text="@string/logout_button"
                     android:layout_height="wrap_content"
-                android:layout_alignParentTop="false"
+                    android:layout_alignParentTop="false"
                     android:id="@+id/Logout"
                     style="@style/Widget.AppCompat.Button"
                     android:layout_centerHorizontal="false"
                     android:layout_alignParentRight="false"
                     android:layout_marginTop="25dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
                     android:layout_width="wrap_content" />
 
             </LinearLayout>
