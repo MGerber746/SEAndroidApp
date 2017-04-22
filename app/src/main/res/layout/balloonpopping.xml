@@ -8,10 +8,11 @@
     <RelativeLayout
         android:id="@+id/balloonpopping"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:fitsSystemWindows="true"
-        android:background="@drawable/bluesquare">
+        android:background="@drawable/bluesquare"
+        android:layout_above="@+id/equation">
 
     </RelativeLayout>
 

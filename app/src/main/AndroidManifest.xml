@@ -29,7 +29,8 @@
         <activity android:name=".activityOverviewActivity" />
         <activity android:name=".StudentHomeActivity" />
         <activity android:name=".BalloonPoppingActivity" />
-        <activity android:name=".StudentAssignmentsActivity"></activity>
+        <activity android:name=".StudentAssignmentsActivity" />
+        <activity android:name=".DuckGameActivity"> </activity>
     </application>
 
 </manifest>
