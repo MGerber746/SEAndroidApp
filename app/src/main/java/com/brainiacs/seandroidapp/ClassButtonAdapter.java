@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +33,7 @@ import utils.handlers.HttpHandler;
 
 public class ClassButtonAdapter extends BaseAdapter {
     public static final String className = "className";
+    private static ArrayList<JSONObject> classes_data;
 
     //RGB Values need to be individual ints
     private int[] colorArray = {66,149,244,244,66,191,13,219,61,237,22,7,214,7,237};
@@ -65,6 +67,7 @@ public class ClassButtonAdapter extends BaseAdapter {
     //Sets up buttons on grid.
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        final int pos = position;
         Button btn;
         if (convertView == null) {
             btn = new Button(mContext);
@@ -130,6 +133,7 @@ public class ClassButtonAdapter extends BaseAdapter {
                 else {
                     Intent intent = new Intent(mContext, ClassHomeActivity.class);
                     intent.putExtra(className, ((Button) v).getText().toString());
+                    intent.putExtra("classData", classes_data.get(pos).toString());
                     mContext.startActivity(intent);
                 }
             }
@@ -143,6 +147,8 @@ public class ClassButtonAdapter extends BaseAdapter {
                 buttons.add(DashboardActivity.getClassData().get(i).getString("name"));
             } catch(JSONException e) {}
         }
+        classes_data = DashboardActivity.getClassData();
+
         DBTools dbTools = new DBTools(c);
         if (dbTools.isTeacher()) {
             buttons.add(c.getString(R.string.Create_New_Class));
