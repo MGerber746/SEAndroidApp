@@ -3,7 +3,7 @@ package utils.handlers;
 import android.content.Context;
 import android.content.Intent;
 
-import com.brainiacs.seandroidapp.activityOverviewActivity;
+import com.brainiacs.seandroidapp.ActivityCreationActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +16,7 @@ public class AssignmentHandler extends HttpHandler {
     }
 
     protected String doInBackround(Void... params) {
-        activityOverviewActivity activity = ((activityOverviewActivity) context);
+        ActivityCreationActivity activity = ((ActivityCreationActivity) context);
         while (activity.getQuestionIDs().size() != activity.getQuestions().size()) {
             try {
                 Thread.sleep(100);
