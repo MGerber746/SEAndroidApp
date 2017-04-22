@@ -30,7 +30,8 @@
         <activity android:name=".StudentHomeActivity" />
         <activity android:name=".BalloonPoppingActivity" />
         <activity android:name=".StudentAssignmentsActivity" />
-        <activity android:name=".DuckGameActivity"> </activity>
+        <activity android:name=".DuckGameActivity"></activity>
+        <activity android:name=".AddToClassActivity"></activity>
     </application>
 
 </manifest>
