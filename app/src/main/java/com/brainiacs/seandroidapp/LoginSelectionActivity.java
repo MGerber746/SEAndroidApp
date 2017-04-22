@@ -18,7 +18,7 @@ public class LoginSelectionActivity extends AppCompatActivity {
 
         DBTools dbTools = new DBTools(this);
         if (!dbTools.getToken().isEmpty()) {
-            startActivity(new Intent(this, TeacherDashboardActivity.class));
+            startActivity(new Intent(this, DashboardActivity.class));
         } else {
             Button mStudentLoginButton = (Button) findViewById(R.id.student_login);
             mStudentLoginButton.setOnClickListener(new View.OnClickListener() {

@@ -82,7 +82,7 @@ public class TeacherLoginActivity extends AppCompatActivity {
             HashMap<String, String> params = new HashMap<>();
             params.put(getString(R.string.username), username);
             params.put(getString(R.string.password), password);
-            Intent intent = new Intent(this, TeacherDashboardActivity.class);
+            Intent intent = new Intent(this, DashboardActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             TeacherLoginHandler handler = new TeacherLoginHandler(
                     getString(R.string.login_url), getString(R.string.login_successful),

@@ -14,10 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 
-import com.brainiacs.seandroidapp.ClassHomeActivity;
-import com.brainiacs.seandroidapp.R;
-import com.brainiacs.seandroidapp.TeacherDashboardActivity;
-
 import org.json.JSONException;
 
 import java.util.ArrayList;
@@ -111,7 +107,7 @@ public class ClassButtonAdapter extends BaseAdapter {
                                 buttons.add(mContext.getString(R.string.Create_New_Class));
                                 HashMap<String, String> params = new HashMap<>();
                                 params.put(activity.getString(R.string.class_name), name);
-                                Intent intent = new Intent(mContext, TeacherDashboardActivity.class);
+                                Intent intent = new Intent(mContext, DashboardActivity.class);
                                 activity.finish();
                                 HttpHandler handler = new HttpHandler(
                                         activity.getString(R.string.classes_url), "",
@@ -142,9 +138,9 @@ public class ClassButtonAdapter extends BaseAdapter {
         }
 
     private void initializeClasses(Context c){
-        for (int i = 0; i < TeacherDashboardActivity.getClassData().size(); ++i) {
+        for (int i = 0; i < DashboardActivity.getClassData().size(); ++i) {
             try {
-                buttons.add(TeacherDashboardActivity.getClassData().get(i).getString("name"));
+                buttons.add(DashboardActivity.getClassData().get(i).getString("name"));
             } catch(JSONException e) {}
         }
         DBTools dbTools = new DBTools(c);

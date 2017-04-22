@@ -23,7 +23,7 @@ import utils.handlers.ClassesHandler;
  * Created by Matthew on 2/21/17.
  * Sets up grid view with our buttons
  */
-public class TeacherDashboardActivity extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity {
     private static ArrayList<JSONObject> classes_data;
     private TextView usernameTextView;
     private GridView gridView;
