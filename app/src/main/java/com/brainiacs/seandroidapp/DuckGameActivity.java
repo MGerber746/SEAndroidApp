@@ -1,9 +1,10 @@
 package com.brainiacs.seandroidapp;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
@@ -15,50 +16,77 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
+
 
 import utils.Equation;
 import utils.Point;
 
 
-public class BalloonPoppingActivity extends AppCompatActivity implements View.OnClickListener {
-    private TextView equationTextView;
+public class DuckGameActivity extends AppCompatActivity implements View.OnClickListener {
     private RelativeLayout relativeLayout;
+    private Button evenButton;
+    private Button oddButton;
+    private Equation currentQuestion;
     private ArrayList<Equation> equations;
     private ArrayList<Point> points;
-    private Equation currentEquation;
     private int correctAnswers;
     private int incorrectAnswers;
+    private ArrayList<Integer> ducks;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.balloonpopping);
+        setContentView(R.layout.activity_duck_game);
         initializeClassVariables();
         initializeWidgets();
+        initializeListeners();
+        setupNextRound();
     }
+
 
     @Override
     public void onClick(View v) {
         Button button = (Button) v;
-        // Check our current equation compared to the answer
-        if (button.getId() == Integer.parseInt(currentEquation.getAnswer())) {
-            // They got the right answer so set the button invisible and increment
-            // correct answers
-            button.setVisibility(View.INVISIBLE);
-            ++correctAnswers;
-        } else {
-            // They got the wrong answer so turn the balloon that has the right
-            // answer red and increment incorrect answers
-            button = (Button) relativeLayout.findViewById(Integer.parseInt(currentEquation.getAnswer()));
-            button.setBackgroundResource(R.drawable.redballoon);
-            button.setClickable(false);
-            ++incorrectAnswers;
+        if (button.getId() == R.id.even) {
+            // check if the expression is even, yes then correct, no then not correct;
+            String answer = currentQuestion.getAnswer();
+            if (answer.equals("even")) {
+                correctAnswers++;
+            } else {
+                incorrectAnswers++;
+            }
+            // IF click the odd butten
+        } else if (button.getId() == R.id.odd) {
+            String Answer = currentQuestion.getAnswer();
+            if (Answer.equals("odd")) {
+                correctAnswers++;
+            } else {
+                incorrectAnswers++;
+            }
         }
-        // Set up our next equation or go to next activity
+        relativeLayout.removeAllViewsInLayout();
+        setupNextRound();
+    }
+
+    private void setupNextRound() {
         if (!equations.isEmpty()) {
-            currentEquation = getRandomEquation();
-            equationTextView.setText(currentEquation.getQuestion());
+            Equation equation = getRandomEquation();
+            currentQuestion = equation;
+            int numberOfDucks = Integer.parseInt(equation.getQuestion());
+            points = new ArrayList<>();
+            int duckColor = getRandomDuckColor();
+            for (int i = 0; i < numberOfDucks; i++) {
+                RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(350, 350);
+                setRandomPlacement(layoutParams);
+                Button duckButton = new Button(this);
+                duckButton.setVisibility(View.VISIBLE);
+                duckButton.setLayoutParams(layoutParams);
+                duckButton.setBackgroundResource(duckColor);
+                relativeLayout.addView(duckButton);
+            }
         } else {
             // Create alert with score
             final Intent intent = new Intent(this, StudentHomeActivity.class);
@@ -80,12 +108,44 @@ public class BalloonPoppingActivity extends AppCompatActivity implements View.On
         }
     }
 
+    private void initializeWidgets() {
+        relativeLayout = (RelativeLayout) findViewById(R.id.duckgame);
+        evenButton = (Button) findViewById(R.id.even);
+        oddButton = (Button) findViewById(R.id.odd);
+    }
+
+    private void initializeListeners() {
+        evenButton.setOnClickListener(this);
+        oddButton.setOnClickListener(this);
+    }
+
+    private Equation getRandomEquation() {
+        int position = new Random().nextInt(equations.size());
+        return equations.remove(position);
+    }
+
+    private Integer getRandomDuckColor() {
+        int position = new Random().nextInt(ducks.size());
+        return ducks.get(position);
+    }
+
     private void initializeClassVariables() {
         // Initialize points to an empty array list
-        points = new ArrayList<>();
+        ducks = new ArrayList<>();
+        ducks.add(R.drawable.blueduck);
+        ducks.add(R.drawable.greenduck);
+        ducks.add(R.drawable.purpleduck);
+        ducks.add(R.drawable.redduck);
+        ducks.add(R.drawable.duck_icon);
 
+        correctAnswers = 0;
+        incorrectAnswers = 0;
+
+
+        points = new ArrayList<>();
         // Get equations setup
         equations = new ArrayList<>();
+
         try {
             JSONArray temp_data = new JSONArray(this.getIntent().getExtras().getString("questions_data"));
             for (int i = 0; i < temp_data.length(); ++i) {
@@ -93,41 +153,9 @@ public class BalloonPoppingActivity extends AppCompatActivity implements View.On
                 equations.add(new Equation(
                         equation_data.getString("question"), equation_data.getString("answer")));
             }
-        } catch(JSONException e) {}
-
-        // Start correct and incorrect answers at zero
-        correctAnswers = 0;
-        incorrectAnswers = 0;
-    }
-
-    private void initializeWidgets() {
-        // Get out linear layout and equation text view
-        relativeLayout = (RelativeLayout) findViewById(R.id.balloonpopping);
-        equationTextView = (TextView) findViewById(R.id.equation);
-        equationTextView.setTextSize(getResources().getDimension(R.dimen.textsize));
-
-        // Create buttons for all of the answers
-        for (Equation equation : equations) {
-            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(350, 350);
-            setRandomPlacement(layoutParams);
-            Button balloonButton = new Button(this);
-            balloonButton.setTextSize(getResources().getDimension(R.dimen.textsize));
-            balloonButton.setText(equation.getAnswer());
-            balloonButton.setId(Integer.parseInt(equation.getAnswer()));
-            balloonButton.setLayoutParams(layoutParams);
-            balloonButton.setBackgroundResource(R.drawable.greenballoon);
-            balloonButton.setOnClickListener(this);
-            relativeLayout.addView(balloonButton);
+        } catch (JSONException e) {
         }
 
-        // Set the first equation
-        currentEquation = getRandomEquation();
-        equationTextView.setText(currentEquation.getQuestion());
-    }
-
-    private Equation getRandomEquation() {
-        int position = new Random().nextInt(equations.size());
-        return equations.remove(position);
     }
 
     private void setRandomPlacement(RelativeLayout.LayoutParams layoutParams) {
@@ -154,3 +182,4 @@ public class BalloonPoppingActivity extends AppCompatActivity implements View.On
         return false;
     }
 }
+

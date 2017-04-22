@@ -1,20 +1,20 @@
 package utils;
 
 public class Equation {
-    private String equation;
+    private String question;
     private String answer;
 
-    public Equation(String equation, String answer) {
-        this.equation = equation;
+    public Equation(String question, String answer) {
+        this.question = question;
         this.answer = answer;
     }
 
-    public String getEquation() {
-        return equation;
+    public String getQuestion() {
+        return question;
     }
 
-    public void setEquation(String equation) {
-        this.equation = equation;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
     public String getAnswer() {

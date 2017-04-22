@@ -28,7 +28,8 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
-                android:background="@color/Blue">
+                android:background="@color/Blue"
+                android:weightSum="1">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profile_image"
@@ -58,6 +59,7 @@
                 </LinearLayout>
 
                 <Button
+
                     android:text="@string/Create_Student_Account"
                     style="@style/Widget.AppCompat.Button"
                     android:layout_centerHorizontal="false"
