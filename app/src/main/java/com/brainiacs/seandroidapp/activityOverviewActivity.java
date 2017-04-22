@@ -2,6 +2,8 @@ package com.brainiacs.seandroidapp;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -11,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,19 +21,28 @@ import android.widget.Toast;
 import com.brainiacs.seandroidapp.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import utils.handlers.AssignmentHandler;
+import utils.handlers.HttpHandler;
+import utils.handlers.QuestionHandler;
 
 
 public class activityOverviewActivity extends AppCompatActivity {
     private ArrayList<String> questions = new ArrayList<String>();
     private ArrayList<String> answers = new ArrayList<String>();
+    private ArrayList<Integer> questionIDs = new ArrayList<>();
     private int numOfQs;
+    private EditText mAssignmentNameEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
+
+        mAssignmentNameEditText = (EditText) findViewById(R.id.assignName);
 
         Button mActivitiesButton = (Button) findViewById(R.id.createActivityButton);
         mActivitiesButton.setOnClickListener(new View.OnClickListener() {
@@ -70,8 +82,26 @@ public class activityOverviewActivity extends AppCompatActivity {
             questions.add(qEntry.getText().toString());
             answers.add(aEntry.getText().toString());
         }
-        if(checkQuestionType(selection)){
-            //TODO post assignment to DB and add the activity as a button/name the assignment
+        if(checkQuestionType(selection)) {
+            for (int i = 0; i < questions.size(); ++i) {
+                // Post each question to the db
+                HashMap<String, String> params = new HashMap<>();
+                params.put("question", questions.get(i));
+                params.put("answer", answers.get(i));
+                QuestionHandler handler = new QuestionHandler(
+                        getString(R.string.questions_url), "", "Failed to create question",
+                        HttpHandler.Method.POST, params, this, null);
+                handler.execute((Void) null);
+            }
+            // Post the assignment to the db
+            HashMap<String, String> params = new HashMap<>();
+            params.put("game_type", selection);
+            params.put("name", mAssignmentNameEditText.getText().toString());
+            AssignmentHandler handler = new AssignmentHandler(
+                    getString(R.string.assignments_url), "", "Failed to create assignment",
+                    HttpHandler.Method.POST, params, this, null);
+            handler.execute((Void) null);
+
             resetQuestions();
         }
     }
@@ -156,7 +186,6 @@ public class activityOverviewActivity extends AppCompatActivity {
         }
     }
 
-    //TODO when user clicks Create assignment button post to DB
     private void resetQuestions(){
         String[] questionViews = getResources().getStringArray(R.array.questionViews);
         String[] questionIDs = getResources().getStringArray(R.array.questionEntry);
@@ -174,4 +203,15 @@ public class activityOverviewActivity extends AppCompatActivity {
         rl1.setVisibility(View.GONE);
     }
 
+    public ArrayList<String> getQuestions() {
+        return questions;
+    }
+
+    public ArrayList<Integer> getQuestionIDs() {
+        return questionIDs;
+    }
+
+    public void addQuestionID(int id) {
+        questionIDs.add(id);
+    }
 }
