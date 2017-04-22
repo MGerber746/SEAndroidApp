@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -133,7 +132,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     //Starts createActivity activity
     private void createActivity(){
-        Intent intent = new Intent(this, activityOverviewActivity.class);
+        Intent intent = new Intent(this, ActivityCreationActivity.class);
         startActivity(intent);
     }
 }

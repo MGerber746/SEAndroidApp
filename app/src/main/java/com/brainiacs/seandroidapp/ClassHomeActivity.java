@@ -1,6 +1,7 @@
 package com.brainiacs.seandroidapp;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -58,6 +59,7 @@ public class ClassHomeActivity extends AppCompatActivity {
             JSONArray studentNameList = classData.getJSONArray("students");
             for(int i = 0; i < studentNameList.length(); i++){
                 TextView studentName = new TextView(this);
+                studentName.setTextColor(Color.BLACK);
                 studentName.setText(studentNameList.getJSONObject(i).getJSONObject("user").getString("first_name") + " " + studentNameList.getJSONObject(i).getJSONObject("user").getString("last_name"));
                 studentList.addView(studentName);
             }

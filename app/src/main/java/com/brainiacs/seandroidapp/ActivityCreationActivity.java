@@ -23,7 +23,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class activityOverviewActivity extends AppCompatActivity {
+public class ActivityCreationActivity extends AppCompatActivity {
     private ArrayList<String> questions = new ArrayList<String>();
     private ArrayList<String> answers = new ArrayList<String>();
     private int numOfQs;
