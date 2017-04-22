@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -27,7 +26,7 @@ public class DashboardActivity extends AppCompatActivity {
     private static ArrayList<JSONObject> classes_data;
     private TextView usernameTextView;
     private GridView gridView;
-    private Button createStudentButton, logoutButton;
+    private Button createStudentButton, logoutButton, createActivityButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +47,11 @@ public class DashboardActivity extends AppCompatActivity {
         gridView.setAdapter(new ClassButtonAdapter(this));
 
         logoutButton = (Button) findViewById(R.id.Logout);
-
+        createActivityButton = (Button) findViewById(R.id.createActivity);
         createStudentButton = (Button) findViewById(R.id.CreateStudent);
         if (!dbTools.isTeacher()) {
             createStudentButton.setVisibility(View.GONE);
+            createActivityButton.setVisibility(View.GONE);
         }
         dbTools.close();
     }
@@ -68,6 +68,13 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 createStudent();
+            }
+        });
+
+        createActivityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createActivity();
             }
         });
     }
@@ -102,6 +109,7 @@ public class DashboardActivity extends AppCompatActivity {
         } catch(JSONException e) {}
     }
 
+    //Logs out user and deletes the login token.
     private void logout() {
         DBTools dbTools = new DBTools(this);
         dbTools.deleteUsers();
@@ -116,9 +124,15 @@ public class DashboardActivity extends AppCompatActivity {
         return classes_data;
     }
 
-    //Redirects to teacher login activity
+    //Redirects to create student account activity
     private void createStudent() {
         Intent intent = new Intent(this, CreateStudentAccountActivity.class);
+        startActivity(intent);
+    }
+
+    //Starts createActivity activity
+    private void createActivity(){
+        Intent intent = new Intent(this, ActivityCreationActivity.class);
         startActivity(intent);
     }
 }

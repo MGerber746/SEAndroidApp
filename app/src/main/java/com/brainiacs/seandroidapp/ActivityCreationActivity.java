@@ -3,7 +3,6 @@ package com.brainiacs.seandroidapp;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -30,7 +29,7 @@ import utils.handlers.HttpHandler;
 import utils.handlers.QuestionHandler;
 
 
-public class activityOverviewActivity extends AppCompatActivity {
+public class ActivityCreationActivity extends AppCompatActivity {
     private ArrayList<String> questions = new ArrayList<String>();
     private ArrayList<String> answers = new ArrayList<String>();
     private ArrayList<Integer> questionIDs = new ArrayList<>();
@@ -43,14 +42,6 @@ public class activityOverviewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_overview);
 
         mAssignmentNameEditText = (EditText) findViewById(R.id.assignName);
-
-        Button mActivitiesButton = (Button) findViewById(R.id.createActivityButton);
-        mActivitiesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                createNewActivity();
-            }
-        });
 
         Button mResetButton = (Button) findViewById(R.id.reset);
         mResetButton.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +58,33 @@ public class activityOverviewActivity extends AppCompatActivity {
                 addAssignment();
             }
         });
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this); //Creates new alertBuilder
+        builder.setTitle(R.string.NumOfQuestions);
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_NUMBER);
+        builder.setView(input);
+        builder.setPositiveButton(R.string.Create, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(Integer.parseInt(input.getText().toString()) <= 10 && Integer.parseInt(input.getText().toString()) > 0){
+                    numOfQs = Integer.parseInt(input.getText().toString());
+                    setViews();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), R.string.questionNumCheckToast, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                resetQuestions();
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
     }
 
     //Adds all questions
@@ -105,39 +123,6 @@ public class activityOverviewActivity extends AppCompatActivity {
             resetQuestions();
         }
     }
-
-    //Sets up dialog and views for a new activity
-    private void createNewActivity(){
-        LinearLayout rl1 = (LinearLayout) findViewById(R.id.newActivity);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this); //Creates new alertBuilder
-        builder.setTitle(R.string.NumOfQuestions);
-        final EditText input = new EditText(this);
-        input.setInputType(InputType.TYPE_CLASS_NUMBER);
-        builder.setView(input);
-        builder.setPositiveButton(R.string.Create, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if(Integer.parseInt(input.getText().toString()) <= 10 && Integer.parseInt(input.getText().toString()) > 0){
-                    numOfQs = Integer.parseInt(input.getText().toString());
-                    setViews();
-                }
-                else{
-                    Toast.makeText(getApplicationContext(), R.string.questionNumCheckToast, Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                resetQuestions();
-                dialog.cancel();
-            }
-        });
-
-        builder.show();
-        rl1.setVisibility(View.VISIBLE);
-    }
-
 
     //Checks if a question is of the like question type
     private boolean checkQuestionType(String questionType){
@@ -187,20 +172,9 @@ public class activityOverviewActivity extends AppCompatActivity {
     }
 
     private void resetQuestions(){
-        String[] questionViews = getResources().getStringArray(R.array.questionViews);
-        String[] questionIDs = getResources().getStringArray(R.array.questionEntry);
-        String[] answerIDs = getResources().getStringArray(R.array.answerEntry);
-        numOfQs = 0;
-        for(int i = 0; i < 10; i++){
-            RelativeLayout rl1 = (RelativeLayout) findViewById(getResources().getIdentifier(questionViews[i], "id", getPackageName()));
-            rl1.setVisibility(View.GONE);
-            EditText qEntry = (EditText) findViewById(getResources().getIdentifier(questionIDs[i], "id", getPackageName()));
-            EditText aEntry = (EditText) findViewById(getResources().getIdentifier(answerIDs[i], "id", getPackageName()));
-            qEntry.setText("");
-            aEntry.setText("");
-        }
-        LinearLayout rl1 = (LinearLayout) findViewById(R.id.newActivity);
-        rl1.setVisibility(View.GONE);
+        Intent intent = new Intent(this, DashboardActivity.class);
+        startActivity(intent);
+        this.finish();
     }
 
     public ArrayList<String> getQuestions() {
