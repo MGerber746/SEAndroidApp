@@ -1,20 +1,16 @@
 package com.brainiacs.seandroidapp;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.util.ArrayList;
 
 import utils.handlers.ClassAssignmentListHandler;
 import utils.handlers.HttpHandler;
@@ -71,7 +67,7 @@ public class AddToClassActivity extends AppCompatActivity {
         handler.execute((Void) null);
     }
 
-    private void submitChanges(String ){
-
+    private void submitChanges(){
+        //TODO put changes in class students or class assignments
     }
 }
