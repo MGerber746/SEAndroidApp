@@ -7,7 +7,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.brainiacs.seandroidapp.AddToClassActivity;
-import com.brainiacs.seandroidapp.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,13 +18,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.util.HashMap;
 
-import utils.DBTools;
+/**
+ * Created by Matthew on 4/25/17.
+ */
 
-
-public class TeacherStudentListHandler extends HttpHandler{
-
-    public TeacherStudentListHandler(String apiEndpoint, String success, String failure, Method method,
-                              HashMap<String, String> params, Context context, Intent intent) {
+public class ClassAssignmentListHandler extends HttpHandler{
+    public ClassAssignmentListHandler(String apiEndpoint, String success, String failure, HttpHandler.Method method,
+                                     HashMap<String, String> params, Context context, Intent intent) {
         super(apiEndpoint, success, failure, method, params, context, intent);
     }
 
@@ -44,16 +43,16 @@ public class TeacherStudentListHandler extends HttpHandler{
             try {
                 JSONObject json = new JSONObject(sb.toString());
                 json = json.getJSONArray("results").getJSONObject(0);
-                JSONArray studentList = json.getJSONArray("students");
+                JSONArray assignmentList = json.getJSONArray("assignments");
                 LinearLayout nameLayout = AddToClassActivity.nameContainer;
                 LinearLayout checkboxLayout = AddToClassActivity.checkboxContainer;
-                for(int i = 0; i < studentList.length(); i++){
+                for(int i = 0; i < assignmentList.length(); i++){
                     final TextView name = new TextView(context);
-                    name.setText(studentList.getJSONObject(i).getJSONObject("user").getString("first_name") + " " +studentList.getJSONObject(i).getJSONObject("user").getString("last_name"));
+                    name.setText(assignmentList.getJSONObject(i).getJSONObject("user").getString("first_name"));
                     name.setPadding(25, 5, 0, 25);
                     nameLayout.addView(name);
                     final CheckBox checkBox = new CheckBox(context);
-                    checkBox.setId(Integer.parseInt(studentList.getJSONObject(i).getJSONObject("user").getString("id")));
+                    checkBox.setId(Integer.parseInt(assignmentList.getJSONObject(i).getJSONObject("assignment").getString("id")));
                     checkboxLayout.addView(checkBox);
                 }
                 for(int i = 0; i < checkboxLayout.getChildCount(); i ++){
@@ -74,9 +73,10 @@ public class TeacherStudentListHandler extends HttpHandler{
             }
         }
         else if(responseCode >= 200 && responseCode < 300) {
-        return success; }
+            return success; }
         else {
-        return failure;
-    }
+            return failure;
+        }
     }
 }
+
