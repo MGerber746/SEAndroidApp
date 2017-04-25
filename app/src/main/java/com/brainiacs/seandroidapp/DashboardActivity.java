@@ -132,7 +132,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     //Starts createActivity activity
     private void createActivity(){
-        Intent intent = new Intent(this, ActivityCreationActivity.class);
+        Intent intent = new Intent(this, AssignmentCreationActivity.class);
         startActivity(intent);
     }
 }

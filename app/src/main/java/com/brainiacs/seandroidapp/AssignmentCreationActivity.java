@@ -7,31 +7,35 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.brainiacs.seandroidapp.R;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import utils.handlers.AssignmentHandler;
+import utils.handlers.HttpHandler;
+import utils.handlers.QuestionHandler;
 
-public class ActivityCreationActivity extends AppCompatActivity {
+
+public class AssignmentCreationActivity extends AppCompatActivity {
     private ArrayList<String> questions = new ArrayList<String>();
     private ArrayList<String> answers = new ArrayList<String>();
+    private ArrayList<Integer> questionIDs = new ArrayList<>();
     private int numOfQs;
+    private EditText mAssignmentNameEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_overview);
+        setContentView(R.layout.activity_assignment_creation);
+
+        mAssignmentNameEditText = (EditText) findViewById(R.id.assignName);
 
         Button mResetButton = (Button) findViewById(R.id.reset);
         mResetButton.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +58,7 @@ public class ActivityCreationActivity extends AppCompatActivity {
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
         builder.setView(input);
+        builder.setCancelable(false);
         builder.setPositiveButton(R.string.Create, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -90,9 +95,26 @@ public class ActivityCreationActivity extends AppCompatActivity {
             questions.add(qEntry.getText().toString());
             answers.add(aEntry.getText().toString());
         }
-        if(checkQuestionType(selection)){
-            //TODO post assignment to DB and add the activity as a button/name the assignment
-            resetQuestions();
+        if(checkQuestionType(selection)) {
+            for (int i = 0; i < questions.size(); ++i) {
+                // Post each question to the db
+                HashMap<String, String> params = new HashMap<>();
+                params.put("question", questions.get(i));
+                params.put("answer", answers.get(i));
+                QuestionHandler handler = new QuestionHandler(
+                        getString(R.string.questions_url), "", "Failed to create question",
+                        HttpHandler.Method.POST, params, this, null);
+                handler.execute((Void) null);
+            }
+            // Post the assignment to the db
+            Intent intent = new Intent(this, DashboardActivity.class);
+            HashMap<String, String> params = new HashMap<>();
+            params.put("math_type", selection);
+            params.put("name", mAssignmentNameEditText.getText().toString());
+            AssignmentHandler handler = new AssignmentHandler(
+                    getString(R.string.assignments_url), "", "Failed to create assignment",
+                    HttpHandler.Method.POST, params, this, intent);
+            handler.execute((Void) null);
         }
     }
 
@@ -149,4 +171,15 @@ public class ActivityCreationActivity extends AppCompatActivity {
         this.finish();
     }
 
+    public ArrayList<String> getQuestions() {
+        return questions;
+    }
+
+    public ArrayList<Integer> getQuestionIDs() {
+        return questionIDs;
+    }
+
+    public void addQuestionID(int id) {
+        questionIDs.add(id);
+    }
 }
