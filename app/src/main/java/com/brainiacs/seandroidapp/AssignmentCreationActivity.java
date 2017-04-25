@@ -7,17 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.brainiacs.seandroidapp.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +23,7 @@ import utils.handlers.HttpHandler;
 import utils.handlers.QuestionHandler;
 
 
-public class ActivityCreationActivity extends AppCompatActivity {
+public class AssignmentCreationActivity extends AppCompatActivity {
     private ArrayList<String> questions = new ArrayList<String>();
     private ArrayList<String> answers = new ArrayList<String>();
     private ArrayList<Integer> questionIDs = new ArrayList<>();
@@ -39,7 +33,7 @@ public class ActivityCreationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_overview);
+        setContentView(R.layout.activity_assignment_creation);
 
         mAssignmentNameEditText = (EditText) findViewById(R.id.assignName);
 
@@ -64,6 +58,7 @@ public class ActivityCreationActivity extends AppCompatActivity {
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
         builder.setView(input);
+        builder.setCancelable(false);
         builder.setPositiveButton(R.string.Create, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -112,15 +107,14 @@ public class ActivityCreationActivity extends AppCompatActivity {
                 handler.execute((Void) null);
             }
             // Post the assignment to the db
+            Intent intent = new Intent(this, DashboardActivity.class);
             HashMap<String, String> params = new HashMap<>();
-            params.put("game_type", selection);
+            params.put("math_type", selection);
             params.put("name", mAssignmentNameEditText.getText().toString());
             AssignmentHandler handler = new AssignmentHandler(
                     getString(R.string.assignments_url), "", "Failed to create assignment",
-                    HttpHandler.Method.POST, params, this, null);
+                    HttpHandler.Method.POST, params, this, intent);
             handler.execute((Void) null);
-
-            resetQuestions();
         }
     }
 

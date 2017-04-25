@@ -3,9 +3,8 @@ package utils.handlers;
 import android.content.Context;
 import android.content.Intent;
 
-import com.brainiacs.seandroidapp.ActivityCreationActivity;
+import com.brainiacs.seandroidapp.AssignmentCreationActivity;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,10 +36,10 @@ public class QuestionHandler extends HttpHandler {
             try {
                 JSONObject jsonObject = new JSONObject(sb.toString());
                 final int id = jsonObject.getInt("id");
-                ((ActivityCreationActivity) context).runOnUiThread(new Runnable() {
+                ((AssignmentCreationActivity) context).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        ActivityCreationActivity activity = ((ActivityCreationActivity) context);
+                        AssignmentCreationActivity activity = ((AssignmentCreationActivity) context);
                         activity.addQuestionID(id);
                     }
                 });
