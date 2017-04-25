@@ -71,7 +71,6 @@ public class StudentHomeActivity extends AppCompatActivity implements View.OnCli
             Button classButton = new Button(this);
             try {
                 classButton.setText(classes_data.get(i).getString("name"));
-                classButton.setTextColor(getResources().getColor(R.color.White));
                 classButton.setPadding(32,32,32,32);
                 classButton.setId(i);
             } catch(JSONException e) {}
@@ -81,9 +80,6 @@ public class StudentHomeActivity extends AppCompatActivity implements View.OnCli
 
         Button logoutButton = new Button(this);
         logoutButton.setText("Logout");
-
-
-
         logoutButton.setTextColor(getResources().getColor(R.color.White));
         logoutButton.setBackgroundColor(getResources().getColor(R.color.Gray));
 

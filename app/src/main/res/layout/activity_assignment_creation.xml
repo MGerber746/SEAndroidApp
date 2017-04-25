@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@color/Blue"
-    tools:context="com.brainiacs.seandroidapp.activityOverviewActivity">
+    tools:context="com.brainiacs.seandroidapp.AssignmentCreationActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -383,7 +383,7 @@
                 android:layout_weight="0.62" />
 
             <Button
-                android:text="@string/AddAssignment"
+                android:text="@string/create_assignment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/activity_vertical_margin"
@@ -411,5 +411,4 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-
 </RelativeLayout>
