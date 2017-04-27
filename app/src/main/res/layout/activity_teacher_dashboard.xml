@@ -12,6 +12,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/Blue"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
@@ -22,96 +23,96 @@
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_alignParentStart="true"
+            tools:ignore="UselessParent">
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
+                android:layout_height="250dp"
                 android:background="@color/Blue"
                 android:weightSum="1">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profile_image"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/teacherpic"
-                    app:civ_border_width="2dp"
-                    app:civ_border_color="@android:color/background_light"
-                    app:civ_fill_color="@android:color/background_light"
-                    android:layout_margin="@dimen/activity_vertical_margin" />
-
                 <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:weightSum="1">
+                    android:orientation="vertical"
+                    android:layout_width="285dp"
+                    android:layout_height="match_parent">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/Gray"
-                            android:textSize="18sp"
-                            android:padding="16dp"
-                            android:id="@+id/username"
-                            android:layout_weight="0.20" />
+                    <TextView
+                        android:text="@string/username"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/Gray"
+                        android:textSize="18sp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="60dp"
+                        android:id="@+id/username"
+                        tools:ignore="RtlHardcoded" />
 
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profile_image"
+                        android:layout_width="200dp"
+                        android:layout_height="180dp"
+                        android:src="@drawable/teacherpic"
+                        app:civ_border_width="2dp"
+                        app:civ_border_color="@android:color/background_light"
+                        app:civ_fill_color="@android:color/background_light"
+                        android:layout_margin="@dimen/activity_vertical_margin" />
                 </LinearLayout>
 
-                <Button
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                    android:text="@string/Create_Student_Account"
-                    style="@style/Widget.AppCompat.Button"
-                    android:layout_centerHorizontal="false"
-                    android:layout_alignParentRight="false"
-                    android:layout_alignParentTop="false"
-                    android:layout_marginTop="25dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/CreateStudent" />
+                    <Button
+                        android:layout_width="400dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="50dp"
+                        android:padding="10dp"
+                        android:id="@+id/CreateStudent"
+                        android:text="@string/Create_Student_Account"
+                        android:textColor="@color/White" />
 
-                <Button
-                    android:text="@string/Create_Activity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/createActivity"
-                    android:layout_weight="1" />
+                    <Button
+                        android:layout_height="wrap_content"
+                        android:layout_width="400dp"
+                        android:layout_marginTop="10dp"
+                        android:padding="10dp"
+                        android:id="@+id/createActivity"
+                        android:text="@string/Create_Activity"
+                        android:textColor="@color/White" />
 
-                <Button
-                    android:text="@string/logout_button"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="false"
-                    android:id="@+id/Logout"
-                    style="@style/Widget.AppCompat.Button"
-                    android:layout_centerHorizontal="false"
-                    android:layout_alignParentRight="false"
-                    android:layout_marginTop="25dp"
-                    android:layout_width="wrap_content" />
+                    <Button
+                        android:layout_height="wrap_content"
+                        android:layout_width="400dp"
+                        android:layout_marginTop="10dp"
+                        android:padding="10dp"
+                        android:id="@+id/Logout"
+                        android:text="@string/logout_button"
+                        android:textColor="@color/White" />
 
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.20">
+                android:layout_height="match_parent">
 
                 <GridView
                     android:id="@+id/gridview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/White"
+                    android:padding="@dimen/activity_vertical_margin"
+                    android:layout_margin="30dp"
                     android:numColumns="auto_fit"
-                    android:verticalSpacing="10dp"
+                    android:verticalSpacing="20dp"
                     android:horizontalSpacing="10dp"
                     android:stretchMode="columnWidth"
-                    android:gravity="center"
-                    />
-
+                    android:gravity="center" />
             </LinearLayout>
-
-
         </LinearLayout>
-
     </RelativeLayout>
-
 </RelativeLayout>

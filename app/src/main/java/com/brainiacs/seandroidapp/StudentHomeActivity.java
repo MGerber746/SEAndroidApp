@@ -21,6 +21,7 @@ import utils.handlers.ClassesHandler;
 public class StudentHomeActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayList<JSONObject> classes_data;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,9 +79,11 @@ public class StudentHomeActivity extends AppCompatActivity implements View.OnCli
         }
 
         Button logoutButton = new Button(this);
+
         logoutButton.setText("Logout");
+        logoutButton.setTextColor(getResources().getColor(R.color.White));
         logoutButton.setBackgroundColor(getResources().getColor(R.color.Gray));
-        logoutButton.setPadding(32,32,32,32);
+
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
