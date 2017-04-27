@@ -134,14 +134,14 @@ public class ClassButtonAdapter extends BaseAdapter {
                     Intent intent = new Intent(mContext, ClassHomeActivity.class);
                     intent.putExtra(className, ((Button) v).getText().toString());
                     intent.putExtra("classData", classes_data.get(pos).toString());
-                    /*DBTools dbTools = new DBTools(mContext);
+                    DBTools dbTools = new DBTools(mContext);
                     if (dbTools.isTeacher()) {
                         intent.putExtra("userType", "teacher");
                     }
                     else{
                         intent.putExtra("userType", "student");
                     }
-                    dbTools.close();*/
+                    dbTools.close();
                     mContext.startActivity(intent);
                 }
             }

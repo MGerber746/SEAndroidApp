@@ -24,7 +24,8 @@ import java.util.ArrayList;
  */
 public class ClassHomeActivity extends AppCompatActivity implements View.OnClickListener{
     private JSONObject classData;
-
+    private ArrayList<JSONObject> assignments_data;
+    private String userType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,16 @@ public class ClassHomeActivity extends AppCompatActivity implements View.OnClick
             classData = new JSONObject(oldIntent.getStringExtra("classData"));
         } catch (JSONException e) {}
 
-        //if(oldIntent.getStringArrayExtra("userType").equals("teacher")) {
+        assignments_data = new ArrayList<>();
+        try {
+            JSONArray temp_data = classData.getJSONArray("assignments");
+            for (int i = 0; i < temp_data.length(); ++i) {
+                assignments_data.add(temp_data.getJSONObject(i));
+            }
+        } catch(JSONException e) {}
+
+        userType = oldIntent.getStringExtra("userType");
+        if(userType.equals("teacher")) {
             Button showStudentButton = (Button) findViewById(R.id.StudentButton);
             showStudentButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -56,11 +66,11 @@ public class ClassHomeActivity extends AppCompatActivity implements View.OnClick
                 }
             });
 
-        //}
-        //else{
+        }
+        else{
             LinearLayout showLayout = (LinearLayout) findViewById(R.id.showLayout);
             showLayout.setVisibility(View.GONE);
-        //}
+        }
         try {
             LinearLayout studentList;
             JSONArray assignmentList = classData.getJSONArray("assignments");
@@ -69,6 +79,8 @@ public class ClassHomeActivity extends AppCompatActivity implements View.OnClick
                 assignment.setTextColor(Color.BLACK);
                 assignment.setGravity(Gravity.CENTER);
                 assignment.setText(assignmentList.getJSONObject(i).getString("name"));
+                assignment.setId(i);
+                assignment.setOnClickListener(this);
                 if(i % 3 == 0) {
                     studentList = (LinearLayout) findViewById(R.id.l3);
                     studentList.addView(assignment);
@@ -107,6 +119,31 @@ public class ClassHomeActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        //TODO onClick show grades on activity and questions?
+        if(userType.equals("student")){
+            studentOnClick(v);
+        }
+    }
+
+    private void studentOnClick(View v){
+        Button button = (Button) v;
+        try {
+            JSONArray questions_data = (JSONArray) assignments_data.get(button.getId()).get("questions");
+            if(assignments_data.get(button.getId()).getString("math_type").toLowerCase().equals("addition")){
+                //Intent intent = new Intent(this, );
+                //intent.putExtra("questions_data", questions_data.toString());
+                //startActivity(intent);
+            }
+            else if(assignments_data.get(button.getId()).getString("math_type").toLowerCase().equals("subtraction")){
+                Intent intent = new Intent(this, BalloonPoppingActivity.class);
+                intent.putExtra("questions_data", questions_data.toString());
+                startActivity(intent);
+            }
+            else{
+                Intent intent = new Intent(this, DuckGameActivity.class);
+                intent.putExtra("questions_data", questions_data.toString());
+                startActivity(intent);
+            }
+        } catch (JSONException e) {}
     }
 }
+
