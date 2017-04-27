@@ -156,5 +156,4 @@
     <string name="additionFailure">Question or answer does not fit addition format, check question: </string>
     <string name="subtractionFailure">Question or answer does not fit subtraction format, check question: </string>
     <string name="oddEvenFailure">Question or answer does not fit even/odd format, check question: </string>
->>>>>>> dev
 </resources>
