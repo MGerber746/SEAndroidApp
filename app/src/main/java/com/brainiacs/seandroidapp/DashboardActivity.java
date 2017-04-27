@@ -44,8 +44,11 @@ public class DashboardActivity extends AppCompatActivity {
         usernameTextView.setText(dbTools.getUsername());
 
         logoutButton = (Button) findViewById(R.id.Logout);
+        logoutButton.setBackgroundColor(getResources().getColor(R.color.Gray));
         createActivityButton = (Button) findViewById(R.id.createActivity);
+        createActivityButton.setBackgroundColor(getResources().getColor(R.color.Gray));
         createStudentButton = (Button) findViewById(R.id.CreateStudent);
+        createStudentButton.setBackgroundColor(getResources().getColor(R.color.Gray));
         if (!dbTools.isTeacher()) {
             createStudentButton.setVisibility(View.GONE);
             createActivityButton.setVisibility(View.GONE);
