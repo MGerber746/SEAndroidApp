@@ -58,7 +58,7 @@ public class BalloonPoppingActivity extends AppCompatActivity implements View.On
         // Set up our next equation or go to next activity
         if (!equations.isEmpty()) {
             currentEquation = getRandomEquation();
-            equationTextView.setText(currentEquation.getEquation());
+            equationTextView.setText(currentEquation.getQuestion());
         } else {
             // Create alert with score
             final Intent intent = new Intent(this, StudentHomeActivity.class);
@@ -122,7 +122,7 @@ public class BalloonPoppingActivity extends AppCompatActivity implements View.On
 
         // Set the first equation
         currentEquation = getRandomEquation();
-        equationTextView.setText(currentEquation.getEquation());
+        equationTextView.setText(currentEquation.getQuestion());
     }
 
     private Equation getRandomEquation() {

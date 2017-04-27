@@ -1,7 +1,8 @@
-package utils;
+package utils.handlers;
 
 import android.content.Context;
 import android.content.Intent;
+import android.widget.Toast;
 
 import com.brainiacs.seandroidapp.R;
 
@@ -18,10 +19,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 
+import utils.DBTools;
 
-public class LoginURLConnectionHandler extends HttpURLConnectionHandler {
-    public LoginURLConnectionHandler(String apiEndpoint, String success, String failure, Method method,
-                                     HashMap<String, String> params, Context context, Intent intent) {
+
+public class TeacherLoginHandler extends HttpHandler {
+    public TeacherLoginHandler(String apiEndpoint, String success, String failure, Method method,
+                               HashMap<String, String> params, Context context, Intent intent) {
         super(apiEndpoint, success, failure, method, params, context, intent);
     }
 
@@ -78,9 +81,7 @@ public class LoginURLConnectionHandler extends HttpURLConnectionHandler {
             try {
                 JSONObject json = new JSONObject(sb.toString());
                 String token = json.getString(context.getString(R.string.token));
-                // Store the token in the database
-                DBTools dbTools = new DBTools(context);
-                dbTools.createToken(token);
+                intent.putExtra(context.getString(R.string.token), token);
                 return success;
             } catch (JSONException e) {
                 System.err.print(e.getMessage());
@@ -90,6 +91,20 @@ public class LoginURLConnectionHandler extends HttpURLConnectionHandler {
             return success;
         } else {
             return failure;
+        }
+    }
+
+    @Override
+    protected void onPostExecute(String result) {
+        if (result.equals(failure)) {
+            Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        } else if (!result.equals(failure) && intent != null) {
+            TeacherDataHandler handler = new TeacherDataHandler(
+                    context.getString(R.string.teachers_url) + context.getString(R.string.user_info),
+                    context.getString(R.string.login_successful),
+                    context.getString(R.string.failed_to_login), HttpHandler.Method.GET,
+                    params, context, intent);
+            handler.execute((Void) null);
         }
     }
 }

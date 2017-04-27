@@ -13,10 +13,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import utils.HttpURLConnectionHandler;
-import utils.JSONTool;
-import utils.StudentClassesURLConnectionHandler;
-
 public class StudentAssignmentsActivity extends AppCompatActivity implements View.OnClickListener {
     private ArrayList<JSONObject> assignments_data;
 
@@ -34,7 +30,7 @@ public class StudentAssignmentsActivity extends AppCompatActivity implements Vie
         Button button = (Button) v;
         try {
             JSONArray questions_data = (JSONArray) assignments_data.get(button.getId()).get("questions");
-            Intent intent = new Intent(this, addition.class);
+            Intent intent = new Intent(this, AdditionActivity.class);
             intent.putExtra("questions_data", questions_data.toString());
             startActivity(intent);
         } catch (JSONException e) {}
@@ -58,6 +54,8 @@ public class StudentAssignmentsActivity extends AppCompatActivity implements Vie
             Button classButton = new Button(this);
             try {
                 classButton.setText(assignments_data.get(i).getString("name"));
+                classButton.setTextColor(getResources().getColor(R.color.White));
+                classButton.setBackgroundColor(getResources().getColor(R.color.Gray));
                 classButton.setId(i);
             } catch(JSONException e) {}
             classButton.setOnClickListener(this);

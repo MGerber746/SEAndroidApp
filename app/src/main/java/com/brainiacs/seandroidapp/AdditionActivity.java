@@ -21,7 +21,7 @@ import utils.Equation;
 
 
 
-public class addition extends AppCompatActivity implements View.OnClickListener {
+public class AdditionActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView equationTextView;
     private RelativeLayout relativeLayout;
     private Equation currentEquation;

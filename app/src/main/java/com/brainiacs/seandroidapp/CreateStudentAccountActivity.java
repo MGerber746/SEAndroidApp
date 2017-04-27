@@ -7,19 +7,15 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
-import com.brainiacs.seandroidapp.ClassHomeActivity;
-import com.brainiacs.seandroidapp.R;
-
 import java.util.HashMap;
 
-import utils.HttpURLConnectionHandler;
-import utils.RegisterURLConnectionHandler;
+import utils.handlers.HttpHandler;
 
 public class CreateStudentAccountActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_create_student_account);
     }
 
     /** Called when user clicks submit button **/
@@ -27,14 +23,14 @@ public class CreateStudentAccountActivity extends AppCompatActivity {
         // Get all of the views of our fields
         EditText mFirstNameView = (EditText) findViewById(R.id.first_name);
         EditText mLastNameView = (EditText) findViewById(R.id.last_name);
-        EditText mEmailView = (EditText) findViewById(R.id.email);
+//        EditText mEmailView = (EditText) findViewById(R.id.email);
         EditText mUsernameView = (EditText) findViewById(R.id.username);
         EditText mPasswordView = (EditText) findViewById(R.id.password);
         EditText mReenterPasswordView = (EditText) findViewById(R.id.reenter_password);
         // Get the String values to create the user
         String firstName = mFirstNameView.getText().toString();
         String lastName = mLastNameView.getText().toString();
-        String email = mEmailView.getText().toString();
+//        String email = mEmailView.getText().toString();
         String username = mUsernameView.getText().toString();
         String password = mPasswordView.getText().toString();
         String reenterPassword = mReenterPasswordView.getText().toString();
@@ -72,14 +68,14 @@ public class CreateStudentAccountActivity extends AppCompatActivity {
             HashMap<String, String> params = new HashMap<>();
             params.put(getString(R.string.first_name), firstName);
             params.put(getString(R.string.last_name), lastName);
-            params.put(null, email);
+//            params.put(getString(R.string.email), email);
             params.put(getString(R.string.username), username);
             params.put(getString(R.string.password), password);
             params.put(getString(R.string.confirm_password), reenterPassword);
             Intent intent = new Intent(this, ClassHomeActivity.class);
-            RegisterURLConnectionHandler handler = new RegisterURLConnectionHandler(
-                    getString(R.string.register_url), getString(R.string.registration_successful),
-                    getString(R.string.failed_to_register), HttpURLConnectionHandler.Method.POST,
+            HttpHandler handler = new HttpHandler(
+                    getString(R.string.students_url), getString(R.string.registration_successful),
+                    getString(R.string.failed_to_register), HttpHandler.Method.POST,
                     params, this, intent);
             // Execute the task, and forward to next activity if successful
             handler.execute((Void) null);
