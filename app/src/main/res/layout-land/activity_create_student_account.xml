@@ -24,6 +24,12 @@
 
         </LinearLayout>
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -117,5 +123,6 @@
                 android:onClick="register" />
 
         </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 </RelativeLayout>

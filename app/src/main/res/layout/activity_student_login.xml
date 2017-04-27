@@ -16,13 +16,18 @@
         android:layout_height="786dp">
     </LinearLayout>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:id="@+id/email_login_form"
         android:layout_height="200dp"
         android:weightSum="1">
-
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -60,23 +65,19 @@
                 android:imeOptions="actionUnspecified"
                 android:inputType="textPassword" />
         </android.support.design.widget.TextInputLayout>
-    </LinearLayout>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="179dp">
+            <Button
+                android:text="@string/action_sign_in"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:textStyle="bold"
+                android:layout_marginRight="24dp"
+                android:layout_marginLeft="24dp"
+                android:textSize="25dp"
+                android:textColor="@color/White"
+                android:background="@color/Gray"
+                android:id="@+id/sign_in_button" />
 
-        <Button
-            android:text="@string/action_sign_in"
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:textStyle="bold"
-            android:layout_marginRight="24dp"
-            android:layout_marginLeft="24dp"
-            android:textSize="25dp"
-            android:textColor="@color/White"
-            android:background="@color/Gray"
-            android:id="@+id/sign_in_button" />
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

@@ -9,6 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/Blue"
     tools:context="com.brainiacs.seandroidapp.ClassHomeActivity">
 
     <LinearLayout
@@ -38,6 +39,8 @@
                 android:text="Add Assignments"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@color/Gray"
+                android:textColor="@color/White"
                 android:id="@+id/AssignButton"
                 android:layout_weight="1" />
 
@@ -45,6 +48,9 @@
                 android:text="Add Students "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+               android:layout_marginLeft="10dp"
+                android:background="@color/Gray"
+                android:textColor="@color/White"
                 android:id="@+id/StudentButton"
                 android:layout_weight="1" />
 
