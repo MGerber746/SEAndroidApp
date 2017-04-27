@@ -34,6 +34,7 @@ public class ClassHomeActivity extends AppCompatActivity {
         //Retrieves class names from selection Screen
         Intent oldIntent = getIntent();
         ((TextView)findViewById(R.id.textView)).setText(oldIntent.getStringExtra(ClassButtonAdapter.className));
+        ((TextView)findViewById(R.id.textView)).setTextColor(Color.BLACK);
         try {
             classData = new JSONObject(oldIntent.getStringExtra("classData"));
         } catch (JSONException e) {}
@@ -55,13 +56,26 @@ public class ClassHomeActivity extends AppCompatActivity {
         });
 
         try {
-            LinearLayout studentList = (LinearLayout) findViewById(R.id.Students);
+            LinearLayout studentList;
             JSONArray studentNameList = classData.getJSONArray("students");
             for(int i = 0; i < studentNameList.length(); i++){
                 TextView studentName = new TextView(this);
                 studentName.setTextColor(Color.BLACK);
+                studentName.setGravity(Gravity.CENTER);
                 studentName.setText(studentNameList.getJSONObject(i).getJSONObject("user").getString("first_name") + " " + studentNameList.getJSONObject(i).getJSONObject("user").getString("last_name"));
-                studentList.addView(studentName);
+                studentName.setTextSize(20);
+                if(i % 3 == 0) {
+                    studentList = (LinearLayout) findViewById(R.id.l3);
+                    studentList.addView(studentName);
+                }
+                else if(i % 2 == 0){
+                    studentList = (LinearLayout) findViewById(R.id.l2);
+                    studentList.addView(studentName);
+                }
+                else{
+                    studentList = (LinearLayout) findViewById(R.id.l1);
+                    studentList.addView(studentName);
+                }
             }
         } catch (JSONException e) {}
 
@@ -70,12 +84,18 @@ public class ClassHomeActivity extends AppCompatActivity {
     private void showStudents(){
         Intent intent = new Intent(this, AddToClassActivity.class);
         intent.putExtra("Type", "students");
+        try {
+            intent.putExtra("classData", classData.getJSONArray("students").toString());
+        } catch (JSONException e) {}
         startActivity(intent);
     }
 
     private void showAssignments(){
         Intent intent = new Intent(this, AddToClassActivity.class);
         intent.putExtra("Type", "assignments");
+        try {
+            intent.putExtra("classData", classData.getJSONArray("assignments").toString());
+        } catch (JSONException e) {}
         startActivity(intent);
     }
 

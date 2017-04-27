@@ -23,7 +23,7 @@ import utils.handlers.ClassesHandler;
  * Sets up grid view with our buttons
  */
 public class DashboardActivity extends AppCompatActivity {
-    private static ArrayList<JSONObject> classes_data;
+    private static ArrayList<JSONObject> classesData;
     private TextView usernameTextView;
     private GridView gridView;
     private Button createStudentButton, logoutButton, createActivityButton;
@@ -43,11 +43,8 @@ public class DashboardActivity extends AppCompatActivity {
         usernameTextView = (TextView) findViewById(R.id.username);
         usernameTextView.setText(dbTools.getUsername());
 
-
         gridView = (GridView) findViewById(R.id.gridview);
         gridView.setAdapter(new ClassButtonAdapter(this));
-
-
         logoutButton = (Button) findViewById(R.id.Logout);
         logoutButton.setBackgroundColor(getResources().getColor(R.color.Gray));
         createActivityButton = (Button) findViewById(R.id.createActivity);
@@ -99,19 +96,6 @@ public class DashboardActivity extends AppCompatActivity {
         }
         dbTools.close();
         handler.execute((Void) null);
-        try {
-            // Sleep while we wait for the data
-            while (jsonTool.getJsonArray() == null) {
-                Thread.sleep(1000);
-            }
-        } catch(InterruptedException e) {}
-
-        classes_data = new ArrayList<>();
-        try {
-            for (int i = 0; i < jsonTool.getJsonArray().length(); ++i) {
-                classes_data.add(jsonTool.getJsonArray().getJSONObject(i));
-            }
-        } catch(JSONException e) {}
     }
 
     //Logs out user and deletes the login token.
@@ -126,7 +110,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     //Returns JSONClassData
     public static ArrayList<JSONObject> getClassData(){
-        return classes_data;
+        return classesData;
     }
 
     //Redirects to create student account activity
@@ -139,5 +123,13 @@ public class DashboardActivity extends AppCompatActivity {
     private void createActivity(){
         Intent intent = new Intent(this, AssignmentCreationActivity.class);
         startActivity(intent);
+    }
+
+    public static void setClassesData(ArrayList<JSONObject> classesData1) {
+        classesData = classesData1;
+    }
+
+    public void setGridView(GridView gridView) {
+        this.gridView = gridView;
     }
 }
