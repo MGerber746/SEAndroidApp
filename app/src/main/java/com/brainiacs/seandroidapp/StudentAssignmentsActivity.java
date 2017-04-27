@@ -34,7 +34,7 @@ public class StudentAssignmentsActivity extends AppCompatActivity implements Vie
         Button button = (Button) v;
         try {
             JSONArray questions_data = (JSONArray) assignments_data.get(button.getId()).get("questions");
-            Intent intent = new Intent(this, BalloonPoppingActivity.class);
+            Intent intent = new Intent(this, addition.class);
             intent.putExtra("questions_data", questions_data.toString());
             startActivity(intent);
         } catch (JSONException e) {}

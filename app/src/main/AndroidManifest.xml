@@ -28,7 +28,7 @@
         <activity android:name=".CreateStudentAccountActivity" />
         <activity android:name=".activityOverviewActivity" />
         <activity android:name=".StudentHomeActivity" />
-        <activity android:name=".BalloonPoppingActivity" />
+        <activity android:name=".addition" />
         <activity android:name=".StudentAssignmentsActivity"></activity>
     </application>
 

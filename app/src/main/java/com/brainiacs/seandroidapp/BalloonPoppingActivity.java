@@ -93,7 +93,7 @@ public class BalloonPoppingActivity extends AppCompatActivity implements View.On
                 equations.add(new Equation(
                         equation_data.getString("question"), equation_data.getString("answer")));
             }
-        } catch(JSONException e) {}
+        } catch(JSONException e) { }
 
         // Start correct and incorrect answers at zero
         correctAnswers = 0;
