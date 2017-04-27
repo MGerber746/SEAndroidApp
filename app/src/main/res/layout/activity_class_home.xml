@@ -51,7 +51,7 @@
         </LinearLayout>
 
         <TextView
-            android:text="Students in this class"
+            android:text="Class Assignments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView2"
@@ -62,28 +62,38 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/l1"
-                android:layout_gravity="center_vertical"></LinearLayout>
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="15dp"></LinearLayout>
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/l2"
-                android:layout_gravity="center_vertical"></LinearLayout>
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="15dp"></LinearLayout>
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:id="@+id/l3"
-                android:layout_gravity="center_vertical"></LinearLayout>
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="15dp"></LinearLayout>
 
         </LinearLayout>
 

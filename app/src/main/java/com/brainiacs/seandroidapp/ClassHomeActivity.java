@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * Created by Matthew on 2/21/17.
  * Overview for a class
  */
-public class ClassHomeActivity extends AppCompatActivity {
+public class ClassHomeActivity extends AppCompatActivity implements View.OnClickListener{
     private JSONObject classData;
 
 
@@ -39,42 +39,47 @@ public class ClassHomeActivity extends AppCompatActivity {
             classData = new JSONObject(oldIntent.getStringExtra("classData"));
         } catch (JSONException e) {}
 
-        Button showStudentButton = (Button) findViewById(R.id.StudentButton);
-        showStudentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showStudents();
-            }
-        });
+        //if(oldIntent.getStringArrayExtra("userType").equals("teacher")) {
+            Button showStudentButton = (Button) findViewById(R.id.StudentButton);
+            showStudentButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showStudents();
+                }
+            });
 
-        Button showAssignmentButton = (Button) findViewById(R.id.AssignButton);
-        showAssignmentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showAssignments();
-            }
-        });
+            Button showAssignmentButton = (Button) findViewById(R.id.AssignButton);
+            showAssignmentButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showAssignments();
+                }
+            });
 
+        //}
+        //else{
+            LinearLayout showLayout = (LinearLayout) findViewById(R.id.showLayout);
+            showLayout.setVisibility(View.GONE);
+        //}
         try {
             LinearLayout studentList;
-            JSONArray studentNameList = classData.getJSONArray("students");
-            for(int i = 0; i < studentNameList.length(); i++){
-                TextView studentName = new TextView(this);
-                studentName.setTextColor(Color.BLACK);
-                studentName.setGravity(Gravity.CENTER);
-                studentName.setText(studentNameList.getJSONObject(i).getJSONObject("user").getString("first_name") + " " + studentNameList.getJSONObject(i).getJSONObject("user").getString("last_name"));
-                studentName.setTextSize(20);
+            JSONArray assignmentList = classData.getJSONArray("assignments");
+            for(int i = 0; i < assignmentList.length(); i++){
+                Button assignment = new Button(this);
+                assignment.setTextColor(Color.BLACK);
+                assignment.setGravity(Gravity.CENTER);
+                assignment.setText(assignmentList.getJSONObject(i).getString("name"));
                 if(i % 3 == 0) {
                     studentList = (LinearLayout) findViewById(R.id.l3);
-                    studentList.addView(studentName);
+                    studentList.addView(assignment);
                 }
                 else if(i % 2 == 0){
                     studentList = (LinearLayout) findViewById(R.id.l2);
-                    studentList.addView(studentName);
+                    studentList.addView(assignment);
                 }
                 else{
                     studentList = (LinearLayout) findViewById(R.id.l1);
-                    studentList.addView(studentName);
+                    studentList.addView(assignment);
                 }
             }
         } catch (JSONException e) {}
@@ -100,4 +105,8 @@ public class ClassHomeActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        //TODO onClick show grades on activity and questions?
+    }
 }
