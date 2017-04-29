@@ -129,19 +129,22 @@ public class ClassHomeActivity extends AppCompatActivity implements View.OnClick
         try {
             JSONArray questions_data = (JSONArray) assignments_data.get(button.getId()).get("questions");
             if(assignments_data.get(button.getId()).getString("math_type").toLowerCase().equals("addition")){
-                //Intent intent = new Intent(this, );
-                //intent.putExtra("questions_data", questions_data.toString());
-                //startActivity(intent);
+                Intent intent = new Intent(this, AdditionActivity.class);
+                intent.putExtra("questions_data", questions_data.toString());
+                startActivity(intent);
+                finish();
             }
             else if(assignments_data.get(button.getId()).getString("math_type").toLowerCase().equals("subtraction")){
                 Intent intent = new Intent(this, BalloonPoppingActivity.class);
                 intent.putExtra("questions_data", questions_data.toString());
                 startActivity(intent);
+                finish();
             }
             else{
                 Intent intent = new Intent(this, DuckGameActivity.class);
                 intent.putExtra("questions_data", questions_data.toString());
                 startActivity(intent);
+                finish();
             }
         } catch (JSONException e) {}
     }

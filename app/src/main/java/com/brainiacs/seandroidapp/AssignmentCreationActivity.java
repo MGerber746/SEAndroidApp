@@ -95,7 +95,7 @@ public class AssignmentCreationActivity extends AppCompatActivity {
             questions.add(qEntry.getText().toString());
             answers.add(aEntry.getText().toString());
         }
-        if(checkQuestionType(selection)) {
+        if(checkQuestionType(selection) && !mAssignmentNameEditText.getText().toString().equals("")) {
             for (int i = 0; i < questions.size(); ++i) {
                 // Post each question to the db
                 HashMap<String, String> params = new HashMap<>();

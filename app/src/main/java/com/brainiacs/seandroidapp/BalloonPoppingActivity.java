@@ -61,7 +61,7 @@ public class BalloonPoppingActivity extends AppCompatActivity implements View.On
             equationTextView.setText(currentEquation.getEquation());
         } else {
             // Create alert with score
-            final Intent intent = new Intent(this, StudentHomeActivity.class);
+            final Intent intent = new Intent(this, DashboardActivity.class);
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle("Score");
             alertDialogBuilder.setMessage("Answers Correct: " + correctAnswers + "\nAnswers Incorrect: " + incorrectAnswers);
@@ -70,6 +70,7 @@ public class BalloonPoppingActivity extends AppCompatActivity implements View.On
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     startActivity(intent);
+                    finish();
                 }
             });
 
