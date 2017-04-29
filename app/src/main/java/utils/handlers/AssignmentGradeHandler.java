@@ -48,8 +48,20 @@ public class AssignmentGradeHandler extends HttpHandler{
                         @Override
                         public void run() {
                             LinearLayout nameLayout = AssignmentGradesActivity.studentName;
-                            LinearLayout GradeLayout = AssignmentGradesActivity.grade;
-                            
+                            LinearLayout gradeLayout = AssignmentGradesActivity.grade;
+                            for(int i = 0; i < json.length(); i++){
+                                TextView name = new TextView(context);
+                                TextView grade = new TextView(context);
+                                try {
+                                    name.setText(json.getJSONObject(i).getJSONObject("student").getJSONObject("user").getString("first_name") + " " + json.getJSONObject(i).getJSONObject("student").getJSONObject("user").getString("last_name"));
+                                    double gradePercent = (json.getJSONObject(i).getInt("correct_answers") / (double) json.getJSONObject(i).getInt("total_questions")) * 100.0;
+                                    grade.setText(Double.toString(gradePercent) + "%");
+                                } catch (JSONException e) {}
+                                name.setPadding(25, 5, 0, 25);
+                                grade.setPadding(25, 5, 0, 25);
+                                nameLayout.addView(name);
+                                gradeLayout.addView(grade);
+                            }
                         }
                     });
                     return success;

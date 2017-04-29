@@ -20,7 +20,7 @@ public class AssignmentGradesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_assignment_grades);
 
         Intent oldIntent = getIntent();
-        ((TextView)findViewById(R.id.assignmentName)).setText(oldIntent.getStringExtra("names"));
+        ((TextView)findViewById(R.id.assignmentName)).setText(oldIntent.getStringExtra("name"));
         String assignId = Integer.toString(getIntent().getExtras().getInt("id"));
         studentName = (LinearLayout) findViewById(R.id.studentName);
         grade = (LinearLayout) findViewById(R.id.grade);
