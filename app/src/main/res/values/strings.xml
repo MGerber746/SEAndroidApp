@@ -39,6 +39,7 @@
     <string name="user_info">user-info/</string>
     <string name="questions_url">questions/</string>
     <string name="assignments_url">assignments/</string>
+    <string name="grades_url">grades/</string>
     <string name="failed_to_register">Registration failed.</string>
     <string name="registration_successful">Registration successful.</string>
     <string name="first_name">first_name</string>
@@ -79,6 +80,13 @@
     <string name="New_class_name">New Class Name</string>
     <string name="Create">Create</string>
     <string name="cancel">Cancel</string>
+
+    <!-- String related to grades -->
+    <string name="failed_to_post_grade">Failed to post grade</string>
+    <string name="total_questions">total_questions</string>
+    <string name="correct_answers">correct_answers</string>
+    <string name="student">student</string>
+    <string name="assignment">assignment</string>
 
     <string name="Create_Activity">Create Assignment</string>
 
