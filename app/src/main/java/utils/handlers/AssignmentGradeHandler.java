@@ -2,6 +2,7 @@ package utils.handlers;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -58,6 +59,8 @@ public class AssignmentGradeHandler extends HttpHandler{
                                     grade.setText(Double.toString(gradePercent) + "%");
                                 } catch (JSONException e) {}
                                 name.setPadding(25, 5, 0, 25);
+                                name.setTextColor(Color.BLACK);
+                                grade.setTextColor(Color.BLACK);
                                 grade.setPadding(25, 5, 0, 25);
                                 nameLayout.addView(name);
                                 gradeLayout.addView(grade);
