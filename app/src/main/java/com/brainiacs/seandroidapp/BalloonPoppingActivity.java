@@ -15,10 +15,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 import utils.Equation;
 import utils.Point;
+import utils.handlers.HttpHandler;
 
 
 public class BalloonPoppingActivity extends AppCompatActivity implements View.OnClickListener {
@@ -60,6 +62,7 @@ public class BalloonPoppingActivity extends AppCompatActivity implements View.On
             currentEquation = getRandomEquation();
             equationTextView.setText(currentEquation.getEquation());
         } else {
+            postGrade(incorrectAnswers, correctAnswers);
             // Create alert with score
             final Intent intent = new Intent(this, DashboardActivity.class);
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -153,5 +156,17 @@ public class BalloonPoppingActivity extends AppCompatActivity implements View.On
             }
         }
         return false;
+    }
+
+    private void postGrade(int incorrectAnswers, int correctAnswers) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put(getString(R.string.total_questions), Integer.toString(incorrectAnswers + correctAnswers));
+        params.put(getString(R.string.correct_answers), Integer.toString(correctAnswers));
+        params.put(getString(R.string.assignment), Integer.toString(getIntent().getExtras().getInt("id")));
+        HttpHandler handler = new HttpHandler(
+                getString(R.string.grades_url), "",
+                getString(R.string.failed_to_post_grade), HttpHandler.Method.POST,
+                params, this, null);
+        handler.execute((Void) null);
     }
 }

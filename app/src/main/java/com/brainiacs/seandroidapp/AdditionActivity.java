@@ -56,7 +56,7 @@ public class AdditionActivity extends AppCompatActivity implements View.OnClickL
         }
         else {
             // Post grade
-            postGrade(correctAnswers, incorrectAnswers);
+            postGrade(incorrectAnswers, correctAnswers);
             // Create alert with score
             relativeLayout.removeAllViewsInLayout();
             final Intent intent = new Intent(this, DashboardActivity.class);
@@ -206,7 +206,7 @@ public class AdditionActivity extends AppCompatActivity implements View.OnClickL
         HashMap<String, String> params = new HashMap<>();
         params.put(getString(R.string.total_questions), Integer.toString(incorrectAnswers + correctAnswers));
         params.put(getString(R.string.correct_answers), Integer.toString(correctAnswers));
-        params.put(getString(R.string.assignment), Integer.toString(0));
+        params.put(getString(R.string.assignment), Integer.toString(getIntent().getExtras().getInt("id")));
         HttpHandler handler = new HttpHandler(
                 getString(R.string.grades_url), "",
                 getString(R.string.failed_to_post_grade), HttpHandler.Method.POST,
