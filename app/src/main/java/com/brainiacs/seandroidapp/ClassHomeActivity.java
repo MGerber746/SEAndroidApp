@@ -73,25 +73,19 @@ public class ClassHomeActivity extends AppCompatActivity implements View.OnClick
         }
         try {
             LinearLayout studentList;
-<<<<<<< HEAD
-            JSONArray studentNameList = classData.getJSONArray("students");
-            for(int i = 0; i < studentNameList.length(); i++){
-                TextView studentName = new TextView(this);
-                studentName.setPadding(0,20,0,20);
-                studentName.setTextColor(Color.BLACK);
-                studentName.setGravity(Gravity.CENTER);
-                studentName.setText(studentNameList.getJSONObject(i).getJSONObject("user").getString("first_name") + " " + studentNameList.getJSONObject(i).getJSONObject("user").getString("last_name"));
-                studentName.setTextSize(20);
-=======
+
             JSONArray assignmentList = classData.getJSONArray("assignments");
             for(int i = 0; i < assignmentList.length(); i++){
                 Button assignment = new Button(this);
-                assignment.setTextColor(Color.BLACK);
+                assignment.setTextColor(Color.WHITE);
+                assignment.setBackgroundColor(Color.BLACK);
                 assignment.setGravity(Gravity.CENTER);
                 assignment.setText(assignmentList.getJSONObject(i).getString("name"));
+                assignment.setPadding(20,20,20,20);
+                assignment.setTextSize(20);
                 assignment.setId(i);
                 assignment.setOnClickListener(this);
->>>>>>> dev
+
                 if(i % 3 == 0) {
                     studentList = (LinearLayout) findViewById(R.id.l1);
                     studentList.addView(assignment);

@@ -118,6 +118,7 @@ public class AdditionActivity extends AppCompatActivity implements View.OnClickL
         equationTextView = (TextView) findViewById(R.id.equation);
         equationTextView.setTextSize(getResources().getDimension(R.dimen.textsize));
 
+
         animalHeads.add(R.drawable.elephant_head);
         animalHeads.add(R.drawable.frog_head);
         animalHeads.add(R.drawable.owl_head);
