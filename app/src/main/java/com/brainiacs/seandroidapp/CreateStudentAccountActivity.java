@@ -72,7 +72,7 @@ public class CreateStudentAccountActivity extends AppCompatActivity {
             params.put(getString(R.string.username), username);
             params.put(getString(R.string.password), password);
             params.put(getString(R.string.confirm_password), reenterPassword);
-            Intent intent = new Intent(this, ClassHomeActivity.class);
+            Intent intent = new Intent(this, DashboardActivity.class);
             HttpHandler handler = new HttpHandler(
                     getString(R.string.students_url), getString(R.string.registration_successful),
                     getString(R.string.failed_to_register), HttpHandler.Method.POST,

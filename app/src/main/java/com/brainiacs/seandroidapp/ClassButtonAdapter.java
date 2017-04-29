@@ -26,9 +26,9 @@ import utils.handlers.HttpHandler;
 
 /**
  * Created by Matthew on 2/21/17.
- * This class sets up a grid view of buttons
+ * This class sets up a grid view of buttonNames
  * on the teacher dashboard.
- * Its necessary for the class buttons
+ * Its necessary for the class buttonNames
  */
 
 public class ClassButtonAdapter extends BaseAdapter {
@@ -38,7 +38,8 @@ public class ClassButtonAdapter extends BaseAdapter {
     //RGB Values need to be individual ints
     private int[] colorArray = {66,149,244,244,66,191,13,219,61,237,22,7,214,7,237};
     private Context mContext;
-    private ArrayList<String> buttons = new ArrayList<>();
+    private ArrayList<String> buttonNames = new ArrayList<>();
+    private ArrayList<Integer> buttonIDs = new ArrayList<>();
     private int i = 0;
 
     public ClassButtonAdapter(Context c){
@@ -49,7 +50,7 @@ public class ClassButtonAdapter extends BaseAdapter {
     //Returns length of the adapter
     @Override
     public int getCount() {
-        return buttons.size();
+        return buttonNames.size();
     }
 
     //Returns null, is not needed for this class
@@ -64,7 +65,7 @@ public class ClassButtonAdapter extends BaseAdapter {
         return position;
     }
 
-    //Sets up buttons on grid.
+    //Sets up buttonNames on grid.
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final int pos = position;
@@ -72,13 +73,15 @@ public class ClassButtonAdapter extends BaseAdapter {
         if (convertView == null) {
             btn = new Button(mContext);
             btn.setLayoutParams(new GridView.LayoutParams(650, 250));
-            //btn.setPadding(10, 20, 10, 10);
         }
         else{
             btn = (Button) convertView;
         }
 
-        btn.setText(buttons.get(position));
+        btn.setText(buttonNames.get(position));
+        try {
+            btn.setId(buttonIDs.get(position));
+        } catch (IndexOutOfBoundsException e) {}
 
         //---------------- Apply RGB Values here -------------------
         btn.setBackgroundColor(Color.rgb(colorArray[i], colorArray[i+1], colorArray[i+2]));
@@ -99,15 +102,15 @@ public class ClassButtonAdapter extends BaseAdapter {
                     builder.setView(input);
 
                     final Activity activity = (Activity) v.getContext();
-                    // Set up the buttons
+                    // Set up the buttonNames
                     builder.setPositiveButton(R.string.Create, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             String name = input.getText().toString();
                             if (!name.isEmpty()) {
-                                buttons.remove(activity.getString(R.string.Create_New_Class));
-                                buttons.add(input.getText().toString());
-                                buttons.add(mContext.getString(R.string.Create_New_Class));
+                                buttonNames.remove(activity.getString(R.string.Create_New_Class));
+                                buttonNames.add(input.getText().toString());
+                                buttonNames.add(mContext.getString(R.string.Create_New_Class));
                                 HashMap<String, String> params = new HashMap<>();
                                 params.put(activity.getString(R.string.class_name), name);
                                 Intent intent = new Intent(mContext, DashboardActivity.class);
@@ -142,6 +145,7 @@ public class ClassButtonAdapter extends BaseAdapter {
                         intent.putExtra("userType", "student");
                     }
                     dbTools.close();
+                    intent.putExtra("id", v.getId());
                     mContext.startActivity(intent);
                 }
             }
@@ -150,16 +154,18 @@ public class ClassButtonAdapter extends BaseAdapter {
         }
 
     private void initializeClasses(Context c){
-        for (int i = 0; i < DashboardActivity.getClassData().size(); ++i) {
+        classes_data = DashboardActivity.getClassData();
+
+        for (int i = 0; i < classes_data.size(); ++i) {
             try {
-                buttons.add(DashboardActivity.getClassData().get(i).getString("name"));
+                buttonNames.add(classes_data.get(i).getString("name"));
+                buttonIDs.add(classes_data.get(i).getInt("id"));
             } catch(JSONException e) {}
         }
-        classes_data = DashboardActivity.getClassData();
 
         DBTools dbTools = new DBTools(c);
         if (dbTools.isTeacher()) {
-            buttons.add(c.getString(R.string.Create_New_Class));
+            buttonNames.add(c.getString(R.string.Create_New_Class));
         }
         dbTools.close();
     }
