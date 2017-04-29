@@ -19,6 +19,7 @@ import utils.handlers.TeacherStudentListHandler;
 public class AddToClassActivity extends AppCompatActivity {
     public static JSONArray classData;
     public static LinearLayout nameContainer, checkboxContainer;
+    private String addType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,7 @@ public class AddToClassActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_to_class);
 
         Intent oldIntent = getIntent();
-        String addType = oldIntent.getStringExtra("Type");
+        addType = oldIntent.getStringExtra("Type");
         try {
             classData = new JSONArray(oldIntent.getStringExtra("classData"));
         } catch (JSONException e) {}
@@ -44,30 +45,53 @@ public class AddToClassActivity extends AppCompatActivity {
         });
 
         if(addType.equals("students")){
-            studentAddToClass();
+            getStudentInfo();
         }
         if(addType.equals("assignments")){
-            assignmentAddToClass();
+            getAssignmentInfo();
         }
     }
 
     //pulls data from teacher and checks any students that are already in the class
-    private void studentAddToClass(){
+    private void getStudentInfo(){
         TeacherStudentListHandler handler = new TeacherStudentListHandler(
-                "teachers/", "Fetched classes", "Failed to fetch classes",
-                HttpHandler.Method.GET, null, this, null);
+                getString(R.string.teachers_url), "", "Failed to fetch students",
+                HttpHandler.Method.GET, null, this, null, null);
         handler.execute((Void) null);
     }
 
     //Pulls data from teacher assignments and checks any assignments already in the class
-    private void assignmentAddToClass(){
+    private void getAssignmentInfo(){
         ClassAssignmentListHandler handler = new ClassAssignmentListHandler(
-                "teachers/assignments/", "Fetched classes", "Failed to fetch classes",
-                HttpHandler.Method.GET, null, this, null);
+                getString(R.string.teachers_url) + getString(R.string.assignments_url), "", "Failed to fetch assignments",
+                HttpHandler.Method.GET, null, this, null, null);
         handler.execute((Void) null);
     }
 
     private void submitChanges(){
-        //TODO put changes in class students or class assignments
+        if(addType.equals("students")){
+            postStudentInfo();
+        }
+        if(addType.equals("assignments")){
+            postAssignmentInfo();
+        }
+    }
+
+    private void postStudentInfo(){
+        int id = getIntent().getExtras().getInt("id");
+        Intent intent = new Intent(this, DashboardActivity.class);
+        TeacherStudentListHandler handler = new TeacherStudentListHandler(
+                getString(R.string.classes_url) + id + "/", "", "Failed to post students",
+                HttpHandler.Method.PUT, null, this, intent, getIntent().getStringExtra(ClassButtonAdapter.className));
+        handler.execute((Void) null);
+    }
+
+    private void postAssignmentInfo(){
+        int id = getIntent().getExtras().getInt("id");
+        Intent intent = new Intent(this, DashboardActivity.class);
+        ClassAssignmentListHandler handler = new ClassAssignmentListHandler(
+                getString(R.string.classes_url) + id + "/", "", "Failed to post assignments",
+                HttpHandler.Method.PUT, null, this, intent, getIntent().getStringExtra(ClassButtonAdapter.className));
+        handler.execute((Void) null);
     }
 }

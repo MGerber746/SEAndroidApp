@@ -84,6 +84,8 @@ public class ClassHomeActivity extends AppCompatActivity {
     private void showStudents(){
         Intent intent = new Intent(this, AddToClassActivity.class);
         intent.putExtra("Type", "students");
+        intent.putExtra("id", getIntent().getExtras().getInt("id"));
+        intent.putExtra(ClassButtonAdapter.className, getIntent().getStringExtra(ClassButtonAdapter.className));
         try {
             intent.putExtra("classData", classData.getJSONArray("students").toString());
         } catch (JSONException e) {}
@@ -93,6 +95,8 @@ public class ClassHomeActivity extends AppCompatActivity {
     private void showAssignments(){
         Intent intent = new Intent(this, AddToClassActivity.class);
         intent.putExtra("Type", "assignments");
+        intent.putExtra("id", getIntent().getExtras().getInt("id"));
+        intent.putExtra(ClassButtonAdapter.className, getIntent().getStringExtra(ClassButtonAdapter.className));
         try {
             intent.putExtra("classData", classData.getJSONArray("assignments").toString());
         } catch (JSONException e) {}
