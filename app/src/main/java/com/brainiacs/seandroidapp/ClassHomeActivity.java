@@ -60,6 +60,7 @@ public class ClassHomeActivity extends AppCompatActivity {
             JSONArray studentNameList = classData.getJSONArray("students");
             for(int i = 0; i < studentNameList.length(); i++){
                 TextView studentName = new TextView(this);
+                studentName.setPadding(0,20,0,20);
                 studentName.setTextColor(Color.BLACK);
                 studentName.setGravity(Gravity.CENTER);
                 studentName.setText(studentNameList.getJSONObject(i).getJSONObject("user").getString("first_name") + " " + studentNameList.getJSONObject(i).getJSONObject("user").getString("last_name"));

@@ -25,8 +25,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView"
             android:textAlignment="center"
-            android:textSize="18sp"
-            android:textStyle="normal|bold"
+            android:textSize="38sp"
+            android:textStyle="bold"
             android:textAllCaps="false" />
 
         <LinearLayout
@@ -39,8 +39,11 @@
                 android:text="Add Assignments"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/activity_vertical_margin"
                 android:background="@color/Gray"
                 android:textColor="@color/White"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 android:id="@+id/AssignButton"
                 android:layout_weight="1" />
 
@@ -48,7 +51,10 @@
                 android:text="Add Students "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-               android:layout_marginLeft="10dp"
+                android:padding="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:textSize="20sp"
                 android:background="@color/Gray"
                 android:textColor="@color/White"
                 android:id="@+id/StudentButton"
@@ -56,40 +62,55 @@
 
         </LinearLayout>
 
-        <TextView
-            android:text="Students in this class"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView2"
-            android:gravity="center_horizontal"
-            android:textColor="#000000"
-            android:paddingTop="5dp" />
+            <TextView
+                android:text="Students in this class"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2"
+                android:padding="@dimen/activity_vertical_margin"
+                android:layout_marginTop="10dp"
+                android:background="@color/Gray"
+                android:textColor="@color/White"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:gravity="center_horizontal" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="@color/White"
             android:layout_height="match_parent">
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_margin="@dimen/activity_vertical_margin"
                 android:id="@+id/l1"
-                android:layout_gravity="center_vertical"></LinearLayout>
+                android:layout_gravity="center_vertical">
+
+            </LinearLayout>
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_margin="@dimen/activity_vertical_margin"
                 android:id="@+id/l2"
-                android:layout_gravity="center_vertical"></LinearLayout>
+                android:layout_gravity="center_vertical">
+
+            </LinearLayout>
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_margin="@dimen/activity_vertical_margin"
                 android:id="@+id/l3"
-                android:layout_gravity="center_vertical"></LinearLayout>
+                android:layout_gravity="center_vertical">
+
+            </LinearLayout>
 
         </LinearLayout>
 
