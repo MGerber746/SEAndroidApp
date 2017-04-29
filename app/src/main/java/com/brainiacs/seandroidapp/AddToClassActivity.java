@@ -26,6 +26,7 @@ public class AddToClassActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_to_class);
 
+
         Intent oldIntent = getIntent();
         addType = oldIntent.getStringExtra("Type");
         try {

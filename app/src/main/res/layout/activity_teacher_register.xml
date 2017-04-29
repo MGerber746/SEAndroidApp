@@ -21,8 +21,7 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="501dp"
-                >
+                android:layout_height="501dp">
 
             </LinearLayout>
 
@@ -149,6 +148,7 @@
                     android:background="@color/Gray"
                     android:text="@string/submit_registraion_button"
                     android:onClick="register"/>
+
             </LinearLayout>
             </ScrollView>
         </LinearLayout>

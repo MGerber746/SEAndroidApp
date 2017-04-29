@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/Blue"
     tools:context="com.brainiacs.seandroidapp.AddToClassActivity">
 
     <TextView
@@ -15,7 +16,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/typeOfAddButton"
         android:gravity="center_horizontal"
-        android:textColor="#000000" />
+        android:textColor="@color/Gray" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -26,13 +27,15 @@
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/layout1"></LinearLayout>
+            android:id="@+id/layout1">
+        </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/layout2"></LinearLayout>
+            android:id="@+id/layout2">
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -40,6 +43,11 @@
         android:text="Submit Changes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/Gray"
+        android:textColor="@color/White"
+        android:padding="@dimen/activity_vertical_margin"
+        android:layout_margin="30dp"
+        android:textStyle="bold"
         android:id="@+id/SubmitButton"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
