@@ -100,7 +100,7 @@ public class AssignmentCreationActivity extends AppCompatActivity {
                 // Post each question to the db
                 HashMap<String, String> params = new HashMap<>();
                 params.put("question", questions.get(i));
-                params.put("answer", answers.get(i));
+                params.put("answer", answers.get(i).toLowerCase());
                 QuestionHandler handler = new QuestionHandler(
                         getString(R.string.questions_url), "", "Failed to create question",
                         HttpHandler.Method.POST, params, this, null);
