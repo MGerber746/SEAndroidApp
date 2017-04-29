@@ -82,7 +82,7 @@ public class ClassHomeActivity extends AppCompatActivity implements View.OnClick
                 assignment.setId(i);
                 assignment.setOnClickListener(this);
                 if(i % 3 == 0) {
-                    studentList = (LinearLayout) findViewById(R.id.l3);
+                    studentList = (LinearLayout) findViewById(R.id.l1);
                     studentList.addView(assignment);
                 }
                 else if(i % 2 == 0){
@@ -90,7 +90,7 @@ public class ClassHomeActivity extends AppCompatActivity implements View.OnClick
                     studentList.addView(assignment);
                 }
                 else{
-                    studentList = (LinearLayout) findViewById(R.id.l1);
+                    studentList = (LinearLayout) findViewById(R.id.l3);
                     studentList.addView(assignment);
                 }
             }
