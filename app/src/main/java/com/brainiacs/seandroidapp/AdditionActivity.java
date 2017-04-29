@@ -14,11 +14,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import utils.Point;
 import utils.Equation;
-
+import utils.handlers.HttpHandler;
 
 
 public class AdditionActivity extends AppCompatActivity implements View.OnClickListener {
@@ -42,7 +43,7 @@ public class AdditionActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         Button button = (Button) v;
         // Check our current equation compared to the answer
-        if (button.getTag().toString() == currentEquation.getAnswer()) {
+        if (button.getTag().toString().equals(currentEquation.getAnswer())) {
             ++correctAnswers;
         }
         else {
@@ -54,6 +55,8 @@ public class AdditionActivity extends AppCompatActivity implements View.OnClickL
             arrangeAnimalHeads();
         }
         else {
+            // Post grade
+            postGrade(incorrectAnswers, correctAnswers);
             // Create alert with score
             relativeLayout.removeAllViewsInLayout();
             final Intent intent = new Intent(this, DashboardActivity.class);
@@ -64,8 +67,8 @@ public class AdditionActivity extends AppCompatActivity implements View.OnClickL
             alertDialogBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    startActivity(intent);
-                    finish();
+                startActivity(intent);
+                finish();
                 }
             });
 
@@ -76,7 +79,7 @@ public class AdditionActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void arrangeAnimalHeads() {
-        List used = new ArrayList();
+        ArrayList<String> used = new ArrayList<>();
         // Makes it so the same animal isn't always the correct answer
         int correctHead = new Random().nextInt(animalHeads.size());
         currentEquation = getRandomEquation();
@@ -129,8 +132,7 @@ public class AdditionActivity extends AppCompatActivity implements View.OnClickL
 
     private int randInt(int min, int max) {
         Random rand = new Random();
-        int randomNum = rand.nextInt((max - min) + 1) + min;
-        return randomNum;
+        return rand.nextInt((max - min) + 1) + min;
     }
 
     private Equation getRandomEquation() {
@@ -198,5 +200,17 @@ public class AdditionActivity extends AppCompatActivity implements View.OnClickL
         layoutParams.leftMargin = point.getX();
         layoutParams.topMargin = point.getY();
         relativeLayout.addView(TV);
+    }
+
+    private void postGrade(int incorrectAnswers, int correctAnswers) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put(getString(R.string.total_questions), Integer.toString(incorrectAnswers + correctAnswers));
+        params.put(getString(R.string.correct_answers), Integer.toString(correctAnswers));
+        params.put(getString(R.string.assignment), Integer.toString(getIntent().getExtras().getInt("id")));
+        HttpHandler handler = new HttpHandler(
+                getString(R.string.grades_url), "",
+                getString(R.string.failed_to_post_grade), HttpHandler.Method.POST,
+                params, this, null);
+        handler.execute((Void) null);
     }
 }
