@@ -84,6 +84,7 @@ public class ClassHomeActivity extends AppCompatActivity implements View.OnClick
                 assignment.setPadding(20,20,20,20);
                 assignment.setTextSize(20);
                 assignment.setId(i);
+                assignment.setId(assignmentList.getJSONObject(i).getInt("id"));
                 assignment.setOnClickListener(this);
 
                 if(i % 3 == 0) {
@@ -131,6 +132,19 @@ public class ClassHomeActivity extends AppCompatActivity implements View.OnClick
         if(userType.equals("student")){
             studentOnClick(v);
         }
+        else{
+            teacherOnClick(v);
+        }
+    }
+
+    private void teacherOnClick(View v) {
+        Intent intent = new Intent(this, AssignmentGradesActivity.class);
+            intent.putExtra("id", v.getId());
+        try {
+            intent.putExtra("name", assignments_data.get(v.getId()).getString("name"));
+        } catch (JSONException e) { }
+        startActivity(intent);
+        finish();
     }
 
     private void studentOnClick(View v){
@@ -139,18 +153,21 @@ public class ClassHomeActivity extends AppCompatActivity implements View.OnClick
             JSONArray questions_data = (JSONArray) assignments_data.get(button.getId()).get("questions");
             if(assignments_data.get(button.getId()).getString("math_type").toLowerCase().equals("addition")){
                 Intent intent = new Intent(this, AdditionActivity.class);
+                intent.putExtra("id", v.getId());
                 intent.putExtra("questions_data", questions_data.toString());
                 startActivity(intent);
                 finish();
             }
             else if(assignments_data.get(button.getId()).getString("math_type").toLowerCase().equals("subtraction")){
                 Intent intent = new Intent(this, BalloonPoppingActivity.class);
+                intent.putExtra("id", v.getId());
                 intent.putExtra("questions_data", questions_data.toString());
                 startActivity(intent);
                 finish();
             }
             else{
                 Intent intent = new Intent(this, DuckGameActivity.class);
+                intent.putExtra("id", v.getId());
                 intent.putExtra("questions_data", questions_data.toString());
                 startActivity(intent);
                 finish();
