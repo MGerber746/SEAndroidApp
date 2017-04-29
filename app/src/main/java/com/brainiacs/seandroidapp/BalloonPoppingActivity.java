@@ -58,10 +58,10 @@ public class BalloonPoppingActivity extends AppCompatActivity implements View.On
         // Set up our next equation or go to next activity
         if (!equations.isEmpty()) {
             currentEquation = getRandomEquation();
-            equationTextView.setText(currentEquation.getQuestion());
+            equationTextView.setText(currentEquation.getEquation());
         } else {
             // Create alert with score
-            final Intent intent = new Intent(this, StudentHomeActivity.class);
+            final Intent intent = new Intent(this, DashboardActivity.class);
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle("Score");
             alertDialogBuilder.setMessage("Answers Correct: " + correctAnswers + "\nAnswers Incorrect: " + incorrectAnswers);
@@ -70,6 +70,7 @@ public class BalloonPoppingActivity extends AppCompatActivity implements View.On
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     startActivity(intent);
+                    finish();
                 }
             });
 
@@ -93,7 +94,7 @@ public class BalloonPoppingActivity extends AppCompatActivity implements View.On
                 equations.add(new Equation(
                         equation_data.getString("question"), equation_data.getString("answer")));
             }
-        } catch(JSONException e) {}
+        } catch(JSONException e) { }
 
         // Start correct and incorrect answers at zero
         correctAnswers = 0;
@@ -122,7 +123,7 @@ public class BalloonPoppingActivity extends AppCompatActivity implements View.On
 
         // Set the first equation
         currentEquation = getRandomEquation();
-        equationTextView.setText(currentEquation.getQuestion());
+        equationTextView.setText(currentEquation.getEquation());
     }
 
     private Equation getRandomEquation() {

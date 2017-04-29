@@ -55,6 +55,7 @@ public class HttpHandler extends AsyncTask<Void, Void, String> {
         this.intent = intent;
         this.success = success;
         this.failure = failure;
+        this.rootUrl = "https://vast-hollows-88441.herokuapp.com/";
         try {
             // Get local url when developing
             BufferedReader br = new BufferedReader(
@@ -86,7 +87,7 @@ public class HttpHandler extends AsyncTask<Void, Void, String> {
             }
 
             // If we have params send them to the server
-            if(this.method == Method.POST) {
+            if(this.method == Method.POST || this.method == Method.PUT) {
                 conn.setDoOutput(true);
                 OutputStream os = conn.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));

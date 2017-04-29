@@ -22,9 +22,10 @@ import java.util.ArrayList;
  * Created by Matthew on 2/21/17.
  * Overview for a class
  */
-public class ClassHomeActivity extends AppCompatActivity {
+public class ClassHomeActivity extends AppCompatActivity implements View.OnClickListener{
     private JSONObject classData;
-
+    private ArrayList<JSONObject> assignments_data;
+    private String userType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,24 +40,40 @@ public class ClassHomeActivity extends AppCompatActivity {
             classData = new JSONObject(oldIntent.getStringExtra("classData"));
         } catch (JSONException e) {}
 
-        Button showStudentButton = (Button) findViewById(R.id.StudentButton);
-        showStudentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showStudents();
+        assignments_data = new ArrayList<>();
+        try {
+            JSONArray temp_data = classData.getJSONArray("assignments");
+            for (int i = 0; i < temp_data.length(); ++i) {
+                assignments_data.add(temp_data.getJSONObject(i));
             }
-        });
+        } catch(JSONException e) {}
 
-        Button showAssignmentButton = (Button) findViewById(R.id.AssignButton);
-        showAssignmentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showAssignments();
-            }
-        });
+        userType = oldIntent.getStringExtra("userType");
+        if(userType.equals("teacher")) {
+            Button showStudentButton = (Button) findViewById(R.id.StudentButton);
+            showStudentButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showStudents();
+                }
+            });
 
+            Button showAssignmentButton = (Button) findViewById(R.id.AssignButton);
+            showAssignmentButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showAssignments();
+                }
+            });
+
+        }
+        else{
+            LinearLayout showLayout = (LinearLayout) findViewById(R.id.showLayout);
+            showLayout.setVisibility(View.GONE);
+        }
         try {
             LinearLayout studentList;
+<<<<<<< HEAD
             JSONArray studentNameList = classData.getJSONArray("students");
             for(int i = 0; i < studentNameList.length(); i++){
                 TextView studentName = new TextView(this);
@@ -65,17 +82,27 @@ public class ClassHomeActivity extends AppCompatActivity {
                 studentName.setGravity(Gravity.CENTER);
                 studentName.setText(studentNameList.getJSONObject(i).getJSONObject("user").getString("first_name") + " " + studentNameList.getJSONObject(i).getJSONObject("user").getString("last_name"));
                 studentName.setTextSize(20);
+=======
+            JSONArray assignmentList = classData.getJSONArray("assignments");
+            for(int i = 0; i < assignmentList.length(); i++){
+                Button assignment = new Button(this);
+                assignment.setTextColor(Color.BLACK);
+                assignment.setGravity(Gravity.CENTER);
+                assignment.setText(assignmentList.getJSONObject(i).getString("name"));
+                assignment.setId(i);
+                assignment.setOnClickListener(this);
+>>>>>>> dev
                 if(i % 3 == 0) {
-                    studentList = (LinearLayout) findViewById(R.id.l3);
-                    studentList.addView(studentName);
+                    studentList = (LinearLayout) findViewById(R.id.l1);
+                    studentList.addView(assignment);
                 }
                 else if(i % 2 == 0){
                     studentList = (LinearLayout) findViewById(R.id.l2);
-                    studentList.addView(studentName);
+                    studentList.addView(assignment);
                 }
                 else{
-                    studentList = (LinearLayout) findViewById(R.id.l1);
-                    studentList.addView(studentName);
+                    studentList = (LinearLayout) findViewById(R.id.l3);
+                    studentList.addView(assignment);
                 }
             }
         } catch (JSONException e) {}
@@ -85,6 +112,8 @@ public class ClassHomeActivity extends AppCompatActivity {
     private void showStudents(){
         Intent intent = new Intent(this, AddToClassActivity.class);
         intent.putExtra("Type", "students");
+        intent.putExtra("id", getIntent().getExtras().getInt("id"));
+        intent.putExtra(ClassButtonAdapter.className, getIntent().getStringExtra(ClassButtonAdapter.className));
         try {
             intent.putExtra("classData", classData.getJSONArray("students").toString());
         } catch (JSONException e) {}
@@ -94,6 +123,8 @@ public class ClassHomeActivity extends AppCompatActivity {
     private void showAssignments(){
         Intent intent = new Intent(this, AddToClassActivity.class);
         intent.putExtra("Type", "assignments");
+        intent.putExtra("id", getIntent().getExtras().getInt("id"));
+        intent.putExtra(ClassButtonAdapter.className, getIntent().getStringExtra(ClassButtonAdapter.className));
         try {
             intent.putExtra("classData", classData.getJSONArray("assignments").toString());
         } catch (JSONException e) {}
@@ -101,4 +132,36 @@ public class ClassHomeActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        if(userType.equals("student")){
+            studentOnClick(v);
+        }
+    }
+
+    private void studentOnClick(View v){
+        Button button = (Button) v;
+        try {
+            JSONArray questions_data = (JSONArray) assignments_data.get(button.getId()).get("questions");
+            if(assignments_data.get(button.getId()).getString("math_type").toLowerCase().equals("addition")){
+                Intent intent = new Intent(this, AdditionActivity.class);
+                intent.putExtra("questions_data", questions_data.toString());
+                startActivity(intent);
+                finish();
+            }
+            else if(assignments_data.get(button.getId()).getString("math_type").toLowerCase().equals("subtraction")){
+                Intent intent = new Intent(this, BalloonPoppingActivity.class);
+                intent.putExtra("questions_data", questions_data.toString());
+                startActivity(intent);
+                finish();
+            }
+            else{
+                Intent intent = new Intent(this, DuckGameActivity.class);
+                intent.putExtra("questions_data", questions_data.toString());
+                startActivity(intent);
+                finish();
+            }
+        } catch (JSONException e) {}
+    }
 }
+

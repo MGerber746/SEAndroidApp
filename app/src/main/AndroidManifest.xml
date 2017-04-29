@@ -27,11 +27,10 @@
         <activity android:name=".DashboardActivity" />
         <activity android:name=".CreateStudentAccountActivity" />
         <activity android:name=".AssignmentCreationActivity" />
-        <activity android:name=".StudentHomeActivity" />
+        <activity android:name=".AdditionActivity" />
         <activity android:name=".BalloonPoppingActivity" />
-        <activity android:name=".StudentAssignmentsActivity" />
-        <activity android:name=".DuckGameActivity"></activity>
-        <activity android:name=".AddToClassActivity"></activity>
+        <activity android:name=".DuckGameActivity" />
+        <activity android:name=".AddToClassActivity" />
     </application>
 
 </manifest>

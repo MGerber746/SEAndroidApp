@@ -75,7 +75,7 @@ public class DuckGameActivity extends AppCompatActivity implements View.OnClickL
         if (!equations.isEmpty()) {
             Equation equation = getRandomEquation();
             currentQuestion = equation;
-            int numberOfDucks = Integer.parseInt(equation.getQuestion());
+            int numberOfDucks = Integer.parseInt(equation.getEquation());
             points = new ArrayList<>();
             int duckColor = getRandomDuckColor();
             for (int i = 0; i < numberOfDucks; i++) {
@@ -89,7 +89,7 @@ public class DuckGameActivity extends AppCompatActivity implements View.OnClickL
             }
         } else {
             // Create alert with score
-            final Intent intent = new Intent(this, StudentHomeActivity.class);
+            final Intent intent = new Intent(this, DashboardActivity.class);
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle("Score");
             alertDialogBuilder.setMessage("Answers Correct: " + correctAnswers + "\nAnswers Incorrect: " + incorrectAnswers);
@@ -98,6 +98,7 @@ public class DuckGameActivity extends AppCompatActivity implements View.OnClickL
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     startActivity(intent);
+                    finish();
                 }
             });
 

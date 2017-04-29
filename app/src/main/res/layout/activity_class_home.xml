@@ -62,6 +62,7 @@
 
         </LinearLayout>
 
+
             <TextView
                 android:text="Students in this class"
                 android:layout_width="match_parent"
@@ -75,12 +76,14 @@
                 android:textStyle="bold"
                 android:gravity="center_horizontal" />
 
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:background="@color/White"
             android:layout_height="match_parent">
+
 
             <LinearLayout
                 android:orientation="vertical"
@@ -92,6 +95,7 @@
 
             </LinearLayout>
 
+
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
@@ -100,18 +104,17 @@
                 android:id="@+id/l2"
                 android:layout_gravity="center_vertical">
 
-            </LinearLayout>
-
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/activity_vertical_margin"
                 android:id="@+id/l3"
-                android:layout_gravity="center_vertical">
+             android:layout_gravity="center_vertical">
 
             </LinearLayout>
 
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
