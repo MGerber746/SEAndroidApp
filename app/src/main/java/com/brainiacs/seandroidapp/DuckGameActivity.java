@@ -75,7 +75,7 @@ public class DuckGameActivity extends AppCompatActivity implements View.OnClickL
         if (!equations.isEmpty()) {
             Equation equation = getRandomEquation();
             currentQuestion = equation;
-            int numberOfDucks = Integer.parseInt(equation.getQuestion());
+            int numberOfDucks = Integer.parseInt(equation.getEquation());
             points = new ArrayList<>();
             int duckColor = getRandomDuckColor();
             for (int i = 0; i < numberOfDucks; i++) {
