@@ -83,6 +83,15 @@
     <string name="Create_Activity">Create Assignment</string>
 
     <!-- Strings related to Student Home Page -->
+
+    <string-array name="animalDrawables">
+        <item>elephant_head</item>
+        <item>frog_head</item>
+        <item>owl_head</item>
+        <item>tiger_head</item>
+    </string-array>
+
+    <string name="title_activity_ducks">Ducks</string>
     <string name="students_get_classes_url">students/classes/</string>
     <string name="teachers_get_classes_url">teachers/classes/</string>
 
