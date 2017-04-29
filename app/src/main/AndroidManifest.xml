@@ -31,6 +31,7 @@
         <activity android:name=".BalloonPoppingActivity" />
         <activity android:name=".DuckGameActivity" />
         <activity android:name=".AddToClassActivity" />
+        <activity android:name=".AssignmentGradesActivity"></activity>
     </application>
 
 </manifest>

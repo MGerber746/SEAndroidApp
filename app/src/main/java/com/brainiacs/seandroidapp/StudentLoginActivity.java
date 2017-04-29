@@ -82,6 +82,7 @@ public class StudentLoginActivity extends AppCompatActivity {
                     getString(R.string.failed_to_login), HttpHandler.Method.POST,
                     params, this, intent);
             handler.execute((Void) null);
+            finish();
         }
     }
 }
