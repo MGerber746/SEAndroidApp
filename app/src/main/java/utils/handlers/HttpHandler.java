@@ -55,6 +55,7 @@ public class HttpHandler extends AsyncTask<Void, Void, String> {
         this.intent = intent;
         this.success = success;
         this.failure = failure;
+        this.rootUrl = "https://vast-hollows-88441.herokuapp.com/";
         try {
             // Get local url when developing
             BufferedReader br = new BufferedReader(
