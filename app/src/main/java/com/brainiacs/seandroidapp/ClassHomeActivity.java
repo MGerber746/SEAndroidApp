@@ -79,7 +79,7 @@ public class ClassHomeActivity extends AppCompatActivity implements View.OnClick
                 assignment.setTextColor(Color.BLACK);
                 assignment.setGravity(Gravity.CENTER);
                 assignment.setText(assignmentList.getJSONObject(i).getString("name"));
-                assignment.setId(i);
+                assignment.setId(assignmentList.getJSONObject(i).getInt("id"));
                 assignment.setOnClickListener(this);
                 if(i % 3 == 0) {
                     studentList = (LinearLayout) findViewById(R.id.l1);
@@ -126,6 +126,19 @@ public class ClassHomeActivity extends AppCompatActivity implements View.OnClick
         if(userType.equals("student")){
             studentOnClick(v);
         }
+        else{
+            teacherOnClick(v);
+        }
+    }
+
+    private void teacherOnClick(View v) {
+        Intent intent = new Intent(this, AssignmentGradesActivity.class);
+            intent.putExtra("id", v.getId());
+        try {
+            intent.putExtra("name", assignments_data.get(v.getId()).getString("name"));
+        } catch (JSONException e) { }
+        startActivity(intent);
+        finish();
     }
 
     private void studentOnClick(View v){
