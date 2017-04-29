@@ -15,10 +15,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 import utils.Equation;
 import utils.Point;
+import utils.handlers.HttpHandler;
 
 
 public class BalloonPoppingActivity extends AppCompatActivity implements View.OnClickListener {
@@ -60,8 +62,9 @@ public class BalloonPoppingActivity extends AppCompatActivity implements View.On
             currentEquation = getRandomEquation();
             equationTextView.setText(currentEquation.getEquation());
         } else {
+            postGrade(incorrectAnswers, correctAnswers);
             // Create alert with score
-            final Intent intent = new Intent(this, StudentHomeActivity.class);
+            final Intent intent = new Intent(this, DashboardActivity.class);
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle("Score");
             alertDialogBuilder.setMessage("Answers Correct: " + correctAnswers + "\nAnswers Incorrect: " + incorrectAnswers);
@@ -70,6 +73,7 @@ public class BalloonPoppingActivity extends AppCompatActivity implements View.On
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     startActivity(intent);
+                    finish();
                 }
             });
 
@@ -93,7 +97,7 @@ public class BalloonPoppingActivity extends AppCompatActivity implements View.On
                 equations.add(new Equation(
                         equation_data.getString("question"), equation_data.getString("answer")));
             }
-        } catch(JSONException e) {}
+        } catch(JSONException e) { }
 
         // Start correct and incorrect answers at zero
         correctAnswers = 0;
@@ -152,5 +156,17 @@ public class BalloonPoppingActivity extends AppCompatActivity implements View.On
             }
         }
         return false;
+    }
+
+    private void postGrade(int incorrectAnswers, int correctAnswers) {
+        HashMap<String, String> params = new HashMap<>();
+        params.put(getString(R.string.total_questions), Integer.toString(incorrectAnswers + correctAnswers));
+        params.put(getString(R.string.correct_answers), Integer.toString(correctAnswers));
+        params.put(getString(R.string.assignment), Integer.toString(getIntent().getExtras().getInt("id")));
+        HttpHandler handler = new HttpHandler(
+                getString(R.string.grades_url), "",
+                getString(R.string.failed_to_post_grade), HttpHandler.Method.POST,
+                params, this, null);
+        handler.execute((Void) null);
     }
 }

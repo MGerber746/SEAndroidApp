@@ -20,16 +20,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".TeacherRegisterActivity" />
         <activity android:name=".TeacherLoginActivity" />
         <activity android:name=".StudentLoginActivity" />
         <activity android:name=".ClassHomeActivity" />
-        <activity android:name=".TeacherDashboard.TeacherDashboardActivity" />
+        <activity android:name=".DashboardActivity" />
         <activity android:name=".CreateStudentAccountActivity" />
-        <activity android:name=".activityOverviewActivity" />
-        <activity android:name=".StudentHomeActivity" />
+        <activity android:name=".AssignmentCreationActivity" />
+        <activity android:name=".AdditionActivity" />
         <activity android:name=".BalloonPoppingActivity" />
-        <activity android:name=".StudentAssignmentsActivity"></activity>
+        <activity android:name=".DuckGameActivity" />
+        <activity android:name=".AddToClassActivity" />
+        <activity android:name=".AssignmentGradesActivity"></activity>
     </application>
 
 </manifest>
