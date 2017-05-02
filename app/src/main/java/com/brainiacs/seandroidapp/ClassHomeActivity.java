@@ -150,15 +150,22 @@ public class ClassHomeActivity extends AppCompatActivity implements View.OnClick
     private void studentOnClick(View v){
         Button button = (Button) v;
         try {
-            JSONArray questions_data = (JSONArray) assignments_data.get(button.getId()).get("questions");
-            if(assignments_data.get(button.getId()).getString("math_type").toLowerCase().equals("addition")){
+            JSONArray questions_data = null;
+            String mathType = "";
+            for (JSONObject json : assignments_data) {
+                if (json.getInt("id") == button.getId()) {
+                    questions_data = json.getJSONArray("questions");
+                    mathType = json.getString("math_type").toLowerCase();
+                }
+            }
+            if(mathType.equals("addition")){
                 Intent intent = new Intent(this, AdditionActivity.class);
                 intent.putExtra("id", v.getId());
                 intent.putExtra("questions_data", questions_data.toString());
                 startActivity(intent);
                 finish();
             }
-            else if(assignments_data.get(button.getId()).getString("math_type").toLowerCase().equals("subtraction")){
+            else if(mathType.equals("subtraction")){
                 Intent intent = new Intent(this, BalloonPoppingActivity.class);
                 intent.putExtra("id", v.getId());
                 intent.putExtra("questions_data", questions_data.toString());
